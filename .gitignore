@@ -1,0 +1,8 @@
+# Runtime data of the preview tool — never commit client files or the password hash.
+preview/storage/config.php
+preview/storage/ratelimit.php
+preview/storage/.*.lock
+preview/storage/projects/*
+preview/storage/originals/*
+preview/storage/previews/*
+!preview/storage/**/index.php
