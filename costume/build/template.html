@@ -1,0 +1,633 @@
+<title>Tanish · タニシュ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Yuji+Boku&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one long RTL workbook, sticky chapter bar, chapters marked by a kanji that names the job (姿 look, 買 buy, 型 pattern, 作 make, 日 days, 印 print, 宴 party, 心 notes). */
+:root{
+  --bg:#ecebe7; --surface:#f7f6f3; --surface2:#e2e0da; --fg:#151315; --muted:#5d5a57; --line:#c9c5bd;
+  --accent:#9b1119; --accent-deep:#6f0b11; --accent-soft:#f1dcdc; --silver:#8c9196; --ok:#2f6b3a;
+  --draft-ink:#1b1919; --draft-dim:#7a2a2e; --draft-fill:#fbfaf7;
+  --fab-black:#2a2729; --fab-black2:#3a3638; --fab-gauze:#6c6870;
+  --fig-coat:#1d1b1d; --fig-coat2:#2b282b; --fig-pants:#262326; --fig-boot:#0f0e0f; --fig-gauze:rgba(40,38,42,.55); --fig-knit:#2f2c30; --fig-line:#000;
+  --callout-bg:#f7f6f3; --callout-fg:#151315;
+  --f-body:Vazirmatn, Tahoma, sans-serif; --f-kanji:'Yuji Boku', 'Hiragino Mincho ProN', serif; --f-mono:'JetBrains Mono', ui-monospace, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f0e10; --surface:#18161a; --surface2:#221f24; --fg:#ece8e3; --muted:#a39d97; --line:#34303a;
+  --accent:#d3323b; --accent-deep:#8e1016; --accent-soft:#3a1517; --silver:#a8adb2; --ok:#6fbf7b;
+  --draft-ink:#e6e1da; --draft-dim:#f08a8f; --draft-fill:#1d1a1f;
+  --fab-black:#3b373c; --fab-black2:#4a454b; --fab-gauze:#77727c;
+  --fig-coat:#2a272c; --fig-coat2:#3a363c; --fig-pants:#322e34; --fig-boot:#1a181b; --fig-gauze:rgba(120,114,126,.45); --fig-knit:#3c3840; --fig-line:#000;
+  --callout-bg:#18161a; --callout-fg:#ece8e3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f0e10; --surface:#18161a; --surface2:#221f24; --fg:#ece8e3; --muted:#a39d97; --line:#34303a;
+  --accent:#d3323b; --accent-deep:#8e1016; --accent-soft:#3a1517; --silver:#a8adb2; --ok:#6fbf7b;
+  --draft-ink:#e6e1da; --draft-dim:#f08a8f; --draft-fill:#1d1a1f;
+  --fab-black:#3b373c; --fab-black2:#4a454b; --fab-gauze:#77727c;
+  --fig-coat:#2a272c; --fig-coat2:#3a363c; --fig-pants:#322e34; --fig-boot:#1a181b; --fig-gauze:rgba(120,114,126,.45); --fig-knit:#3c3840; --fig-line:#000;
+  --callout-bg:#18161a; --callout-fg:#ece8e3; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.85 var(--f-body);direction:rtl;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.35;margin:0}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:800}
+h4{font-size:1rem;font-weight:800}
+p{margin:0}
+a{color:var(--accent)}
+.en{direction:ltr;unicode-bidi:isolate;font-family:var(--f-mono);font-size:.82em;color:var(--muted)}
+.kj{font-family:var(--f-kanji)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+.prose{max-width:68ch}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-block:8px}
+.bar .brand{font-family:var(--f-kanji);font-size:1.25rem;white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.chips a{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;font-size:.86rem;white-space:nowrap;background:var(--surface)}
+.chips a .kj{color:var(--accent);font-size:1rem;line-height:1}
+.chips a:hover{border-color:var(--accent)}
+.sync{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.sync b{color:var(--ok);font-weight:700}
+
+/* hero */
+.hero{padding-block:36px 28px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center}
+.hero .name{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.hero .name .kj{font-size:clamp(3.2rem,9vw,6.2rem);line-height:1;color:var(--fg)}
+.hero .name .lat{font:700 .95rem var(--f-mono);letter-spacing:.3em;color:var(--accent)}
+.hero .title{font-size:clamp(1.15rem,2.4vw,1.45rem);font-weight:800;margin-top:12px}
+.hero .title .kj{color:var(--accent);margin-inline-end:8px}
+.hero .lede{margin-top:12px;color:var(--muted);max-width:56ch}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.stat .k{font-size:.78rem;color:var(--muted)}
+.stat .v{font:700 1.5rem/1.3 var(--f-mono);font-variant-numeric:tabular-nums}
+.stat .v small{font:500 .8rem var(--f-body);color:var(--muted)}
+.meter{height:6px;border-radius:9px;background:var(--surface2);overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* chapters */
+section.ch{padding-block:44px;border-top:1px solid var(--line)}
+.ch-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:22px}
+.ch-head .glyph{font-family:var(--f-kanji);font-size:3.2rem;line-height:1;color:var(--accent);min-width:1em}
+.ch-head p{color:var(--muted);margin-top:6px;max-width:68ch}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.card.hl{border-color:var(--accent)}
+.note{border-inline-start:3px solid var(--accent);padding:8px 12px;background:var(--accent-soft);border-radius:0 6px 6px 0;font-size:.95rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.must{border-color:var(--accent);color:var(--accent)}
+.tag.have{border-color:var(--ok);color:var(--ok)}
+.tag.make{border-color:var(--fg);color:var(--fg)}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:start;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
+td.num,th.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* concept */
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.figs figure{margin:0;min-width:0}
+.figs figcaption{text-align:center;font-size:.8rem;color:var(--muted)}
+svg.fig{width:100%;height:auto;display:block}
+.legend{columns:2;column-gap:22px;font-size:.92rem}
+.legend li{break-inside:avoid;margin-bottom:6px;list-style:none;display:flex;gap:8px}
+.legend ol{padding:0;margin:0}
+.legend .n{font:700 .8rem var(--f-mono);min-width:1.9em;height:1.9em;border-radius:50%;border:1.5px solid var(--accent);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:flex;align-items:center;gap:8px;font-size:.85rem}
+.sw i{width:34px;height:34px;border-radius:6px;border:1px solid var(--line);display:block}
+.lore{font-size:1.06rem;line-height:2}
+.lore q{display:block;font-weight:800;margin-top:10px;quotes:none}
+.refs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.refs img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.sig{counter-reset:s;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sig li{list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.sig li b{display:block}
+
+/* inventory */
+.inv{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.inv .card{display:flex;gap:12px;align-items:flex-start}
+.inv img{width:72px;height:72px;object-fit:cover;border-radius:8px;flex-shrink:0}
+
+/* shop */
+.shop-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.totals{display:flex;flex-wrap:wrap;gap:10px}
+.totals .stat{padding:8px 12px}
+.totals .stat .v{font-size:1.1rem}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .88rem var(--f-body);padding:7px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{appearance:none;border:0;background:var(--surface);color:var(--fg);font:600 .84rem var(--f-body);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.store{margin-top:18px}
+.store h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.store .how{font-size:.88rem;color:var(--muted);margin:4px 0 8px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.item.done .iname{text-decoration:line-through;text-decoration-color:var(--accent);opacity:.65}
+.item .iname{font-weight:700}
+.item .meta{font-size:.84rem;color:var(--muted)}
+.item .price{text-align:end;font:600 .85rem var(--f-mono);white-space:nowrap}
+.item .price input{width:92px;font:600 .85rem var(--f-mono);padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);text-align:center;margin-top:4px;direction:ltr}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);margin-top:4px;cursor:pointer}
+
+/* patterns */
+.meas{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.meas div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.meas .k{font-size:.78rem;color:var(--muted)}
+.meas .v{font:700 1.15rem var(--f-mono)}
+.meas .flag{border-color:var(--accent)}
+.draftbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
+.draftbox h4{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.draftbox ul{margin:8px 0 0;padding-inline-start:18px;font-size:.88rem;color:var(--muted)}
+svg.draft{width:100%;height:auto;display:block;max-height:560px}
+svg.draft.wide{max-height:none}
+svg.draft.mini{max-height:220px}
+svg.draft.sodeprev{max-height:300px}
+svg.layout{width:100%;height:auto;display:block}
+.laytxt{fill:#fff;font-family:Vazirmatn,sans-serif;font-weight:700}
+.layouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.rects{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.rects .draftbox p{font-size:.84rem;color:var(--muted);margin-top:6px}
+.dl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dl .card{display:flex;gap:12px;align-items:center;flex:1 1 280px}
+.dl .card .ico{font-family:var(--f-kanji);font-size:2rem;color:var(--accent);line-height:1}
+.dl .card .t{font-weight:800}
+.dl .card .s{font-size:.82rem;color:var(--muted)}
+.dl .card .acts{margin-inline-start:auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.dl .card a.alt{font-size:.75rem}
+{{DRAFT_CSS}}
+
+/* build */
+details.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+details.step>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+details.step>summary::-webkit-details-marker{display:none}
+details.step>summary .n{font:700 .8rem var(--f-mono);color:var(--accent);min-width:2.2em}
+details.step>summary h3{flex:1;min-width:0;font-size:1.05rem}
+details.step>summary .t{font-size:.8rem;color:var(--muted)}
+details.step>summary::after{content:"+";font:700 1.2rem var(--f-mono);color:var(--accent)}
+details.step[open]>summary::after{content:"−"}
+details.step .body{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+details.step ol,details.step ul{margin:0;padding-inline-start:22px}
+details.step li{margin-bottom:6px}
+.pill{font-size:.75rem;font-weight:700;padding:1px 8px;border-radius:6px;background:var(--surface2)}
+.pill.mom{background:var(--accent-soft);color:var(--accent)}
+
+/* plan */
+.plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0;position:relative}
+.day.today{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.day.party{grid-column:1/-1;background:linear-gradient(135deg,var(--surface),var(--accent-soft))}
+.day header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.day .dn{font:700 1.5rem var(--f-mono);color:var(--accent)}
+.day .dd{font-weight:800}
+.day .dh{font-size:.8rem;color:var(--muted);margin-inline-start:auto}
+.day .tt{font-weight:800;font-size:1.02rem}
+.day .dnote{font-size:.82rem;color:var(--muted)}
+.day .todaybadge{position:absolute;top:-10px;left:14px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800;padding:1px 10px;border-radius:999px}
+.task{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:8px;align-items:start;padding:5px 0;font-size:.93rem}
+.task.done span:last-child{text-decoration:line-through;opacity:.6}
+.who{font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:6px;background:var(--surface2);margin-top:4px;white-space:nowrap}
+.who.mom{background:var(--accent-soft);color:var(--accent)}
+.prio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+
+/* print/dtf */
+.arts{display:grid;grid-template-columns:1.2fr .5fr .8fr;gap:12px;align-items:start}
+.arts figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.arts img{width:100%;height:auto;max-height:440px;object-fit:contain;display:block;border-radius:6px}
+.arts figcaption{font-size:.82rem;color:var(--muted);margin-top:6px}
+pre.copy{white-space:pre-wrap;background:var(--surface2);border-radius:8px;padding:12px;font:500 .85rem/1.7 var(--f-mono);direction:ltr;text-align:left;margin:0;max-height:340px;overflow:auto}
+pre.copy.fa{direction:rtl;text-align:right;font-family:var(--f-body)}
+
+/* party */
+.checklist{display:flex;flex-direction:column}
+.checklist label{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:10px;align-items:start;padding:7px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.checklist label .i{font:700 .8rem var(--f-mono);color:var(--muted);margin-top:4px;min-width:1.6em}
+.checklist label.done span:last-child{text-decoration:line-through;opacity:.6}
+.where{font-size:.7rem;font-weight:800;color:var(--accent)}
+.poses{counter-reset:p;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.poses li{list-style:none}
+textarea{width:100%;min-height:120px;font:400 .95rem/1.8 var(--f-body);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px}
+footer{padding-block:30px 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer ul{padding-inline-start:18px}
+
+{{FIG_CSS}}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .grid2,.sig,.plan,.prio,.poses{grid-template-columns:1fr}
+  .grid3,.layouts{grid-template-columns:1fr}
+  .arts{grid-template-columns:1fr 1fr}
+  .refs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .legend{columns:1}
+}
+@media (max-width:480px){
+  body{font-size:15px}
+  .figs{grid-template-columns:1fr 1fr;padding:6px;gap:4px}
+  .arts{grid-template-columns:1.2fr .5fr .8fr;gap:6px}
+  .arts figure{padding:6px}
+  .arts img{max-height:300px}
+  details.step>summary h3{flex-basis:60%}
+  .item{grid-template-columns:auto minmax(0,1fr)}
+  .item .price{grid-column:2;text-align:start}
+  .sync{display:none}
+}
+</style>
+
+<div class="bar"><div class="wrap">
+  <span class="brand" aria-hidden="true">タニシュ</span>
+  <nav class="chips" aria-label="فصل‌ها">
+    <a href="#look"><span class="kj">姿</span>کانسپت</a>
+    <a href="#have"><span class="kj">持</span>داری‌ها</a>
+    <a href="#buy"><span class="kj">買</span>خرید</a>
+    <a href="#pattern"><span class="kj">型</span>الگو</a>
+    <a href="#make"><span class="kj">作</span>ساخت</a>
+    <a href="#days"><span class="kj">日</span>۱۴ روز</a>
+    <a href="#print"><span class="kj">印</span>چاپ</a>
+    <a href="#party"><span class="kj">宴</span>شب مهمونی</a>
+    <a href="#ai"><span class="kj">絵</span>پرامپت</a>
+    <a href="#notes"><span class="kj">心</span>نکته‌ها</a>
+  </nav>
+  <span class="sync" id="sync">ذخیره: <b>این دستگاه</b></span>
+</div></div>
+
+<main class="wrap">
+<header class="hero">
+  <div>
+    <div class="name"><span class="kj">タニシュ</span><span class="lat">TANISH</span></div>
+    <div class="title"><span class="kj">笑う亡霊</span>شبحِ خندان · رونینی که یه بار مُرد</div>
+    <p class="lede">کاستوم هالووین ۱۴ آبان ۱۴۰۵: طراحی کامل، لیست خرید با قیمت، الگوهای اندازه‌ی خودت، آموزش ساخت تک‌تک قطعه‌ها و برنامه‌ی روزبه‌روز. تیک‌ها و قیمت‌هایی که اینجا وارد می‌کنی ذخیره میشن.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="k">تا شروع مهمونی</div><div class="v" id="cd">—</div><div class="meter"><i id="cdbar"></i></div></div>
+    <div class="stat"><div class="k">امروز</div><div class="v" id="today">—</div><div class="muted" style="font-size:.8rem" id="todayt"></div></div>
+    <div class="stat"><div class="k">کارهای برنامه</div><div class="v" id="planp">۰٪</div><div class="meter"><i id="planbar"></i></div></div>
+    <div class="stat"><div class="k">بودجه‌ی تخمینی</div><div class="v" id="budget">—</div><div class="muted" style="font-size:.8rem">سقف تو: ۲۰ میلیون</div></div>
+  </div>
+</header>
+
+<!-- ============ LOOK ============ -->
+<section class="ch" id="look">
+  <div class="ch-head"><span class="glyph">姿</span><div><h2>کانسپت: «شبحِ خندان»</h2>
+  <p>ترکیب رونین کهنه‌ی ژاپنی با کمی تکوِر و گوتیک. مشکی غالب، قرمز خونی برای لایه‌های داخلی، سفید فقط روی ماسک و نوشته‌ها. همه‌چی از کلاه خودت شروع میشه: 起死回生 یعنی «از مرگ برخاستن».</p></div></div>
+
+  <div class="grid2">
+    <div class="figs">
+      <figure>{{FIG_FRONT}}<figcaption>جلو · FRONT</figcaption></figure>
+      <figure>{{FIG_BACK}}<figcaption>پشت · BACK</figcaption></figure>
+    </div>
+    <div class="stack">
+      <div class="legend"><ol>
+        <li><span class="n">1</span><span>کلاه حصیری خودت + منگوله‌های قرمز + بند چونه</span></li>
+        <li><span class="n">2</span><span>ماسک کاگه‌تانه روی بالاکلاوا</span></li>
+        <li><span class="n">3</span><span>هود نوک‌تیز، آستر قرمز، نور LED قرمز داخلش</span></li>
+        <li><span class="n">4</span><span>شنل کوتاه ریش‌ریش روی شونه‌ها</span></li>
+        <li><span class="n">5</span><span>پیش‌سینه‌ی کیمونو: مشکی روی قرمز، راست روی چپ</span></li>
+        <li><span class="n">6</span><span>سردوشی (Sode) فقط شونه‌ی چپ، با بند قرمز</span></li>
+        <li><span class="n">7</span><span>طناب شیمه‌ناوا + شیده‌های کاغذی سفید</span></li>
+        <li><span class="n">8</span><span>حمایل شمشیر (تسمه‌ی مشکی)</span></li>
+        <li><span class="n">9</span><span>اوبی قرمز + کمربند سگک صلیبی خودت</span></li>
+        <li><span class="n">10</span><span>پنل جلو قرمز با 起死回生 (چاپ DTF)</span></li>
+        <li><span class="n">11</span><span>طلسم‌های کاغذی (Ofuda) روی زنجیر</span></li>
+        <li><span class="n">12</span><span>کت رونین: کیمونویی، ریش‌ریش، چاک‌دار</span></li>
+        <li><span class="n">13</span><span>فقط آستین راست؛ گشاد، با ستون کانجی سفید</span></li>
+        <li><span class="n">14</span><span>دست چپ: یقه‌اسکی + مچ‌بند چرمی + دستکش + بازوبند قرمز</span></li>
+        <li><span class="n">15</span><span>تسبیح مشکی + دستکش نیم‌انگشتی</span></li>
+        <li><span class="n">16</span><span>شلوار خیلی گشاد، جمع‌شده روی پوتین</span></li>
+        <li><span class="n">17</span><span>پوتین خودت</span></li>
+        <li><span class="n">18</span><span>دسته‌ی کاتانا روی شونه‌ی راست + چارم قرمز با زنگوله</span></li>
+        <li><span class="n">19</span><span>نوک غلاف کنار لگن چپ</span></li>
+        <li><span class="n">20</span><span>پرده‌ی توری پشت کلاه</span></li>
+        <li><span class="n">21</span><span>دسته‌ی شمشیر و چارم از پشت</span></li>
+        <li><span class="n">22</span><span>طرح پشت: 起死回生 سفید با دایره‌ی قرمز پشت 死 (مثل کلاهت)، روی دامن کت زیر اوبی</span></li>
+        <li><span class="n">23</span><span>نوارهای پاره‌ی توری</span></li>
+        <li><span class="n">24</span><span>شمشیر مورب روی پشت با دو حلقه‌ی غلاف</span></li>
+        <li><span class="n">25</span><span>دامن کت از پشت بلندتر و پاره‌تر</span></li>
+        <li><span class="n">26</span><span>سردوشی از پشت</span></li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:22px">
+    <div class="card lore">
+      <h3>داستان (برای وقتی ازت پرسیدن «چی هستی؟»)</h3>
+      <p style="margin-top:8px">تانیش یه رونین بود که یه شب بارونی تو جنگ کشته شد. صبح، توی گور خودش بیدار شد با یه ماسک روی صورتش که لبخند می‌زد؛ ماسک کسی که کشته بودش. از اون شب لباس مرده‌ها رو تنش داره: یقه‌ی راست‌روی‌چپ، طلسم‌های کاغذی قبرستون از کمرش آویزونه، یه طناب مقدس روحش رو مهر و موم کرده و آستر قرمزش هنوز رنگ همون شبه. قبل از اینکه ببینیش، صدای زنگوله‌ی شمشیرش رو می‌شنوی.</p>
+      <q>«نه قهرمان، نه شرور. فقط کسی که یه بار مُرده و هنوز لبخند می‌زنه.»</q>
+      <p class="en" style="margin-top:6px">Died once. Still smiling.</p>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>پالت</h3>
+        <div class="swatches" style="margin-top:10px">
+          <span class="sw"><i style="background:#0d0c0c"></i>مشکی جوهری <span class="en">#0D0C0C</span></span>
+          <span class="sw"><i style="background:#2a2829"></i>زغالی <span class="en">#2A2829</span></span>
+          <span class="sw"><i style="background:#8e1016"></i>قرمز خونی <span class="en">#8E1016</span></span>
+          <span class="sw"><i style="background:#f2efe8"></i>استخونی <span class="en">#F2EFE8</span></span>
+          <span class="sw"><i style="background:#a98c5c"></i>کنف <span class="en">#A98C5C</span></span>
+          <span class="sw"><i style="background:#9da3a8"></i>نقره‌ای کدر <span class="en">#9DA3A8</span></span>
+        </div>
+        <p class="muted" style="font-size:.88rem;margin-top:10px">قانون رنگ: قرمز فقط از «داخل» بیرون می‌زنه (آستر هود، زیر یقه، لای چاک‌ها، اوبی، بندها). هیچ قطعه‌ی بزرگی از بیرون قرمز نیست، جز پنل جلو.</p>
+      </div>
+      <div class="card"><h3>کانجی‌ها</h3>
+        <table style="margin-top:6px"><tbody>
+          <tr><td class="kj" style="font-size:1.3rem">起死回生</td><td><span class="en">kishi kaisei</span><br>از مرگ برخاستن (روی کلاه، پشت کت، پنل جلو)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">笑う亡霊</td><td><span class="en">warau bōrei</span><br>شبحِ خندان (لقب)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">死して尚笑う</td><td><span class="en">shishite nao warau</span><br>حتی بعد از مرگ می‌خنده (آستین)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">影に生きる者</td><td><span class="en">kage ni ikiru mono</span><br>کسی که در سایه زندگی می‌کنه (آستین)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">タニシュ</td><td><span class="en">ta-ni-shu</span><br>اسم خودت به کاتاکانا</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px">هشت جزئیاتی که این کاستوم رو «شخصیت» می‌کنه</h3>
+  <ol class="sig" style="padding:0;margin-top:12px">
+    <li><b>یقه‌ی مرده‌ها</b>تو ژاپن کیمونو رو فقط برای مرده‌ها راست‌روی‌چپ می‌بندن. پیش‌سینه‌ی تو عمداً همین‌طوریه. اگه نخواستی، فقط ترتیب دوخت نوارها رو برعکس کن.</li>
+    <li><b>قرمز از درون</b>آستر هود دور ماسک سفید یه قاب خونی می‌سازه. لای چاک‌های کت و زیر یقه هم قرمز پیداست.</li>
+    <li><b>یه دست زره، یه دست پارچه</b>چپ: سردوشی و مچ‌بند پیداست. راست: آستین گشاد با نوشته. عدم تقارن مثل رفرنس‌های مو قرمز و کلود.</li>
+    <li><b>کلاه = امضا</b>طرح پشت کت دقیقاً از کلاه خودت کپی شده: ستون سفید و دایره‌ی قرمز پشت 死.</li>
+    <li><b>طناب مُهر</b>شیمه‌ناوا (طناب مقدس معابد شینتو) با شیده‌های کاغذی، یعنی یه چیزی تو این بدن «مهر و موم» شده.</li>
+    <li><b>صدا</b>زنگوله‌های چارم شمشیر. وقتی راه میری صدا میده.</li>
+    <li><b>نور</b>نور قرمز LED داخل هود. تو تاریکی فقط ماسک دیده میشه.</li>
+    <li><b>هیچ پوستی نیست</b>بالاکلاوا، گریم مشکی دور چشم و دستکش. غیر از نوک انگشت‌ها، هیچ‌جای آدم دیده نمیشه.</li>
+  </ol>
+
+  <details class="step" style="margin-top:18px"><summary><span class="n">ref</span><h3>رفرنس‌ها و کانسپت ChatGPT</h3><span class="t">چیزهایی که ازشون الهام گرفته شد</span></summary>
+    <div class="body">
+      <img src="img/concept.jpg" alt="کانسپت ChatGPT" style="width:100%;border-radius:8px;border:1px solid var(--line)">
+      <p class="muted" style="font-size:.9rem">تفاوت با کانسپت ChatGPT: ماسک خودت (سفید با لبخند مشکی) به جای ماسک نقره‌ای؛ کلاه خودت با نوشته؛ سردوشی یک‌طرفه؛ آستین تکی؛ طناب شیمه‌ناوا؛ قرمز کنترل‌شده‌تر.</p>
+      <div class="refs">
+        <img src="img/ref-sleeve.jpg" alt="رفرنس آستین با کانجی" loading="lazy">
+        <img src="img/ref-redhair.jpg" alt="رفرنس طناب و شیده" loading="lazy">
+        <img src="img/ref-rags.jpg" alt="رفرنس شنل پاره" loading="lazy">
+        <img src="img/ref-harness.jpg" alt="رفرنس هارنس" loading="lazy">
+        <img src="img/ref-rain.jpg" alt="رفرنس کلاه و شال" loading="lazy">
+        <img src="img/hat.jpg" alt="کلاه تو" loading="lazy">
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ HAVE ============ -->
+<section class="ch" id="have">
+  <div class="ch-head"><span class="glyph">持</span><div><h2>چیزهایی که داری و کجا میرن</h2>
+  <p>تقریباً همه‌ی وسایلت جا پیدا کردن. فقط کمربند فشنگی و جین با این ست جور نیستن.</p></div></div>
+  <div class="inv" id="inv"></div>
+</section>
+
+<!-- ============ BUY ============ -->
+<section class="ch" id="buy">
+  <div class="ch-head"><span class="glyph">買</span><div><h2>لیست خرید</h2>
+  <p>به ترتیب مسیر چیده شده. قیمت‌ها تخمینی و به هزار تومنن، از آگهی‌های آنلاین شهریور تا آبان ۱۴۰۵ (دلار حدود ۲۷۰). قیمت واقعی رو تو کادر هر قلم بنویس تا جمع واقعی حساب بشه.</p></div></div>
+  <div class="shop-top">
+    <div class="totals">
+      <div class="stat"><div class="k">تخمین کل</div><div class="v" id="estT">—</div></div>
+      <div class="stat"><div class="k">خرج شده (واقعی)</div><div class="v" id="spentT">—</div></div>
+      <div class="stat"><div class="k">خریده شده</div><div class="v" id="boughtT">—</div></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="seg" role="group" aria-label="فیلتر">
+        <button type="button" id="fAll" aria-pressed="true">همه</button>
+        <button type="button" id="fLeft" aria-pressed="false">نخریده</button>
+        <button type="button" id="fMust" aria-pressed="false">ضروری</button>
+      </div>
+      <button type="button" class="btn" id="copyShop">کپی لیست نخریده‌ها</button>
+    </div>
+  </div>
+  <div class="note">برچسب‌ها: <span class="tag must">ضروری</span> بدون این کار درنمیاد · <span class="tag">بهتره</span> کیفیت رو می‌بره بالا · <span class="tag" style="border-style:dashed">اختیاری</span> اگه وقت و پول موند. برای صرفه‌جویی، پلن B‌ها رو تو بخش «نکته‌ها» ببین.</div>
+  <div id="shop"></div>
+</section>
+
+<!-- ============ PATTERN ============ -->
+<section class="ch" id="pattern">
+  <div class="ch-head"><span class="glyph">型</span><div><h2>الگوها و نقشه‌ی برش</h2>
+  <p>همه‌ی اندازه‌ها از بدن خودت حساب شدن. تیکه‌های منحنی (شلوار، هود، جیب) هم اینجا نقشه‌ی اندازه‌دار دارن و هم توی PDF با اندازه‌ی واقعی. بقیه مستطیلن و اندازه‌ی برششون همین‌جاست.</p></div></div>
+
+  <h3>اندازه‌های تو</h3>
+  <div class="meas" style="margin-top:10px">
+    <div><div class="k">قد</div><div class="v">187</div></div>
+    <div><div class="k">سینه</div><div class="v">92</div></div>
+    <div><div class="k">کمر</div><div class="v">78</div></div>
+    <div><div class="k">باسن</div><div class="v">96</div></div>
+    <div><div class="k">سرشانه</div><div class="v">48</div></div>
+    <div><div class="k">قد دست</div><div class="v">70</div></div>
+    <div><div class="k">دور بازو / مچ</div><div class="v">30 / 17</div></div>
+    <div><div class="k">دور سر</div><div class="v">58</div></div>
+    <div><div class="k">کمر تا زمین</div><div class="v">118</div></div>
+    <div class="flag"><div class="k">قد فاق (Rise) ⚑</div><div class="v">30</div></div>
+    <div class="flag"><div class="k">داخل پا (محاسبه‌شده) ⚑</div><div class="v">88</div></div>
+    <div class="flag"><div class="k">دور گردن (فرض) ⚑</div><div class="v">38</div></div>
+  </div>
+  <div class="note" style="margin-top:12px"><b>⚑ چک کن:</b> نوشته بودی «فاق تا زمین ۳۰». این برای داخل پا با قد ۱۸۷ ممکن نیست، پس ۳۰ رو <b>قد فاق</b> فرض کردم (کمر تا نشیمن وقتی رو صندلی نشستی؛ معمولاً ۲۸ تا ۳۲) و داخل پا رو ۱۱۸ − ۳۰ = ۸۸ گرفتم. دور گردن رو هم ۳۸ فرض کردم. هود و شنل گشادن و ۲ سانت فرقش مهم نیست. اگه هر کدوم بیشتر از ۲ سانت فرق داشت، الگوی شلوار باید آپدیت بشه.</div>
+  <p class="muted" style="margin-top:10px;font-size:.9rem">آزادی‌ها (ease): دور سینه‌ی کت ۱۲۰ (۲۸ سانت گشادتر از بدن، برای افتادگی کیمونویی). دور باسن شلوار ۱۱۲ (۱۶ سانت). دمپای شلوار ۸۴ (خیلی گشاد، روی پوتین جمع میشه).</p>
+
+  <h3 style="margin-top:26px">دانلودها</h3>
+  <div class="dl" style="margin-top:10px">
+    <div class="card"><span class="ico">型</span><div><div class="t">الگوهای ۱:۱ (PDF، ۵۱ صفحه A4)</div><div class="s">شلوار، هود، جیب، سردوشی، طلسم‌ها، شیده، چارم</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/tanish-patterns-1to1.pdf">دانلود</button><a class="alt" href="files/tanish-patterns-1to1.pdf" target="_blank" rel="noopener">باز کردن</a></div></div>
+    <div class="card"><span class="ico">母</span><div><div class="t">برگه‌ی مامان (PDF)</div><div class="s">لیست برش، نقشه‌های اندازه‌دار، ترتیب دوخت</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/tanish-mom-sewing-sheet.pdf">دانلود</button><a class="alt" href="files/tanish-mom-sewing-sheet.pdf" target="_blank" rel="noopener">باز کردن</a></div></div>
+  </div>
+
+  <h3 style="margin-top:26px">قانون درز</h3>
+  <div class="grid2" style="margin-top:10px">
+    <div class="card"><h4>تیکه‌های منحنی (شلوار، هود، جیب)</h4><p style="margin-top:6px">الگو <b>بدون درزه</b>. موقع برش ۱.۵ سانت دورتادور اضافه کن. استثنا: تای کمر (۵ سانت) و تای دمپا (۴ سانت) داخل الگو کشیده شدن.</p></div>
+    <div class="card"><h4>تیکه‌های مستطیلی</h4><p style="margin-top:6px">اندازه‌ها <b>اندازه‌ی برش</b> هستن و درز توشون حساب شده. لبه‌هایی که قراره ریش‌ریش بشن هیچ درزی نمی‌خوان.</p></div>
+  </div>
+
+  <h3 style="margin-top:26px">نقشه‌های اندازه‌دار (سانتی‌متر)</h3>
+  <div class="grid2" style="margin-top:10px">
+    {{DRAFT_CARDS}}
+  </div>
+  <div class="draftbox" style="margin-top:14px"><h4><span>بدنه‌ی کت ×۲ (قرینه) — ۳۳ × ۲۶۲</span><span class="en">Coat body panel (cut size)</span></h4>
+    <div class="scroll-x">{{D_COAT}}</div>
+    <ul>
+      <li>هر تیکه از لبه‌ی پایین جلو، از روی شونه، تا لبه‌ی پایین پشت یکسره‌ست. شونه درز نداره، فقط تا میخوره.</li>
+      <li>لبه‌ی بالای شکل (y=0) = لبه‌ی داخلی. نیمه‌ی پشت به تیکه‌ی قرینه دوخته میشه (درز وسط پشت). نیمه‌ی جلو باز می‌مونه.</li>
+      <li>یقه: نقطه‌ی گردن ۱۰.۵ سانت از لبه‌ی داخلی روی خط شونه‌ست. از اونجا یه خط صاف تا ۲۸ سانت پایین‌تر روی لبه‌ی جلو بکش (یقه‌ی V، قسمت قرمز رو ببُر). پشت گردن فقط یه گودی ۲ سانتی.</li>
+      <li>علامت‌ها: حلقه‌ی آستین ۲۲ سانت دو طرف خط شونه. شروع چاک کناری ۷۵ سانت پایین‌تر از خط شونه.</li>
+    </ul>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="draftbox"><h4><span>شنل کوتاه — نیم‌دایره‌ی توخالی ×۲</span><span class="en">Capelet</span></h4>{{D_CAPE}}
+      <ul><li>با یه نخ و یه مداد مثل پرگار بکش: شعاع ۸ و ۵۳.۵ از یه نقطه.</li><li>لبه‌ی بیرونی بعداً نامنظم و ریش‌ریش بریده میشه (خط‌چین قرمز، طول نهایی ۳۰ تا ۴۵).</li></ul></div>
+    <div class="draftbox"><h4><span>سردوشی مونتاژشده</span><span class="en">Sode, 3 lames + top plate</span></h4>{{D_SODE}}
+      <ul><li>EVA ۵ میل. الگوی ۱:۱ توی PDF صفحه‌ی ۴۸ و ۴۹.</li><li>تیغه‌ها با بند قرمز آویزونن، فاصله‌ی ۱ سانتی که قرمز پیدا باشه. ارتفاع کل حدود ۲۸ سانت.</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:26px">تیکه‌های مستطیلی (اندازه‌ی برش)</h3>
+  <div class="rects" style="margin-top:10px">{{RECTS}}</div>
+
+  <h3 style="margin-top:26px">تسمه‌ها</h3>
+  <div class="scroll-x" style="margin-top:8px"><table style="min-width:560px"><thead><tr><th>تیکه</th><th>مواد</th><th>کجا</th></tr></thead><tbody>{{WEBBING}}</tbody></table></div>
+
+  <h3 style="margin-top:26px">نقشه‌ی برش روی پارچه</h3>
+  <p class="muted" style="font-size:.9rem;margin-top:4px">عرض پارچه ۱۵۰ فرض شده. اگه ۱۴۰ بود، تیکه‌های ستون آخر رو زیر بقیه جا بده و ۳۰ سانت بیشتر بخر. متراژهای لیست خرید از قبل ۵ درصد برای جمع شدن بعد از شستشو اضافه دارن.</p>
+  <div class="layouts" style="margin-top:12px">{{LAYOUTS}}</div>
+
+  <h3 style="margin-top:26px">لیست کامل برش</h3>
+  <div class="scroll-x" style="margin-top:8px"><table style="min-width:680px"><thead><tr><th>تیکه</th><th>پارچه</th><th class="num">برش (سانت)</th><th>تعداد</th><th>توضیح</th></tr></thead><tbody>{{CUTLIST}}</tbody></table></div>
+</section>
+
+<!-- ============ MAKE ============ -->
+<section class="ch" id="make">
+  <div class="ch-head"><span class="glyph">作</span><div><h2>ساخت، قطعه به قطعه</h2>
+  <p>هر قطعه رو باز کن. <span class="pill mom">مامان</span> یعنی کار چرخ خیاطیه؛ بقیه کار دست خودته. زمان‌ها تقریبی‌ان.</p></div></div>
+  {{BUILD}}
+</section>
+
+<!-- ============ DAYS ============ -->
+<section class="ch" id="days">
+  <div class="ch-head"><span class="glyph">日</span><div><h2>برنامه‌ی ۱۴ روزه</h2>
+  <p>از جمعه ۱ آبان تا شب مهمونی، پنجشنبه ۱۴ آبان. روزی ۳ تا ۴ ساعت. دو روز آخر قبل از مهمونی برای تست و رفع ایراد خالیه. تیک هر کار ذخیره میشه و امروز با رنگ قرمز مشخصه.</p></div></div>
+  <div class="prio" style="margin-bottom:16px">
+    <div class="card hl"><h4>اگه عقب افتادی: حتماً</h4><p style="font-size:.9rem;margin-top:6px">کت، هود و شنل، اوبی، شلوار (یا پلن B)، ماسک، کلاه، شمشیر با گره‌ی ایمنی.</p></div>
+    <div class="card"><h4>بهتره باشه</h4><p style="font-size:.9rem;margin-top:6px">سردوشی، پنل جلو با DTF، طناب و شیده، طلسم‌ها، پیش‌سینه، کهنه‌کاری.</p></div>
+    <div class="card"><h4>اگه وقت شد</h4><p style="font-size:.9rem;margin-top:6px">LED، زنگوله، پنل‌های کناری توری، مچ‌پیچ ساق، خون مصنوعی، پرده‌ی پشت کلاه.</p></div>
+  </div>
+  <div class="plan" id="plan"></div>
+</section>
+
+<!-- ============ PRINT ============ -->
+<section class="ch" id="print">
+  <div class="ch-head"><span class="glyph">印</span><div><h2>فایل‌های چاپ DTF</h2>
+  <p>DTF یعنی طرح روی فیلم چاپ میشه و با پرس داغ به پارچه می‌چسبه. تمیز، سریع و مثل لباس فروشگاهی. سه طرح روی یه برگه‌ی ۵۸ سانتی جا شدن که ارزون‌تر دربیاد.</p></div></div>
+  <div class="arts">
+    <figure><img src="img/dtf-back-preview.png" alt="طرح پشت کت"><figcaption>پشت کت · ۲۶×۴۴ سانت · سفید + قرمز</figcaption></figure>
+    <figure><img src="img/dtf-sleeve-preview.png" alt="طرح آستین"><figcaption>آستین راست · ۹×۴۰</figcaption></figure>
+    <figure><img src="img/dtf-panel-preview.png" alt="طرح پنل جلو"><figcaption>پنل جلو · ۲۰×۶۶ · جوهر مشکی روی پارچه‌ی قرمز</figcaption></figure>
+  </div>
+  <div class="dl" style="margin-top:14px">
+    <div class="card"><span class="ico">印</span><div><div class="t">گنگ‌شیت DTF (PNG شفاف، ۳۰۰dpi)</div><div class="s">۵۸×۶۸ سانت؛ همینو برای چاپخانه بفرست</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/dtf-gangsheet.png">دانلود</button><a class="alt" href="files/dtf-gangsheet.png" target="_blank" rel="noopener">باز کردن</a></div></div>
+    <div class="card"><span class="ico">一</span><div><div class="t">طرح‌ها جدا</div><div class="s">برای وقتی که فقط یکی رو می‌خوای</div></div>
+      <div class="acts"><button class="btn" data-dl="files/dtf-back.png">پشت</button><button class="btn" data-dl="files/dtf-sleeve.png">آستین</button><button class="btn" data-dl="files/dtf-panel.png">پنل</button></div></div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h3>پیام آماده برای چاپخانه</h3>
+      <pre class="copy fa" id="msgPrint">سلام، یه چاپ DTF دارم:
+- فایل PNG شفاف، ۳۰۰dpi، عرض ۵۸ سانت، طول حدود ۶۸ سانت (گنگ‌شیت).
+- سه طرح داره. طرح وسطی و چپی سفیدن؛ پنل سمت راست جوهر مشکیه (روی پارچه‌ی قرمز پرس میشه).
+- چاپ در اندازه‌ی ۱۰۰٪ لطفاً، بدون تغییر اندازه.
+- پرس روی سه تیکه پارچه‌ی خودم رو هم انجام میدید؟ (کتان مشکی ۱۰۰٪ نخ و کرپ قرمز)
+- تا دوشنبه ۴ آبان آماده میشه؟ قیمت با پرس چقدر میشه؟
+ممنون</pre>
+      <button class="btn" data-copy="msgPrint" style="margin-top:8px">کپی پیام</button></div>
+    <div class="card"><h3>موقع پرس</h3><ul style="padding-inline-start:20px;margin:6px 0 0">
+      <li>اندازه‌ها: پشت ۲۶×۴۴، آستین ۹×۴۰، پنل ۲۰×۶۶ سانت.</li>
+      <li>دمای معمول DTF: ۱۵۰ تا ۱۶۰ درجه، ۱۰ تا ۱۵ ثانیه، فشار متوسط به بالا. تنظیم دقیق با خود چاپخانه‌ست (به فیلمشون بستگی داره).</li>
+      <li><b>پشت کت:</b> طرح روی <b>دامن کت، زیر اوبی</b> میاد، چون شنل بالای پشت رو می‌پوشونه و اوبی کمر رو. روز ۴ بدنه‌ی دوخته رو بنداز رو شونه‌ت، یه شال جای اوبی ببند و لبه‌ی پایینش رو پشت علامت بزن (حدوداً ۴۵ تا ۴۸ سانت زیر خط شونه). بالای طرح ۵ سانت زیر این علامت. وسط طرح روی درز وسط پشت، که قبلش باز و صاف اتو شده.</li>
+      <li><b>آستین:</b> روی نیمه‌ی بیرونی آستین (همون نیمه‌ای که از جلو دیده میشه)، عمودی. بالای طرح ۱۸ سانت پایین‌تر از لبه‌ای که به بدنه دوخته میشه، چون بالای آستین زیر شنله.</li>
+      <li><b>پنل جلو:</b> وسط، ۸ سانت زیر خط تونل.</li>
+      <li>پرس <b>قبل</b> از دوختن آستین و قبل از سجاف پنل. پارچه صاف‌تر = چاپ بهتر.</li>
+      <li>پلن B (بدون DTF): طرح رو بزرگ پرینت کن، پشتش رو با گچ سفید سیاه کن، روی پارچه کپی کن و با رنگ پارچه‌ی سفید و قلم‌موی تخت پر کن. خط قلم‌مویی کج هم به سبکش میاد.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ PARTY ============ -->
+<section class="ch" id="party">
+  <div class="ch-head"><span class="glyph">宴</span><div><h2>شب مهمونی</h2>
+  <p>پنجشنبه ۱۴ آبان، ۱۸ تا ۲۱. با ماشین برو و نصف لباس رو تو محل بپوش. تو خیابون نه ماسک لازمه، نه شمشیر.</p></div></div>
+  <div class="grid2">
+    <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>ترتیب پوشیدن</h3><button class="btn" id="resetDress" type="button">پاک کردن تیک‌ها</button></div>
+      <p class="muted" style="font-size:.85rem">خونه حدود ۲۰ دقیقه · محل حدود ۱۵ دقیقه</p>
+      <div class="checklist" id="dress"></div></div>
+    <div class="stack">
+      <div class="card"><h3>ساک اضطراری</h3><div class="checklist" id="kit"></div></div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card hl"><h3>ایمنی (جدی)</h3><ul style="padding-inline-start:20px;margin:6px 0 0">
+      <li><b>گره‌ی ایمنی شمشیر (Peace-tie):</b> یه بند قرمز دور گارد و دهانه‌ی غلاف با گره‌ی پاپیونی. وقتی شمشیر رو پشتته سر و ته آویزونه و بدون این گره ممکنه تیغه بیفته بیرون.</li>
+      <li>تو شلوغی شمشیر رو بیرون نکش. فقط برای عکس، با فاصله و با هماهنگی.</li>
+      <li>مسیر: شمشیر تو کاور یا جعبه، تو صندوق ماشین. با ماسک و شمشیر تو خیابون راه نرو؛ حمل سلاح سرد می‌تونه دردسر قانونی داشته باشه.</li>
+      <li>دید: ماسک، هود و کلاه دید کناری و پایین رو کم می‌کنن. پله رو آروم برو. کلاه حدود ۵۰ سانت قطر داره؛ تو در کج رد شو.</li>
+      <li>گرما: اگه داغ کردی اول بالاکلاوا رو دربیار. هر یه ساعت آب بخور.</li>
+      <li>موقع ساخت: سشوار صنعتی و هویه فقط با تهویه. چسب رازی فقط فضای باز. هیچ شعله‌ای نزدیک تور و پارچه‌ی مصنوعی نباشه.</li>
+    </ul></div>
+    <div class="card"><h3>شش ژست عکس</h3><ol style="padding-inline-start:20px;margin:6px 0 0">
+      <li><b>سایه‌ی کلاه:</b> سر پایین، فقط لبخند ماسک از زیر لبه‌ی کلاه.</li>
+      <li><b>نیم‌کشیدن:</b> ۵ سانت تیغه بیرون، دست روی دسته، صاف به دوربین.</li>
+      <li><b>از روی شونه:</b> پشت به دوربین، طرح پشت کت و سردوشی، سر نیم‌چرخ.</li>
+      <li><b>تسبیح:</b> دست راست با تسبیح جلوی ماسک، مثل رفرنس مو قرمز.</li>
+      <li><b>زانو:</b> یه زانو زمین، شمشیر غلاف‌دار عمودی کنارت، سر بالا.</li>
+      <li><b>تاریکی:</b> چراغ‌ها خاموش، فقط LED. عکس از پایین.</li>
+    </ol>
+    <p class="muted" style="font-size:.85rem;margin-top:8px">یکی از دوستات رو از قبل توجیه کن که این شش تا رو ازت بگیره.</p></div>
+  </div>
+</section>
+
+<!-- ============ AI ============ -->
+<section class="ch" id="ai">
+  <div class="ch-head"><span class="glyph">絵</span><div><h2>پرامپت‌ها برای ChatGPT</h2>
+  <p>اگه بخوای ChatGPT همین طرح نهایی رو به عکس دربیاره. کانجی‌ها رو ممکنه درست ننویسه؛ مهم نیست، طرح واقعی از فایل‌های DTF میاد.</p></div></div>
+  <div class="stack">
+    <div class="card"><h3>۱. عکس کامل کاراکتر</h3><pre class="copy" id="p1">Full-body photorealistic cosplay photo of a tall slim ronin called "Tanish, the Smiling Revenant", front view, 85mm, dramatic low-key studio light, light rain, red rim light.
+HEAD: wide black woven bamboo conical kasa hat with a white vertical kanji column 起死回生 and a red circle behind 死, red tassels hanging at both sides, red chin cord, a ragged black gauze veil at the back. Under it a pointed black hood lined in blood red with a faint red glow inside. Face: glossy white mask with black crescent smiling eyes and a wide black grin (Kagetane Hiruko, Black Bullet), black balaclava under it, eyes hidden in black. A short ragged black capelet over the shoulders.
+TORSO: kimono collar crossed right-over-left, black over a blood-red under-collar, over a black knit turtleneck. Long black cotton kimono-construction coat to mid-calf, frayed asymmetric hem, side slits showing red, only the RIGHT sleeve: wide, ragged, with a vertical column of white brush kanji. LEFT arm in the turtleneck sleeve with a laced black leather bracer, a single samurai sode shoulder guard of three black lacquered plates hanging on red silk cords, a red cord armband.
+CHEST: braided hemp shimenawa rope with white zigzag shide paper from the left shoulder to the right hip, crossing a black webbing sword baldric; katana on the back, hilt over the right shoulder, red Chinese-knot charm with small bells.
+WAIST: blood-red obi wrapped twice, black leather belt with a silver gothic cross buckle, red front apron panel with black brush kanji 起死回生, red ragged hip panels under torn black gauze, paper ofuda talisman tags on a silver chain, a silver cross chain.
+HANDS/LEGS: black fingerless gloves with silver rings, black juzu prayer beads in the right hand; very wide black hakama-like trousers bloused over chunky black lace-up combat boots.
+PALETTE: ink black, charcoal, blood red #8E1016, bone white. Weathered, dusty hems. No bare skin visible.</pre><button class="btn" data-copy="p1" style="margin-top:8px">کپی</button></div>
+    <div class="card"><h3>۲. شیت جلو، پشت و بغل</h3><pre class="copy" id="p2">Character turnaround sheet of the exact same costume (front, back, left side), neutral dark grey background, costume design reference sheet style with small English callout labels. Back view must show: the coat back with a large white vertical 起死回生 and a red brushed disc behind 死, the kasa hat's gauze veil, the katana diagonal on the back with two scabbard straps, the ragged longer back hem. Side view shows the single left sode shoulder guard with red cord lacing and the wide right sleeve. Same lighting and palette as before.</pre><button class="btn" data-copy="p2" style="margin-top:8px">کپی</button></div>
+    <div class="card"><h3>۳. پوستر برای استوری</h3><pre class="copy" id="p3">Moody vertical 9:16 poster of the same character standing in a rainy night alley lit only by a red glow from inside his hood; the white smiling mask is the brightest thing in the frame; large red vertical Japanese text タニシュ on the right edge, small text "笑う亡霊 — Died once. Still smiling." at the bottom; cinematic, grain, shallow depth of field.</pre><button class="btn" data-copy="p3" style="margin-top:8px">کپی</button></div>
+  </div>
+</section>
+
+<!-- ============ NOTES ============ -->
+<section class="ch" id="notes">
+  <div class="ch-head"><span class="glyph">心</span><div><h2>چیزهایی که احتمالاً بهشون فکر نکرده بودی</h2></div></div>
+  <div class="grid2">
+    <div class="card"><ol style="padding-inline-start:20px;margin:0">
+      <li><b>جمع شدن پارچه:</b> کتان بعد از اولین شستشو ۳ تا ۵ درصد جمع میشه. قبل از برش بشور، وگرنه بعد از کهنه‌کاری کت کوتاه میشه.</li>
+      <li><b>دستشویی:</b> شلوار کش‌کمره و اوبی ۳۰ ثانیه‌ای باز و بسته میشه. حمایل قفل کوله داره. پس هیچ‌چیز رو به هم ندوز.</li>
+      <li><b>آب خوردن:</b> ماسک رو از پایین بالا بده و با نی بخور.</li>
+      <li><b>نشستن:</b> شمشیر پشت + صندلی = نمیشه. قبل از نشستن ببرش لای اوبی یا بذارش کنار.</li>
+      <li><b>گوشی:</b> تو جیب شلوار، از لای چاک کت دستت بهش میرسه.</li>
+      <li><b>ماسک روی بالاکلاوا لیز می‌خوره:</b> یه تیکه ولکروی نرم یا نوار ضدلغزش داخل ماسک بچسبون.</li>
+      <li><b>صدای زنگوله:</b> اگه رو اعصاب رفت، با یه گیره‌ی کوچیک خفه‌اش کن.</li>
+      <li><b>بو:</b> چسب رازی و رنگ رو تا روز ۱۱ تموم کن که تا مهمونی بوش بره.</li>
+    </ol></div>
+    <div class="card"><ol start="9" style="padding-inline-start:20px;margin:0">
+      <li><b>پلن B شلوار:</b> کارگوی خودت + مچ‌پیچ ساق + پنل‌های کناری. صرفه‌جویی حدود ۱.۵ میلیون.</li>
+      <li><b>پلن B DTF:</b> رنگ پارچه + کپی با گچ. صرفه‌جویی حدود ۸۰۰ هزار، ولی ۲ ساعت کار بیشتر.</li>
+      <li><b>پلن B سردوشی:</b> کفپوش پازلی فومی به جای EVA.</li>
+      <li><b>پلن B پارچه‌ی توری:</b> تنظیف (گاز) سفید + رنگ پارچه‌ی مشکی تو آب داغ.</li>
+      <li><b>اگه مامانت اصلاً قبول نکرد:</b> شلوار رو پلن B کن. کت رو با دوخت صاف خودت بزن؛ کیمونو فقط درز صافه. یقه رو هم میشه با چسب پارچه زد.</li>
+      <li><b>بعد مهمونی:</b> با آب سرد و دست بشور. DTF رو از پشت اتو کن. سردوشی رو آویزون نگه دار که صاف نشه.</li>
+      <li><b>اسم و جمله آماده داشته باش:</b> «تانیش؛ رونینی که یه بار مُرد و هنوز می‌خنده.»</li>
+      <li><b>اگه اندازه‌ای اشتباه بود</b> (مخصوصاً فاق و داخل پا)، بگو تا الگو و PDF رو دوباره بسازم.</li>
+    </ol></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>یادداشت‌های خودت</h3><p class="muted" style="font-size:.85rem">هرچی اینجا بنویسی با بقیه‌ی پیشرفتت ذخیره میشه.</p><label for="notesTxt" class="muted" style="font-size:.8rem">یادداشت</label><textarea id="notesTxt" placeholder="مثلاً: مغازه‌ی پارچه‌ی خوب تو سرای امیرکبیر، طبقه‌ی دوم…"></textarea></div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p>منابع قیمت (برای تخمین؛ قیمت واقعی رو تو لیست وارد کن):</p>
+  <ul>
+    <li><a href="https://basalam.com/cat/home/%D9%BE%D8%A7%D8%B1%DA%86%D9%87-%DA%A9%D8%AA%D8%A7%D9%86-%DA%A9%D8%AC%D8%B1%D8%A7%D9%87" target="_blank" rel="noopener">باسلام: پارچه‌ی کتان کجراه</a> · <a href="https://torob.com/p/384f6946-2660-403c-9e6d-89e79b828f8d/%D9%BE%D8%A7%D8%B1%DA%86%D9%87-%DA%A9%D8%AA%D8%A7%D9%86-%DA%A9%D8%AC%D8%B1%D8%A7%D9%87/" target="_blank" rel="noopener">ترب: کتان کجراه</a></li>
+    <li><a href="https://satiatex.com/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%DA%86%D8%A7%D9%BE-dtf/" target="_blank" rel="noopener">ساتیاتکس: تعرفه‌ی DTF (شهریور ۱۴۰۵)</a> · <a href="https://nimosh.ir/%DA%86%D8%A7%D9%BE-%D8%AF%DB%8C-%D8%AA%DB%8C-%D8%A7%D9%81-dtf/" target="_blank" rel="noopener">نیموش: DTF</a></li>
+    <li><a href="https://torob.com/p/73d739d1-b21c-4ae4-ae3b-4d6723d775cb/%D8%AF%D8%B3%D8%AA%DA%A9%D8%B4-%D9%86%DB%8C%D9%85-%D8%A7%D9%86%DA%AF%D8%B4%D8%AA%DB%8C-%D8%AA%D8%A7%DA%A9%D8%AA%DB%8C%DA%A9%D8%A7%D9%84/" target="_blank" rel="noopener">ترب: دستکش نیم‌انگشتی</a> · <a href="https://amiranlaminet.com/%D9%82%DB%8C%D9%85%D8%AA-%D9%81%D9%88%D9%85-eva/" target="_blank" rel="noopener">قیمت فوم EVA</a></li>
+    <li><a href="https://balad.ir/blog/?p=3136" target="_blank" rel="noopener">بلد: بورس پارچه‌ی تهران (سرای امیرکبیر و چهارسوق)</a></li>
+  </ul>
+  <p style="margin-top:10px">ساخته‌شده برای تانیش · هالووین ۱۴۰۵ · <span class="kj">起死回生</span></p>
+</div></footer>
+
+<script>
+{{DATA_JS}}
+</script>
+<script>
+{{APP_JS}}
+</script>

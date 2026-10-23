@@ -1,0 +1,1222 @@
+<title>Tanish · タニシュ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Yuji+Boku&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one long RTL workbook, sticky chapter bar, chapters marked by a kanji that names the job (姿 look, 買 buy, 型 pattern, 作 make, 日 days, 印 print, 宴 party, 心 notes). */
+:root{
+  --bg:#ecebe7; --surface:#f7f6f3; --surface2:#e2e0da; --fg:#151315; --muted:#5d5a57; --line:#c9c5bd;
+  --accent:#9b1119; --accent-deep:#6f0b11; --accent-soft:#f1dcdc; --silver:#8c9196; --ok:#2f6b3a;
+  --draft-ink:#1b1919; --draft-dim:#7a2a2e; --draft-fill:#fbfaf7;
+  --fab-black:#2a2729; --fab-black2:#3a3638; --fab-gauze:#6c6870;
+  --fig-coat:#1d1b1d; --fig-coat2:#2b282b; --fig-pants:#262326; --fig-boot:#0f0e0f; --fig-gauze:rgba(40,38,42,.55); --fig-knit:#2f2c30; --fig-line:#000;
+  --callout-bg:#f7f6f3; --callout-fg:#151315;
+  --f-body:Vazirmatn, Tahoma, sans-serif; --f-kanji:'Yuji Boku', 'Hiragino Mincho ProN', serif; --f-mono:'JetBrains Mono', ui-monospace, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f0e10; --surface:#18161a; --surface2:#221f24; --fg:#ece8e3; --muted:#a39d97; --line:#34303a;
+  --accent:#d3323b; --accent-deep:#8e1016; --accent-soft:#3a1517; --silver:#a8adb2; --ok:#6fbf7b;
+  --draft-ink:#e6e1da; --draft-dim:#f08a8f; --draft-fill:#1d1a1f;
+  --fab-black:#3b373c; --fab-black2:#4a454b; --fab-gauze:#77727c;
+  --fig-coat:#2a272c; --fig-coat2:#3a363c; --fig-pants:#322e34; --fig-boot:#1a181b; --fig-gauze:rgba(120,114,126,.45); --fig-knit:#3c3840; --fig-line:#000;
+  --callout-bg:#18161a; --callout-fg:#ece8e3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f0e10; --surface:#18161a; --surface2:#221f24; --fg:#ece8e3; --muted:#a39d97; --line:#34303a;
+  --accent:#d3323b; --accent-deep:#8e1016; --accent-soft:#3a1517; --silver:#a8adb2; --ok:#6fbf7b;
+  --draft-ink:#e6e1da; --draft-dim:#f08a8f; --draft-fill:#1d1a1f;
+  --fab-black:#3b373c; --fab-black2:#4a454b; --fab-gauze:#77727c;
+  --fig-coat:#2a272c; --fig-coat2:#3a363c; --fig-pants:#322e34; --fig-boot:#1a181b; --fig-gauze:rgba(120,114,126,.45); --fig-knit:#3c3840; --fig-line:#000;
+  --callout-bg:#18161a; --callout-fg:#ece8e3; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.85 var(--f-body);direction:rtl;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.35;margin:0}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:800}
+h4{font-size:1rem;font-weight:800}
+p{margin:0}
+a{color:var(--accent)}
+.en{direction:ltr;unicode-bidi:isolate;font-family:var(--f-mono);font-size:.82em;color:var(--muted)}
+.kj{font-family:var(--f-kanji)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+.prose{max-width:68ch}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-block:8px}
+.bar .brand{font-family:var(--f-kanji);font-size:1.25rem;white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.chips a{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;font-size:.86rem;white-space:nowrap;background:var(--surface)}
+.chips a .kj{color:var(--accent);font-size:1rem;line-height:1}
+.chips a:hover{border-color:var(--accent)}
+.sync{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.sync b{color:var(--ok);font-weight:700}
+
+/* hero */
+.hero{padding-block:36px 28px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center}
+.hero .name{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.hero .name .kj{font-size:clamp(3.2rem,9vw,6.2rem);line-height:1;color:var(--fg)}
+.hero .name .lat{font:700 .95rem var(--f-mono);letter-spacing:.3em;color:var(--accent)}
+.hero .title{font-size:clamp(1.15rem,2.4vw,1.45rem);font-weight:800;margin-top:12px}
+.hero .title .kj{color:var(--accent);margin-inline-end:8px}
+.hero .lede{margin-top:12px;color:var(--muted);max-width:56ch}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.stat .k{font-size:.78rem;color:var(--muted)}
+.stat .v{font:700 1.5rem/1.3 var(--f-mono);font-variant-numeric:tabular-nums}
+.stat .v small{font:500 .8rem var(--f-body);color:var(--muted)}
+.meter{height:6px;border-radius:9px;background:var(--surface2);overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* chapters */
+section.ch{padding-block:44px;border-top:1px solid var(--line)}
+.ch-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:22px}
+.ch-head .glyph{font-family:var(--f-kanji);font-size:3.2rem;line-height:1;color:var(--accent);min-width:1em}
+.ch-head p{color:var(--muted);margin-top:6px;max-width:68ch}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
+.card.hl{border-color:var(--accent)}
+.note{border-inline-start:3px solid var(--accent);padding:8px 12px;background:var(--accent-soft);border-radius:0 6px 6px 0;font-size:.95rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.must{border-color:var(--accent);color:var(--accent)}
+.tag.have{border-color:var(--ok);color:var(--ok)}
+.tag.make{border-color:var(--fg);color:var(--fg)}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:start;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap}
+td.num,th.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* concept */
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.figs figure{margin:0;min-width:0}
+.figs figcaption{text-align:center;font-size:.8rem;color:var(--muted)}
+svg.fig{width:100%;height:auto;display:block}
+.legend{columns:2;column-gap:22px;font-size:.92rem}
+.legend li{break-inside:avoid;margin-bottom:6px;list-style:none;display:flex;gap:8px}
+.legend ol{padding:0;margin:0}
+.legend .n{font:700 .8rem var(--f-mono);min-width:1.9em;height:1.9em;border-radius:50%;border:1.5px solid var(--accent);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:flex;align-items:center;gap:8px;font-size:.85rem}
+.sw i{width:34px;height:34px;border-radius:6px;border:1px solid var(--line);display:block}
+.lore{font-size:1.06rem;line-height:2}
+.lore q{display:block;font-weight:800;margin-top:10px;quotes:none}
+.refs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.refs img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.sig{counter-reset:s;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sig li{list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.sig li b{display:block}
+
+/* inventory */
+.inv{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.inv .card{display:flex;gap:12px;align-items:flex-start}
+.inv img{width:72px;height:72px;object-fit:cover;border-radius:8px;flex-shrink:0}
+
+/* shop */
+.shop-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.totals{display:flex;flex-wrap:wrap;gap:10px}
+.totals .stat{padding:8px 12px}
+.totals .stat .v{font-size:1.1rem}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .88rem var(--f-body);padding:7px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{appearance:none;border:0;background:var(--surface);color:var(--fg);font:600 .84rem var(--f-body);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.store{margin-top:18px}
+.store h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.store .how{font-size:.88rem;color:var(--muted);margin:4px 0 8px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.item.done .iname{text-decoration:line-through;text-decoration-color:var(--accent);opacity:.65}
+.item .iname{font-weight:700}
+.item .meta{font-size:.84rem;color:var(--muted)}
+.item .price{text-align:end;font:600 .85rem var(--f-mono);white-space:nowrap}
+.item .price input{width:92px;font:600 .85rem var(--f-mono);padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);text-align:center;margin-top:4px;direction:ltr}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);margin-top:4px;cursor:pointer}
+
+/* patterns */
+.meas{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.meas div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.meas .k{font-size:.78rem;color:var(--muted)}
+.meas .v{font:700 1.15rem var(--f-mono)}
+.meas .flag{border-color:var(--accent)}
+.draftbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
+.draftbox h4{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.draftbox ul{margin:8px 0 0;padding-inline-start:18px;font-size:.88rem;color:var(--muted)}
+svg.draft{width:100%;height:auto;display:block;max-height:560px}
+svg.draft.wide{max-height:none}
+svg.draft.mini{max-height:220px}
+svg.draft.sodeprev{max-height:300px}
+svg.layout{width:100%;height:auto;display:block}
+.laytxt{fill:#fff;font-family:Vazirmatn,sans-serif;font-weight:700}
+.layouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.rects{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.rects .draftbox p{font-size:.84rem;color:var(--muted);margin-top:6px}
+.dl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dl .card{display:flex;gap:12px;align-items:center;flex:1 1 280px}
+.dl .card .ico{font-family:var(--f-kanji);font-size:2rem;color:var(--accent);line-height:1}
+.dl .card .t{font-weight:800}
+.dl .card .s{font-size:.82rem;color:var(--muted)}
+.dl .card .acts{margin-inline-start:auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.dl .card a.alt{font-size:.75rem}
+.cut{fill:var(--draft-fill);stroke:var(--draft-ink);stroke-width:.3}.fold{stroke:var(--draft-ink);stroke-width:.2;stroke-dasharray:1.2 .8}.grain{stroke:var(--draft-ink);stroke-width:.2}.notch{fill:none;stroke:var(--accent);stroke-width:.35}.ext{stroke:var(--draft-dim);stroke-width:.12}.dim{stroke:var(--draft-dim);stroke-width:.15}.dimfill{fill:var(--draft-dim)}.dimtxt{fill:var(--draft-dim);font-family:'JetBrains Mono',monospace;font-weight:600}.plabel{fill:var(--draft-ink);font-family:Vazirmatn,sans-serif;font-weight:700}.rect{fill:var(--draft-fill);stroke:var(--draft-ink);stroke-width:.3}.hole{fill:var(--bg);stroke:var(--draft-ink);stroke-width:.15}
+
+/* build */
+details.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
+details.step>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+details.step>summary::-webkit-details-marker{display:none}
+details.step>summary .n{font:700 .8rem var(--f-mono);color:var(--accent);min-width:2.2em}
+details.step>summary h3{flex:1;min-width:0;font-size:1.05rem}
+details.step>summary .t{font-size:.8rem;color:var(--muted)}
+details.step>summary::after{content:"+";font:700 1.2rem var(--f-mono);color:var(--accent)}
+details.step[open]>summary::after{content:"−"}
+details.step .body{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+details.step ol,details.step ul{margin:0;padding-inline-start:22px}
+details.step li{margin-bottom:6px}
+.pill{font-size:.75rem;font-weight:700;padding:1px 8px;border-radius:6px;background:var(--surface2)}
+.pill.mom{background:var(--accent-soft);color:var(--accent)}
+
+/* plan */
+.plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0;position:relative}
+.day.today{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.day.party{grid-column:1/-1;background:linear-gradient(135deg,var(--surface),var(--accent-soft))}
+.day header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.day .dn{font:700 1.5rem var(--f-mono);color:var(--accent)}
+.day .dd{font-weight:800}
+.day .dh{font-size:.8rem;color:var(--muted);margin-inline-start:auto}
+.day .tt{font-weight:800;font-size:1.02rem}
+.day .dnote{font-size:.82rem;color:var(--muted)}
+.day .todaybadge{position:absolute;top:-10px;left:14px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800;padding:1px 10px;border-radius:999px}
+.task{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:8px;align-items:start;padding:5px 0;font-size:.93rem}
+.task.done span:last-child{text-decoration:line-through;opacity:.6}
+.who{font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:6px;background:var(--surface2);margin-top:4px;white-space:nowrap}
+.who.mom{background:var(--accent-soft);color:var(--accent)}
+.prio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+
+/* print/dtf */
+.arts{display:grid;grid-template-columns:1.2fr .5fr .8fr;gap:12px;align-items:start}
+.arts figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.arts img{width:100%;height:auto;max-height:440px;object-fit:contain;display:block;border-radius:6px}
+.arts figcaption{font-size:.82rem;color:var(--muted);margin-top:6px}
+pre.copy{white-space:pre-wrap;background:var(--surface2);border-radius:8px;padding:12px;font:500 .85rem/1.7 var(--f-mono);direction:ltr;text-align:left;margin:0;max-height:340px;overflow:auto}
+pre.copy.fa{direction:rtl;text-align:right;font-family:var(--f-body)}
+
+/* party */
+.checklist{display:flex;flex-direction:column}
+.checklist label{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:10px;align-items:start;padding:7px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.checklist label .i{font:700 .8rem var(--f-mono);color:var(--muted);margin-top:4px;min-width:1.6em}
+.checklist label.done span:last-child{text-decoration:line-through;opacity:.6}
+.where{font-size:.7rem;font-weight:800;color:var(--accent)}
+.poses{counter-reset:p;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.poses li{list-style:none}
+textarea{width:100%;min-height:120px;font:400 .95rem/1.8 var(--f-body);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px}
+footer{padding-block:30px 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer ul{padding-inline-start:18px}
+
+
+.fig .f-coat{fill:var(--fig-coat);stroke:var(--fig-line);stroke-width:1.2}
+.fig .f-coat2{fill:var(--fig-coat2);stroke:var(--fig-line);stroke-width:.8}
+.fig .f-pants{fill:var(--fig-pants);stroke:var(--fig-line);stroke-width:1.2}
+.fig .f-boot{fill:var(--fig-boot);stroke:var(--fig-line);stroke-width:1.2}
+.fig .f-red{fill:var(--accent);stroke:var(--fig-line);stroke-width:.8}
+.fig .f-red2{fill:var(--accent-deep)}
+.fig .f-gauze{fill:var(--fig-gauze);stroke:var(--fig-line);stroke-width:.6;stroke-dasharray:2 2}
+.fig .f-belt{fill:var(--fig-boot)}
+.fig .f-silver{fill:var(--silver)}
+.fig .f-brass{fill:#a8873a}
+.fig .f-paper{fill:#d9cfb8;stroke:#7b6f57;stroke-width:.5}
+.fig .f-glove,.fig .f-leather{fill:var(--fig-boot);stroke:var(--fig-line);stroke-width:.8}
+.fig .f-knit{fill:var(--fig-knit);stroke:var(--fig-line);stroke-width:1}
+.fig .f-plate{fill:var(--fig-boot);stroke:var(--silver);stroke-width:1}
+.fig .f-mask{fill:#f4f2ee;stroke:#bdb8ae;stroke-width:.8}
+.fig .f-ink{fill:#0d0c0c}
+.fig .f-glow{fill:url(#glow)}
+.fig .f-kasa{fill:#1b1a1d;stroke:var(--fig-line);stroke-width:1.2}
+.fig .kasa-weave{stroke:#3a383e;stroke-width:.8}
+.fig .hilt{stroke:#141313;stroke-width:6;stroke-linecap:round;stroke-dasharray:4 1.5}
+.fig .scab{stroke:#111;stroke-width:6;stroke-linecap:round}
+.fig .cord{fill:none;stroke:var(--accent);stroke-width:1.6}
+.fig .lacing,.fig .lace{stroke:var(--accent);stroke-width:1.4}
+.fig .lace{stroke:#555}
+.fig .armband{stroke:var(--accent);stroke-width:4}
+.fig .chain{fill:none;stroke:var(--silver);stroke-width:1.8;stroke-dasharray:2.5 1.2}
+.fig .beads{fill:none;stroke:#0b0b0b;stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 6}
+.fig .strap{stroke:#0f0f10;stroke-width:6}
+.fig .rope{stroke:#a98c5c;stroke-width:7;stroke-linecap:round}
+.fig .rope-twist{stroke:#6f5a36;stroke-width:7;stroke-dasharray:1.5 4}
+.fig .shide{fill:none;stroke:#f2efe8;stroke-width:3;stroke-linejoin:bevel}
+.fig .rag{fill:none;stroke:var(--fig-line);stroke-width:3;opacity:.7}
+.fig .seam{fill:none;stroke:var(--fig-line);stroke-width:.8;stroke-dasharray:3 2;opacity:.8}
+.fig .collar{fill:none;stroke:var(--fig-line);stroke-width:4;opacity:.9}
+.fig .kanji-w{fill:#f4f2ee;font-family:'Yuji Boku',serif}
+.fig .kanji-b{fill:#0d0c0c;font-family:'Yuji Boku',serif}
+.fig .kanji-r{fill:var(--accent);font-family:'Yuji Boku',serif}
+.fig .co circle{fill:var(--callout-bg);stroke:var(--accent);stroke-width:1.5}
+.fig .co text{fill:var(--callout-fg);font:700 10px 'JetBrains Mono',monospace}
+
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .grid2,.sig,.plan,.prio,.poses{grid-template-columns:1fr}
+  .grid3,.layouts{grid-template-columns:1fr}
+  .arts{grid-template-columns:1fr 1fr}
+  .refs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .legend{columns:1}
+}
+@media (max-width:480px){
+  body{font-size:15px}
+  .figs{grid-template-columns:1fr 1fr;padding:6px;gap:4px}
+  .arts{grid-template-columns:1.2fr .5fr .8fr;gap:6px}
+  .arts figure{padding:6px}
+  .arts img{max-height:300px}
+  details.step>summary h3{flex-basis:60%}
+  .item{grid-template-columns:auto minmax(0,1fr)}
+  .item .price{grid-column:2;text-align:start}
+  .sync{display:none}
+}
+</style>
+
+<div class="bar"><div class="wrap">
+  <span class="brand" aria-hidden="true">タニシュ</span>
+  <nav class="chips" aria-label="فصل‌ها">
+    <a href="#look"><span class="kj">姿</span>کانسپت</a>
+    <a href="#have"><span class="kj">持</span>داری‌ها</a>
+    <a href="#buy"><span class="kj">買</span>خرید</a>
+    <a href="#pattern"><span class="kj">型</span>الگو</a>
+    <a href="#make"><span class="kj">作</span>ساخت</a>
+    <a href="#days"><span class="kj">日</span>۱۴ روز</a>
+    <a href="#print"><span class="kj">印</span>چاپ</a>
+    <a href="#party"><span class="kj">宴</span>شب مهمونی</a>
+    <a href="#ai"><span class="kj">絵</span>پرامپت</a>
+    <a href="#notes"><span class="kj">心</span>نکته‌ها</a>
+  </nav>
+  <span class="sync" id="sync">ذخیره: <b>این دستگاه</b></span>
+</div></div>
+
+<main class="wrap">
+<header class="hero">
+  <div>
+    <div class="name"><span class="kj">タニシュ</span><span class="lat">TANISH</span></div>
+    <div class="title"><span class="kj">笑う亡霊</span>شبحِ خندان · رونینی که یه بار مُرد</div>
+    <p class="lede">کاستوم هالووین ۱۴ آبان ۱۴۰۵: طراحی کامل، لیست خرید با قیمت، الگوهای اندازه‌ی خودت، آموزش ساخت تک‌تک قطعه‌ها و برنامه‌ی روزبه‌روز. تیک‌ها و قیمت‌هایی که اینجا وارد می‌کنی ذخیره میشن.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="k">تا شروع مهمونی</div><div class="v" id="cd">—</div><div class="meter"><i id="cdbar"></i></div></div>
+    <div class="stat"><div class="k">امروز</div><div class="v" id="today">—</div><div class="muted" style="font-size:.8rem" id="todayt"></div></div>
+    <div class="stat"><div class="k">کارهای برنامه</div><div class="v" id="planp">۰٪</div><div class="meter"><i id="planbar"></i></div></div>
+    <div class="stat"><div class="k">بودجه‌ی تخمینی</div><div class="v" id="budget">—</div><div class="muted" style="font-size:.8rem">سقف تو: ۲۰ میلیون</div></div>
+  </div>
+</header>
+
+<!-- ============ LOOK ============ -->
+<section class="ch" id="look">
+  <div class="ch-head"><span class="glyph">姿</span><div><h2>کانسپت: «شبحِ خندان»</h2>
+  <p>ترکیب رونین کهنه‌ی ژاپنی با کمی تکوِر و گوتیک. مشکی غالب، قرمز خونی برای لایه‌های داخلی، سفید فقط روی ماسک و نوشته‌ها. همه‌چی از کلاه خودت شروع میشه: 起死回生 یعنی «از مرگ برخاستن».</p></div></div>
+
+  <div class="grid2">
+    <div class="figs">
+      <figure><svg class="fig" viewBox="40 20 220 590" role="img" aria-label="front view"><defs><radialGradient id="glow" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#ff2a2a" stop-opacity=".75"/><stop offset="1" stop-color="#ff2a2a" stop-opacity="0"/></radialGradient></defs><line x1="104" y1="168" x2="74" y2="112" class="hilt"/><ellipse cx="101" cy="162" rx="7" ry="3" transform="rotate(-62 101 162)" class="f-brass"/><path d="M74,112 q-4,10 -2,22" class="cord"/><path d="M69,133 l3,12 l4,-12 Z" class="f-red"/><circle cx="72" cy="128" r="2.2" class="f-brass"/><line x1="214" y1="350" x2="234" y2="392" class="scab"/><path d="M100,560 h44 l4,30 q-2,8 -10,8 h-40 q-6,0 -4,-10 Z" class="f-boot"/><path d="M156,560 h44 l4,30 q-2,8 -10,8 h-40 q-6,0 -2,-10 Z" class="f-boot"/><path d="M116,318 L150,318 L148,566 Q124,572 96,564 Z" class="f-pants"/><path d="M150,318 L186,318 L206,564 Q178,572 152,566 Z" class="f-pants"/><path d="M98,556 q25,8 50,2 M154,558 q25,6 50,-2" class="seam"/><polygon points="110,300 128,300 128,445 128.0,445.0 124.0,457.8 120.0,445.0 116.0,460.9 112.0,445.0 108.0,459.7" class="f-red"/><polygon points="172,300 192,300 194,440 194.0,440.0 189.6,450.7 185.2,440.0 180.8,449.5 176.4,440.0 172.0,455.7" class="f-red"/><polygon points="104,300 126,300 122,470 100,468" class="f-gauze"/><polygon points="108,150 140,150 146,232 138,300 130,470 130.0,470.0 123.7,483.1 117.3,470.0 111.0,485.9 104.7,470.0 98.3,494.0 92.0,470.0 96,330" class="f-coat"/><polygon points="160,150 194,150 204,330 212,486 212.0,486.0 205.0,509.7 198.0,486.0 191.0,504.7 184.0,486.0 177.0,495.4 170.0,486.0 162,300 154,232" class="f-coat"/><path d="M140,150 L146,232 L138,300 L130,470 M160,150 L154,232 L162,300 L170,486" class="collar"/><path d="M138,152 L156,236 L162,236 L145,152 Z" class="f-red"/><path d="M162,152 L142,236 L136,236 L155,152 Z" class="f-red"/><path d="M161,152 L146,232 L140,232 L156,152 Z" class="f-coat2"/><path d="M139,152 L158,232 L152,232 L134,154 Z" class="f-coat2"/><rect x="118" y="262" width="66" height="30" rx="2" class="f-red"/><rect x="118" y="282" width="66" height="7" class="f-belt"/><path d="M151,279 l4,6 l-4,6 l-4,-6 Z" class="f-silver"/><rect x="139" y="292" width="24" height="112" class="f-red"/><rect x="139" y="292" width="24" height="7" class="f-red2"/><text x="151" y="318" class="kanji-b" font-size="16" text-anchor="middle" dominant-baseline="middle">起</text><text x="151" y="340" class="kanji-b" font-size="16" text-anchor="middle" dominant-baseline="middle">死</text><text x="151" y="362" class="kanji-b" font-size="16" text-anchor="middle" dominant-baseline="middle">回</text><text x="151" y="384" class="kanji-b" font-size="16" text-anchor="middle" dominant-baseline="middle">生</text><path d="M122,290 q8,36 20,6" class="chain"/><path d="M178,290 v14 M186,290 v20 M194,290 v12" class="cord"/><rect x="173" y="304" width="10" height="26" class="f-paper"/><rect x="181" y="310" width="10" height="26" class="f-paper"/><rect x="189" y="302" width="10" height="26" class="f-paper"/><text x="178" y="316" class="kanji-r" font-size="8" text-anchor="middle">封</text><text x="186" y="322" class="kanji-r" font-size="8" text-anchor="middle">死</text><text x="194" y="314" class="kanji-r" font-size="8" text-anchor="middle">笑</text><polygon points="108,152 82,168 62,300 62.0,300.0 70.4,310.2 78.8,300.0 87.2,313.6 95.6,300.0 104.0,313.4 104,200" class="f-coat"/><text x="84" y="210" class="kanji-w" font-size="7.5" writing-mode="tb" style="writing-mode:vertical-rl">死して尚笑う</text><path d="M76,300 l6,22 l14,0 l4,-20 Z" class="f-glove"/><path d="M84,322 q-10,22 2,46" class="beads"/><path d="M86,368 l-3,10 l6,0 Z" class="f-red"/><path d="M194,158 L214,170 L226,300 L210,302 L200,214 Z" class="f-knit"/><path d="M206,246 L224,244 L227,292 L210,296 Z" class="f-leather"/><path d="M208,252 l16,6 M208,262 l17,6 M209,272 l17,6 M209,282 l17,6" class="lace"/><path d="M210,300 l16,-2 l4,22 l-16,4 Z" class="f-glove"/><path d="M201,204 l18,-3" class="armband"/><polygon points="118,132 182,132 210,160 214,196 214.0,196.0 201.2,214.0 188.4,196.0 175.6,211.2 162.8,196.0 150.0,204.7 137.2,196.0 124.4,207.4 111.6,196.0 98.8,212.8 86.0,196.0 86,196 90,160" class="f-coat"/><path d="M112,160 L192,292" class="strap"/><rect x="146" y="214" width="9" height="7" transform="rotate(58 150 217)" class="f-silver"/><path d="M196,158 L114,296" class="rope"/><path d="M196,158 L114,296" class="rope-twist"/><path d="M172,198 l6,6 l-6,6 l6,6 l-6,6 l6,6" class="shide"/><path d="M134,262 l6,6 l-6,6 l6,6 l-6,6 l6,6" class="shide"/><rect x="190" y="150" width="30" height="9" rx="1.5" class="f-plate" transform="rotate(14 190 150)"/><rect x="192" y="162" width="31" height="8" rx="1.5" class="f-plate" transform="rotate(14 192 162)"/><rect x="194" y="173" width="32" height="8" rx="1.5" class="f-plate" transform="rotate(14 194 173)"/><rect x="196" y="184" width="33" height="8" rx="1.5" class="f-plate" transform="rotate(14 196 184)"/><path d="M199,158 l-3,12 M208,160 l-3,12 M217,162 l-3,12 M197,170 l-3,11 M206,172 l-3,11 M216,174 l-3,11" class="lacing"/><path d="M118,136 Q112,92 132,70 L170,62 Q190,84 184,136 Z" class="f-coat"/><path d="M126,134 Q122,96 138,78 L164,74 Q180,96 176,134 Z" class="f-red"/><ellipse cx="151" cy="112" rx="20" ry="25" class="f-glow"/><path d="M134,96 Q151,86 168,96 Q170,124 151,138 Q132,124 134,96 Z" class="f-mask"/><path d="M138,107 q6,-6 11,1 q-6,-3 -11,-1 Z M153,108 q6,-7 11,-1 q-5,-2 -11,1 Z" class="f-ink"/><path d="M139,118 q12,16 24,0 q-12,8 -24,0 Z" class="f-ink"/><path d="M58,96 L150,46 L242,96 Q150,106 58,96 Z" class="f-kasa"/><line x1="150" y1="46" x2="84.3" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="110.6" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="136.9" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="163.1" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="189.4" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="215.7" y2="99" class="kasa-weave"/><circle cx="150" cy="74" r="7" class="f-red"/><text x="150" y="75" class="kanji-w" font-size="8" text-anchor="middle" dominant-baseline="middle">死</text><path d="M62,97 q-3,14 2,30" class="cord"/><path d="M238,97 q3,14 -2,30" class="cord"/><path d="M59,125 l2,10 l3,-10 Z" class="f-red"/><path d="M236,125 l2,10 l3,-10 Z" class="f-red"/><g class="co"><circle cx="150" cy="34" r="8.5"/><text x="150" y="34.5" text-anchor="middle" dominant-baseline="middle">1</text></g><g class="co"><circle cx="186" cy="104" r="8.5"/><text x="186" y="104.5" text-anchor="middle" dominant-baseline="middle">2</text></g><g class="co"><circle cx="118" cy="126" r="8.5"/><text x="118" y="126.5" text-anchor="middle" dominant-baseline="middle">3</text></g><g class="co"><circle cx="150" cy="196" r="8.5"/><text x="150" y="196.5" text-anchor="middle" dominant-baseline="middle">4</text></g><g class="co"><circle cx="122" cy="240" r="8.5"/><text x="122" y="240.5" text-anchor="middle" dominant-baseline="middle">5</text></g><g class="co"><circle cx="230" cy="176" r="8.5"/><text x="230" y="176.5" text-anchor="middle" dominant-baseline="middle">6</text></g><g class="co"><circle cx="184" cy="206" r="8.5"/><text x="184" y="206.5" text-anchor="middle" dominant-baseline="middle">7</text></g><g class="co"><circle cx="100" cy="186" r="8.5"/><text x="100" y="186.5" text-anchor="middle" dominant-baseline="middle">8</text></g><g class="co"><circle cx="150" cy="270" r="8.5"/><text x="150" y="270.5" text-anchor="middle" dominant-baseline="middle">9</text></g><g class="co"><circle cx="151" cy="418" r="8.5"/><text x="151" y="418.5" text-anchor="middle" dominant-baseline="middle">10</text></g><g class="co"><circle cx="186" cy="344" r="8.5"/><text x="186" y="344.5" text-anchor="middle" dominant-baseline="middle">11</text></g><g class="co"><circle cx="120" cy="470" r="8.5"/><text x="120" y="470.5" text-anchor="middle" dominant-baseline="middle">12</text></g><g class="co"><circle cx="70" cy="248" r="8.5"/><text x="70" y="248.5" text-anchor="middle" dominant-baseline="middle">13</text></g><g class="co"><circle cx="236" cy="270" r="8.5"/><text x="236" y="270.5" text-anchor="middle" dominant-baseline="middle">14</text></g><g class="co"><circle cx="94" cy="382" r="8.5"/><text x="94" y="382.5" text-anchor="middle" dominant-baseline="middle">15</text></g><g class="co"><circle cx="128" cy="520" r="8.5"/><text x="128" y="520.5" text-anchor="middle" dominant-baseline="middle">16</text></g><g class="co"><circle cx="124" cy="594" r="8.5"/><text x="124" y="594.5" text-anchor="middle" dominant-baseline="middle">17</text></g><g class="co"><circle cx="62" cy="112" r="8.5"/><text x="62" y="112.5" text-anchor="middle" dominant-baseline="middle">18</text></g><g class="co"><circle cx="242" cy="392" r="8.5"/><text x="242" y="392.5" text-anchor="middle" dominant-baseline="middle">19</text></g></svg><figcaption>جلو · FRONT</figcaption></figure>
+      <figure><svg class="fig" viewBox="40 20 220 590" role="img" aria-label="back view"><defs><radialGradient id="glow" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#ff2a2a" stop-opacity=".75"/><stop offset="1" stop-color="#ff2a2a" stop-opacity="0"/></radialGradient></defs><path d="M100,560 h44 l4,30 q-2,8 -10,8 h-40 q-6,0 -4,-10 Z" class="f-boot"/><path d="M156,560 h44 l4,30 q-2,8 -10,8 h-40 q-6,0 -2,-10 Z" class="f-boot"/><path d="M114,318 L150,318 L148,566 Q124,572 96,564 Z" class="f-pants"/><path d="M150,318 L186,318 L206,564 Q178,572 152,566 Z" class="f-pants"/><polygon points="104,320 122,320 118,452 118.0,452.0 113.0,466.3 108.0,452.0 103.0,469.9 98.0,452.0" class="f-red"/><polygon points="104,150 196,150 206,330 216,500 216.0,500.0 205.0,513.2 194.0,500.0 183.0,526.4 172.0,500.0 161.0,533.6 150.0,500.0 139.0,531.7 128.0,500.0 117.0,521.5 106.0,500.0 95.0,516.5 84.0,500.0 84,500 94,330" class="f-coat"/><path d="M150,150 L150,500" class="seam"/><path d="M94,330 L84,500 M206,330 L216,500" class="seam"/><rect x="104" y="262" width="92" height="28" class="f-red"/><rect x="104" y="280" width="92" height="7" class="f-belt"/><path d="M150,262 l-12,-8 l0,22 Z M150,262 l12,-8 l0,22 Z" class="f-red2"/><circle cx="150" cy="338" r="15" class="f-red"/><text x="150" y="314" class="kanji-w" font-size="19" text-anchor="middle" dominant-baseline="middle">起</text><text x="150" y="338" class="kanji-w" font-size="19" text-anchor="middle" dominant-baseline="middle">死</text><text x="150" y="362" class="kanji-w" font-size="19" text-anchor="middle" dominant-baseline="middle">回</text><text x="150" y="386" class="kanji-w" font-size="19" text-anchor="middle" dominant-baseline="middle">生</text><path d="M104,196 q3,40.0 -2,80" class="rag"/><path d="M118,196 q3,30.0 -2,60" class="rag"/><path d="M184,196 q3,35.0 -2,70" class="rag"/><path d="M196,196 q3,25.0 -2,50" class="rag"/><line x1="96" y1="384" x2="186" y2="176" class="scab"/><line x1="186" y1="176" x2="212" y2="116" class="hilt"/><ellipse cx="188" cy="172" rx="8" ry="3" transform="rotate(-66 188 172)" class="f-brass"/><path d="M212,116 q6,10 4,22" class="cord"/><path d="M212,137 l3,12 l4,-12 Z" class="f-red"/><path d="M116,330 L198,150" class="strap"/><rect x="128" y="276" width="10" height="5" transform="rotate(-66 133 278)" class="f-belt"/><rect x="164" y="198" width="10" height="5" transform="rotate(-66 169 200)" class="f-belt"/><path d="M104,158 L194,300" class="rope"/><path d="M104,158 L194,300" class="rope-twist"/><polygon points="192,152 218,168 238,300 238.0,300.0 229.6,310.2 221.2,300.0 212.8,313.6 204.4,300.0 196.0,313.4 196,200" class="f-coat"/><path d="M106,158 L86,170 L74,300 L90,302 L100,214 Z" class="f-knit"/><path d="M94,246 L76,244 L73,292 L90,296 Z" class="f-leather"/><path d="M90,300 l-16,-2 l-4,22 l16,4 Z" class="f-glove"/><polygon points="118,132 182,132 210,160 214,198 214.0,198.0 201.2,215.5 188.4,198.0 175.6,219.8 162.8,198.0 150.0,218.2 137.2,198.0 124.4,211.4 111.6,198.0 98.8,209.2 86.0,198.0 86,198 90,160" class="f-coat"/><path d="M118,138 Q110,90 134,66 L176,48 Q188,96 184,138 Z" class="f-coat"/><rect x="80" y="150" width="30" height="9" rx="1.5" class="f-plate" transform="rotate(-14 110 150)"/><rect x="78" y="162" width="31" height="8" rx="1.5" class="f-plate" transform="rotate(-14 109 162)"/><rect x="76" y="173" width="32" height="8" rx="1.5" class="f-plate" transform="rotate(-14 108 173)"/><rect x="74" y="184" width="33" height="8" rx="1.5" class="f-plate" transform="rotate(-14 107 184)"/><path d="M100,158 l3,12 M91,160 l3,12 M82,162 l3,12 M102,170 l3,11 M93,172 l3,11 M84,174 l3,11" class="lacing"/><path d="M58,96 L150,46 L242,96 Q150,106 58,96 Z" class="f-kasa"/><line x1="150" y1="46" x2="84.3" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="110.6" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="136.9" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="163.1" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="189.4" y2="99" class="kasa-weave"/><line x1="150" y1="46" x2="215.7" y2="99" class="kasa-weave"/><polygon points="88,99 212,99 212.0,150.0 203.1,171.7 194.3,150.0 185.4,167.2 176.6,150.0 167.7,158.6 158.9,150.0 150.0,165.7 141.1,150.0 132.3,171.3 123.4,150.0 114.6,171.2 105.7,150.0 96.9,165.5 88.0,150.0" class="f-gauze"/><line x1="96" y1="101" x2="98" y2="141" class="seam"/><line x1="108" y1="101" x2="110" y2="147" class="seam"/><line x1="120" y1="101" x2="122" y2="138" class="seam"/><line x1="132" y1="101" x2="134" y2="144" class="seam"/><line x1="144" y1="101" x2="146" y2="150" class="seam"/><line x1="156" y1="101" x2="158" y2="141" class="seam"/><line x1="168" y1="101" x2="170" y2="147" class="seam"/><line x1="180" y1="101" x2="182" y2="138" class="seam"/><line x1="192" y1="101" x2="194" y2="144" class="seam"/><line x1="204" y1="101" x2="206" y2="150" class="seam"/><g class="co"><circle cx="150" cy="34" r="8.5"/><text x="150" y="34.5" text-anchor="middle" dominant-baseline="middle">20</text></g><g class="co"><circle cx="226" cy="118" r="8.5"/><text x="226" y="118.5" text-anchor="middle" dominant-baseline="middle">21</text></g><g class="co"><circle cx="182" cy="352" r="8.5"/><text x="182" y="352.5" text-anchor="middle" dominant-baseline="middle">22</text></g><g class="co"><circle cx="124" cy="228" r="8.5"/><text x="124" y="228.5" text-anchor="middle" dominant-baseline="middle">23</text></g><g class="co"><circle cx="132" cy="300" r="8.5"/><text x="132" y="300.5" text-anchor="middle" dominant-baseline="middle">24</text></g><g class="co"><circle cx="70" cy="520" r="8.5"/><text x="70" y="520.5" text-anchor="middle" dominant-baseline="middle">25</text></g><g class="co"><circle cx="62" cy="172" r="8.5"/><text x="62" y="172.5" text-anchor="middle" dominant-baseline="middle">26</text></g></svg><figcaption>پشت · BACK</figcaption></figure>
+    </div>
+    <div class="stack">
+      <div class="legend"><ol>
+        <li><span class="n">1</span><span>کلاه حصیری خودت + منگوله‌های قرمز + بند چونه</span></li>
+        <li><span class="n">2</span><span>ماسک کاگه‌تانه روی بالاکلاوا</span></li>
+        <li><span class="n">3</span><span>هود نوک‌تیز، آستر قرمز، نور LED قرمز داخلش</span></li>
+        <li><span class="n">4</span><span>شنل کوتاه ریش‌ریش روی شونه‌ها</span></li>
+        <li><span class="n">5</span><span>پیش‌سینه‌ی کیمونو: مشکی روی قرمز، راست روی چپ</span></li>
+        <li><span class="n">6</span><span>سردوشی (Sode) فقط شونه‌ی چپ، با بند قرمز</span></li>
+        <li><span class="n">7</span><span>طناب شیمه‌ناوا + شیده‌های کاغذی سفید</span></li>
+        <li><span class="n">8</span><span>حمایل شمشیر (تسمه‌ی مشکی)</span></li>
+        <li><span class="n">9</span><span>اوبی قرمز + کمربند سگک صلیبی خودت</span></li>
+        <li><span class="n">10</span><span>پنل جلو قرمز با 起死回生 (چاپ DTF)</span></li>
+        <li><span class="n">11</span><span>طلسم‌های کاغذی (Ofuda) روی زنجیر</span></li>
+        <li><span class="n">12</span><span>کت رونین: کیمونویی، ریش‌ریش، چاک‌دار</span></li>
+        <li><span class="n">13</span><span>فقط آستین راست؛ گشاد، با ستون کانجی سفید</span></li>
+        <li><span class="n">14</span><span>دست چپ: یقه‌اسکی + مچ‌بند چرمی + دستکش + بازوبند قرمز</span></li>
+        <li><span class="n">15</span><span>تسبیح مشکی + دستکش نیم‌انگشتی</span></li>
+        <li><span class="n">16</span><span>شلوار خیلی گشاد، جمع‌شده روی پوتین</span></li>
+        <li><span class="n">17</span><span>پوتین خودت</span></li>
+        <li><span class="n">18</span><span>دسته‌ی کاتانا روی شونه‌ی راست + چارم قرمز با زنگوله</span></li>
+        <li><span class="n">19</span><span>نوک غلاف کنار لگن چپ</span></li>
+        <li><span class="n">20</span><span>پرده‌ی توری پشت کلاه</span></li>
+        <li><span class="n">21</span><span>دسته‌ی شمشیر و چارم از پشت</span></li>
+        <li><span class="n">22</span><span>طرح پشت: 起死回生 سفید با دایره‌ی قرمز پشت 死 (مثل کلاهت)، روی دامن کت زیر اوبی</span></li>
+        <li><span class="n">23</span><span>نوارهای پاره‌ی توری</span></li>
+        <li><span class="n">24</span><span>شمشیر مورب روی پشت با دو حلقه‌ی غلاف</span></li>
+        <li><span class="n">25</span><span>دامن کت از پشت بلندتر و پاره‌تر</span></li>
+        <li><span class="n">26</span><span>سردوشی از پشت</span></li>
+      </ol></div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:22px">
+    <div class="card lore">
+      <h3>داستان (برای وقتی ازت پرسیدن «چی هستی؟»)</h3>
+      <p style="margin-top:8px">تانیش یه رونین بود که یه شب بارونی تو جنگ کشته شد. صبح، توی گور خودش بیدار شد با یه ماسک روی صورتش که لبخند می‌زد؛ ماسک کسی که کشته بودش. از اون شب لباس مرده‌ها رو تنش داره: یقه‌ی راست‌روی‌چپ، طلسم‌های کاغذی قبرستون از کمرش آویزونه، یه طناب مقدس روحش رو مهر و موم کرده و آستر قرمزش هنوز رنگ همون شبه. قبل از اینکه ببینیش، صدای زنگوله‌ی شمشیرش رو می‌شنوی.</p>
+      <q>«نه قهرمان، نه شرور. فقط کسی که یه بار مُرده و هنوز لبخند می‌زنه.»</q>
+      <p class="en" style="margin-top:6px">Died once. Still smiling.</p>
+    </div>
+    <div class="stack">
+      <div class="card"><h3>پالت</h3>
+        <div class="swatches" style="margin-top:10px">
+          <span class="sw"><i style="background:#0d0c0c"></i>مشکی جوهری <span class="en">#0D0C0C</span></span>
+          <span class="sw"><i style="background:#2a2829"></i>زغالی <span class="en">#2A2829</span></span>
+          <span class="sw"><i style="background:#8e1016"></i>قرمز خونی <span class="en">#8E1016</span></span>
+          <span class="sw"><i style="background:#f2efe8"></i>استخونی <span class="en">#F2EFE8</span></span>
+          <span class="sw"><i style="background:#a98c5c"></i>کنف <span class="en">#A98C5C</span></span>
+          <span class="sw"><i style="background:#9da3a8"></i>نقره‌ای کدر <span class="en">#9DA3A8</span></span>
+        </div>
+        <p class="muted" style="font-size:.88rem;margin-top:10px">قانون رنگ: قرمز فقط از «داخل» بیرون می‌زنه (آستر هود، زیر یقه، لای چاک‌ها، اوبی، بندها). هیچ قطعه‌ی بزرگی از بیرون قرمز نیست، جز پنل جلو.</p>
+      </div>
+      <div class="card"><h3>کانجی‌ها</h3>
+        <table style="margin-top:6px"><tbody>
+          <tr><td class="kj" style="font-size:1.3rem">起死回生</td><td><span class="en">kishi kaisei</span><br>از مرگ برخاستن (روی کلاه، پشت کت، پنل جلو)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">笑う亡霊</td><td><span class="en">warau bōrei</span><br>شبحِ خندان (لقب)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">死して尚笑う</td><td><span class="en">shishite nao warau</span><br>حتی بعد از مرگ می‌خنده (آستین)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">影に生きる者</td><td><span class="en">kage ni ikiru mono</span><br>کسی که در سایه زندگی می‌کنه (آستین)</td></tr>
+          <tr><td class="kj" style="font-size:1.3rem">タニシュ</td><td><span class="en">ta-ni-shu</span><br>اسم خودت به کاتاکانا</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px">هشت جزئیاتی که این کاستوم رو «شخصیت» می‌کنه</h3>
+  <ol class="sig" style="padding:0;margin-top:12px">
+    <li><b>یقه‌ی مرده‌ها</b>تو ژاپن کیمونو رو فقط برای مرده‌ها راست‌روی‌چپ می‌بندن. پیش‌سینه‌ی تو عمداً همین‌طوریه. اگه نخواستی، فقط ترتیب دوخت نوارها رو برعکس کن.</li>
+    <li><b>قرمز از درون</b>آستر هود دور ماسک سفید یه قاب خونی می‌سازه. لای چاک‌های کت و زیر یقه هم قرمز پیداست.</li>
+    <li><b>یه دست زره، یه دست پارچه</b>چپ: سردوشی و مچ‌بند پیداست. راست: آستین گشاد با نوشته. عدم تقارن مثل رفرنس‌های مو قرمز و کلود.</li>
+    <li><b>کلاه = امضا</b>طرح پشت کت دقیقاً از کلاه خودت کپی شده: ستون سفید و دایره‌ی قرمز پشت 死.</li>
+    <li><b>طناب مُهر</b>شیمه‌ناوا (طناب مقدس معابد شینتو) با شیده‌های کاغذی، یعنی یه چیزی تو این بدن «مهر و موم» شده.</li>
+    <li><b>صدا</b>زنگوله‌های چارم شمشیر. وقتی راه میری صدا میده.</li>
+    <li><b>نور</b>نور قرمز LED داخل هود. تو تاریکی فقط ماسک دیده میشه.</li>
+    <li><b>هیچ پوستی نیست</b>بالاکلاوا، گریم مشکی دور چشم و دستکش. غیر از نوک انگشت‌ها، هیچ‌جای آدم دیده نمیشه.</li>
+  </ol>
+
+  <details class="step" style="margin-top:18px"><summary><span class="n">ref</span><h3>رفرنس‌ها و کانسپت ChatGPT</h3><span class="t">چیزهایی که ازشون الهام گرفته شد</span></summary>
+    <div class="body">
+      <img src="img/concept.jpg" alt="کانسپت ChatGPT" style="width:100%;border-radius:8px;border:1px solid var(--line)">
+      <p class="muted" style="font-size:.9rem">تفاوت با کانسپت ChatGPT: ماسک خودت (سفید با لبخند مشکی) به جای ماسک نقره‌ای؛ کلاه خودت با نوشته؛ سردوشی یک‌طرفه؛ آستین تکی؛ طناب شیمه‌ناوا؛ قرمز کنترل‌شده‌تر.</p>
+      <div class="refs">
+        <img src="img/ref-sleeve.jpg" alt="رفرنس آستین با کانجی" loading="lazy">
+        <img src="img/ref-redhair.jpg" alt="رفرنس طناب و شیده" loading="lazy">
+        <img src="img/ref-rags.jpg" alt="رفرنس شنل پاره" loading="lazy">
+        <img src="img/ref-harness.jpg" alt="رفرنس هارنس" loading="lazy">
+        <img src="img/ref-rain.jpg" alt="رفرنس کلاه و شال" loading="lazy">
+        <img src="img/hat.jpg" alt="کلاه تو" loading="lazy">
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ HAVE ============ -->
+<section class="ch" id="have">
+  <div class="ch-head"><span class="glyph">持</span><div><h2>چیزهایی که داری و کجا میرن</h2>
+  <p>تقریباً همه‌ی وسایلت جا پیدا کردن. فقط کمربند فشنگی و جین با این ست جور نیستن.</p></div></div>
+  <div class="inv" id="inv"></div>
+</section>
+
+<!-- ============ BUY ============ -->
+<section class="ch" id="buy">
+  <div class="ch-head"><span class="glyph">買</span><div><h2>لیست خرید</h2>
+  <p>به ترتیب مسیر چیده شده. قیمت‌ها تخمینی و به هزار تومنن، از آگهی‌های آنلاین شهریور تا آبان ۱۴۰۵ (دلار حدود ۲۷۰). قیمت واقعی رو تو کادر هر قلم بنویس تا جمع واقعی حساب بشه.</p></div></div>
+  <div class="shop-top">
+    <div class="totals">
+      <div class="stat"><div class="k">تخمین کل</div><div class="v" id="estT">—</div></div>
+      <div class="stat"><div class="k">خرج شده (واقعی)</div><div class="v" id="spentT">—</div></div>
+      <div class="stat"><div class="k">خریده شده</div><div class="v" id="boughtT">—</div></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="seg" role="group" aria-label="فیلتر">
+        <button type="button" id="fAll" aria-pressed="true">همه</button>
+        <button type="button" id="fLeft" aria-pressed="false">نخریده</button>
+        <button type="button" id="fMust" aria-pressed="false">ضروری</button>
+      </div>
+      <button type="button" class="btn" id="copyShop">کپی لیست نخریده‌ها</button>
+    </div>
+  </div>
+  <div class="note">برچسب‌ها: <span class="tag must">ضروری</span> بدون این کار درنمیاد · <span class="tag">بهتره</span> کیفیت رو می‌بره بالا · <span class="tag" style="border-style:dashed">اختیاری</span> اگه وقت و پول موند. برای صرفه‌جویی، پلن B‌ها رو تو بخش «نکته‌ها» ببین.</div>
+  <div id="shop"></div>
+</section>
+
+<!-- ============ PATTERN ============ -->
+<section class="ch" id="pattern">
+  <div class="ch-head"><span class="glyph">型</span><div><h2>الگوها و نقشه‌ی برش</h2>
+  <p>همه‌ی اندازه‌ها از بدن خودت حساب شدن. تیکه‌های منحنی (شلوار، هود، جیب) هم اینجا نقشه‌ی اندازه‌دار دارن و هم توی PDF با اندازه‌ی واقعی. بقیه مستطیلن و اندازه‌ی برششون همین‌جاست.</p></div></div>
+
+  <h3>اندازه‌های تو</h3>
+  <div class="meas" style="margin-top:10px">
+    <div><div class="k">قد</div><div class="v">187</div></div>
+    <div><div class="k">سینه</div><div class="v">92</div></div>
+    <div><div class="k">کمر</div><div class="v">78</div></div>
+    <div><div class="k">باسن</div><div class="v">96</div></div>
+    <div><div class="k">سرشانه</div><div class="v">48</div></div>
+    <div><div class="k">قد دست</div><div class="v">70</div></div>
+    <div><div class="k">دور بازو / مچ</div><div class="v">30 / 17</div></div>
+    <div><div class="k">دور سر</div><div class="v">58</div></div>
+    <div><div class="k">کمر تا زمین</div><div class="v">118</div></div>
+    <div class="flag"><div class="k">قد فاق (Rise) ⚑</div><div class="v">30</div></div>
+    <div class="flag"><div class="k">داخل پا (محاسبه‌شده) ⚑</div><div class="v">88</div></div>
+    <div class="flag"><div class="k">دور گردن (فرض) ⚑</div><div class="v">38</div></div>
+  </div>
+  <div class="note" style="margin-top:12px"><b>⚑ چک کن:</b> نوشته بودی «فاق تا زمین ۳۰». این برای داخل پا با قد ۱۸۷ ممکن نیست، پس ۳۰ رو <b>قد فاق</b> فرض کردم (کمر تا نشیمن وقتی رو صندلی نشستی؛ معمولاً ۲۸ تا ۳۲) و داخل پا رو ۱۱۸ − ۳۰ = ۸۸ گرفتم. دور گردن رو هم ۳۸ فرض کردم. هود و شنل گشادن و ۲ سانت فرقش مهم نیست. اگه هر کدوم بیشتر از ۲ سانت فرق داشت، الگوی شلوار باید آپدیت بشه.</div>
+  <p class="muted" style="margin-top:10px;font-size:.9rem">آزادی‌ها (ease): دور سینه‌ی کت ۱۲۰ (۲۸ سانت گشادتر از بدن، برای افتادگی کیمونویی). دور باسن شلوار ۱۱۲ (۱۶ سانت). دمپای شلوار ۸۴ (خیلی گشاد، روی پوتین جمع میشه).</p>
+
+  <h3 style="margin-top:26px">دانلودها</h3>
+  <div class="dl" style="margin-top:10px">
+    <div class="card"><span class="ico">型</span><div><div class="t">الگوهای ۱:۱ (PDF، ۵۱ صفحه A4)</div><div class="s">شلوار، هود، جیب، سردوشی، طلسم‌ها، شیده، چارم</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/tanish-patterns-1to1.pdf">دانلود</button><a class="alt" href="files/tanish-patterns-1to1.pdf" target="_blank" rel="noopener">باز کردن</a></div></div>
+    <div class="card"><span class="ico">母</span><div><div class="t">برگه‌ی مامان (PDF)</div><div class="s">لیست برش، نقشه‌های اندازه‌دار، ترتیب دوخت</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/tanish-mom-sewing-sheet.pdf">دانلود</button><a class="alt" href="files/tanish-mom-sewing-sheet.pdf" target="_blank" rel="noopener">باز کردن</a></div></div>
+  </div>
+
+  <h3 style="margin-top:26px">قانون درز</h3>
+  <div class="grid2" style="margin-top:10px">
+    <div class="card"><h4>تیکه‌های منحنی (شلوار، هود، جیب)</h4><p style="margin-top:6px">الگو <b>بدون درزه</b>. موقع برش ۱.۵ سانت دورتادور اضافه کن. استثنا: تای کمر (۵ سانت) و تای دمپا (۴ سانت) داخل الگو کشیده شدن.</p></div>
+    <div class="card"><h4>تیکه‌های مستطیلی</h4><p style="margin-top:6px">اندازه‌ها <b>اندازه‌ی برش</b> هستن و درز توشون حساب شده. لبه‌هایی که قراره ریش‌ریش بشن هیچ درزی نمی‌خوان.</p></div>
+  </div>
+
+  <h3 style="margin-top:26px">نقشه‌های اندازه‌دار (سانتی‌متر)</h3>
+  <div class="grid2" style="margin-top:10px">
+    <div class="draftbox"><h4><span>شلوار — جلو — ×۲ (یک جفت قرینه) — پارچه‌ی شلوار</span><span class="en">Pants FRONT</span></h4><svg class="draft" viewBox="-6 -9 50 132" role="img" aria-label="Pants FRONT"><path d="M0,-5 L27,-5 L27,24 Q27,32 33,32 L36,115 L36,119 L-2,119 L-2,115 L0,32 Z" class="cut"/><line x1="0" y1="0" x2="27" y2="0" class="fold"/><line x1="-2" y1="115" x2="36" y2="115" class="fold"/><line x1="16" y1="40" x2="16" y2="95" class="grain"/><path d="M16,40 L16.68,41.45 L15.32,41.45 Z" class="dimfill"/><path d="M16,95 L15.32,93.55 L16.68,93.55 Z" class="dimfill"/><path d="M-0.9,13.1 L0.9,14 L-0.9,14.9" class="notch"/><path d="M-0.9,30.1 L0.9,31 L-0.9,31.9" class="notch"/><text x="16" y="60" font-size="3.2" class="plabel" text-anchor="middle">جلو</text><text x="16" y="66" font-size="2.0" class="plabel" text-anchor="middle">FRONT ×2</text><line x1="0" y1="-5" x2="0.00" y2="-7.50" class="ext"/><line x1="27" y1="-5" x2="27.00" y2="-7.50" class="ext"/><line x1="0.00" y1="-7.50" x2="27.00" y2="-7.50" class="dim"/><path d="M0.0,-7.5 L-1.08,-6.99 L-1.08,-8.01 Z" class="dimfill"/><path d="M27.0,-7.5 L28.08,-8.01 L28.08,-6.99 Z" class="dimfill"/><text x="13.50" y="-8.70" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 13.50 -8.70)">27</text><line x1="27" y1="32" x2="27.00" y2="35.20" class="ext"/><line x1="33" y1="32" x2="33.00" y2="35.20" class="ext"/><line x1="27.00" y1="35.20" x2="33.00" y2="35.20" class="dim"/><path d="M27.0,35.2 L25.92,35.71 L25.92,34.69 Z" class="dimfill"/><path d="M33.0,35.2 L34.08,34.69 L34.08,35.71 Z" class="dimfill"/><text x="30.00" y="36.40" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 30.00 36.40)">6</text><line x1="-2" y1="119" x2="-2.00" y2="121.50" class="ext"/><line x1="36" y1="119" x2="36.00" y2="121.50" class="ext"/><line x1="-2.00" y1="121.50" x2="36.00" y2="121.50" class="dim"/><path d="M-2.0,121.5 L-3.08,122.01 L-3.08,120.99 Z" class="dimfill"/><path d="M36.0,121.5 L37.08,120.99 L37.08,122.01 Z" class="dimfill"/><text x="17.00" y="122.70" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 17.00 122.70)">38</text><line x1="0" y1="0" x2="-5.00" y2="0.00" class="ext"/><line x1="0" y1="32" x2="-5.00" y2="32.00" class="ext"/><line x1="-5.00" y1="0.00" x2="-5.00" y2="32.00" class="dim"/><path d="M-5.0,0.0 L-5.51,-1.08 L-4.49,-1.08 Z" class="dimfill"/><path d="M-5.0,32.0 L-4.49,33.08 L-5.51,33.08 Z" class="dimfill"/><text x="-6.20" y="16.00" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 -6.20 16.00)">32 فاق</text><line x1="0" y1="32" x2="-5.00" y2="31.88" class="ext"/><line x1="-2" y1="115" x2="-7.00" y2="114.88" class="ext"/><line x1="-5.00" y1="31.88" x2="-7.00" y2="114.88" class="dim"/><path d="M-4.9985490423374115,31.8795530351244 L-5.49,30.78 L-4.46,30.81 Z" class="dimfill"/><path d="M-6.9985490423374115,114.8795530351244 L-6.51,115.98 L-7.54,115.95 Z" class="dimfill"/><text x="-7.20" y="73.35" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(271.4 -7.20 73.35)">83</text><line x1="27" y1="-5" x2="29.50" y2="-5.00" class="ext"/><line x1="27" y1="0" x2="29.50" y2="0.00" class="ext"/><line x1="29.50" y1="-5.00" x2="29.50" y2="0.00" class="dim"/><path d="M29.5,-5.0 L28.99,-6.08 L30.01,-6.08 Z" class="dimfill"/><path d="M29.5,0.0 L30.01,1.08 L28.99,1.08 Z" class="dimfill"/><text x="30.70" y="-2.50" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 30.70 -2.50)">5</text><line x1="36" y1="115" x2="38.50" y2="115.00" class="ext"/><line x1="36" y1="119" x2="38.50" y2="119.00" class="ext"/><line x1="38.50" y1="115.00" x2="38.50" y2="119.00" class="dim"/><path d="M38.5,115.0 L37.99,113.92 L39.01,113.92 Z" class="dimfill"/><path d="M38.5,119.0 L39.01,120.08 L37.99,120.08 Z" class="dimfill"/><text x="39.70" y="117.00" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 39.70 117.00)">4</text></svg><ul><li>کمر کش‌دار: ۵ سانت بالای خط کمر داخل الگوست (تای ۵ سانتی برای کش ۳.۵).</li><li>دمپا: ۴ سانت پایین داخل الگوست (تونل بند برای جمع کردن روی پوتین).</li><li>دو علامت روی درز کناری = دهانه‌ی جیب (۱۷ سانت).</li></ul></div><div class="draftbox"><h4><span>شلوار — پشت — ×۲ (یک جفت قرینه) — پارچه‌ی شلوار</span><span class="en">Pants BACK</span></h4><svg class="draft" viewBox="-5 -13.5 52 136.5" role="img" aria-label="Pants BACK"><path d="M12,-9 L41,-5 L41,32 L43,115 L43,119 L-3,119 L-3,115 L0,33 Q12,33 12,22 Z" class="cut"/><line x1="12" y1="-4" x2="41" y2="0" class="fold"/><line x1="-3" y1="115" x2="43" y2="115" class="fold"/><line x1="25" y1="40" x2="25" y2="95" class="grain"/><path d="M25,40 L25.68,41.45 L24.32,41.45 Z" class="dimfill"/><path d="M25,95 L24.32,93.55 L25.68,93.55 Z" class="dimfill"/><path d="M41.9,13.1 L40.1,14 L41.9,14.9" class="notch"/><path d="M41.9,30.1 L40.1,31 L41.9,31.9" class="notch"/><text x="24" y="60" font-size="3.2" class="plabel" text-anchor="middle">پشت</text><text x="24" y="66" font-size="2.0" class="plabel" text-anchor="middle">BACK ×2</text><line x1="12" y1="-9" x2="12.41" y2="-11.97" class="ext"/><line x1="41" y1="-5" x2="41.41" y2="-7.97" class="ext"/><line x1="12.41" y1="-11.97" x2="41.41" y2="-7.97" class="dim"/><path d="M12.409912191411093,-11.971863387730425 L11.27,-11.61 L11.41,-12.63 Z" class="dimfill"/><path d="M41.409912191411095,-7.971863387730425 L42.55,-8.33 L42.41,-7.32 Z" class="dimfill"/><text x="27.07" y="-11.16" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(7.9 27.07 -11.16)">29</text><line x1="0" y1="33" x2="0.00" y2="36.20" class="ext"/><line x1="12" y1="33" x2="12.00" y2="36.20" class="ext"/><line x1="0.00" y1="36.20" x2="12.00" y2="36.20" class="dim"/><path d="M0.0,36.2 L-1.08,36.71 L-1.08,35.69 Z" class="dimfill"/><path d="M12.0,36.2 L13.08,35.69 L13.08,36.71 Z" class="dimfill"/><text x="6.00" y="37.40" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 6.00 37.40)">12</text><line x1="-3" y1="119" x2="-3.00" y2="121.50" class="ext"/><line x1="43" y1="119" x2="43.00" y2="121.50" class="ext"/><line x1="-3.00" y1="121.50" x2="43.00" y2="121.50" class="dim"/><path d="M-3.0,121.5 L-4.08,122.01 L-4.08,120.99 Z" class="dimfill"/><path d="M43.0,121.5 L44.08,120.99 L44.08,122.01 Z" class="dimfill"/><text x="20.00" y="122.70" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 20.00 122.70)">46</text><line x1="41" y1="0" x2="44.50" y2="0.00" class="ext"/><line x1="41" y1="32" x2="44.50" y2="32.00" class="ext"/><line x1="44.50" y1="0.00" x2="44.50" y2="32.00" class="dim"/><path d="M44.5,0.0 L43.99,-1.08 L45.01,-1.08 Z" class="dimfill"/><path d="M44.5,32.0 L45.01,33.08 L43.99,33.08 Z" class="dimfill"/><text x="45.70" y="16.00" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 45.70 16.00)">32</text><line x1="41" y1="32" x2="44.20" y2="31.92" class="ext"/><line x1="43" y1="115" x2="46.20" y2="114.92" class="ext"/><line x1="44.20" y1="31.92" x2="46.20" y2="114.92" class="dim"/><path d="M44.19907138709594,31.922913942479617 L43.66,30.85 L44.69,30.83 Z" class="dimfill"/><path d="M46.19907138709594,114.92291394247961 L46.74,116.00 L45.71,116.02 Z" class="dimfill"/><text x="46.40" y="73.39" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(88.6 46.40 73.39)">83</text></svg><ul><li>خط وسط پشت ۴ سانت از جلو بلندتره (برای نشستن راحت).</li><li>فاق پشت ۱۲ سانت بیرون میاد؛ منحنی رو نرم بکش.</li></ul></div><div class="draftbox"><h4><span>کلاه شنل (هود) — ×۲ مشکی + ×۲ قرمز (آستر)</span><span class="en">Hood side</span></h4><svg class="draft" viewBox="-5 -54 49 60" role="img" aria-label="Hood side"><path d="M0,0 L1,-44 Q12,-50 26,-48 L38,-43 Q33,-30 32,-16 Q31,-6 30,0 Q15,2.5 0,0 Z" class="cut"/><line x1="14" y1="-8" x2="14" y2="-38" class="grain"/><path d="M14,-8 L13.32,-9.45 L14.68,-9.45 Z" class="dimfill"/><path d="M14,-38 L14.68,-36.55 L13.32,-36.55 Z" class="dimfill"/><path d="M15.9,0.9999999999999999 L14.1,1.9 L15.9,2.8" class="notch"/><text x="16" y="-26" font-size="3.2" class="plabel" text-anchor="middle">هود</text><text x="16" y="-21" font-size="2.0" class="plabel" text-anchor="middle">HOOD</text><line x1="0" y1="0" x2="3.50" y2="0.08" class="ext"/><line x1="1" y1="-44" x2="4.50" y2="-43.92" class="ext"/><line x1="3.50" y1="0.08" x2="4.50" y2="-43.92" class="dim"/><path d="M3.4990964244072997,0.07952491873652955 L3.99,1.18 L2.96,1.15 Z" class="dimfill"/><path d="M4.4990964244073,-43.92047508126347 L4.01,-45.02 L5.04,-44.99 Z" class="dimfill"/><text x="5.20" y="-21.89" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-88.7 5.20 -21.89)">44 لبه‌ی صورت</text><line x1="0" y1="0" x2="0.00" y2="4.00" class="ext"/><line x1="30" y1="0" x2="30.00" y2="4.00" class="ext"/><line x1="0.00" y1="4.00" x2="30.00" y2="4.00" class="dim"/><path d="M0.0,4.0 L-1.08,4.51 L-1.08,3.49 Z" class="dimfill"/><path d="M30.0,4.0 L31.08,3.49 L31.08,4.51 Z" class="dimfill"/><text x="15.00" y="5.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 15.00 5.20)">30</text><line x1="1" y1="-44" x2="1.09" y2="-47.50" class="ext"/><line x1="38" y1="-43" x2="38.09" y2="-46.50" class="ext"/><line x1="1.09" y1="-47.50" x2="38.09" y2="-46.50" class="dim"/><path d="M1.0945600647177023,-47.49872239455499 L-0.00,-47.02 L0.02,-48.04 Z" class="dimfill"/><path d="M38.094560064717705,-46.49872239455499 L39.19,-46.98 L39.17,-45.96 Z" class="dimfill"/><text x="19.63" y="-48.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(1.5 19.63 -48.20)">37</text></svg><ul><li>لبه‌ی چپ = دور صورت. لبه‌ی بالا و منحنی پشت = درز وسط (نوک تیز مثل داس‌مرگ).</li><li>اندازه برای دور سر ۵۸ + بالاکلاوا + ماسک + جا برای کلاه حصیری گشاد گرفته شده.</li><li>علامت روی خط گردن = جای شونه؛ به وسط نیم‌دایره‌ی شنل می‌خوره.</li></ul></div><div class="draftbox"><h4><span>کیسه‌ی جیب — ×۴ — هر پارچه‌ی نازک مشکی یا همون پارچه</span><span class="en">Pocket bag</span></h4><svg class="draft" viewBox="-4 -4 28 42" role="img" aria-label="Pocket bag"><path d="M0,0 L12,0 Q20,1 20,10 L20,24 Q20,34 9,34 Q3,34 0,30 Z" class="cut"/><line x1="10" y1="8" x2="10" y2="26" class="grain"/><path d="M10,8 L10.68,9.45 L9.32,9.45 Z" class="dimfill"/><path d="M10,26 L9.32,24.55 L10.68,24.55 Z" class="dimfill"/><path d="M-0.9,3.1 L0.9,4 L-0.9,4.9" class="notch"/><path d="M-0.9,20.1 L0.9,21 L-0.9,21.9" class="notch"/><text x="10" y="16" font-size="3.2" class="plabel" text-anchor="middle">جیب</text><text x="10" y="20" font-size="2.0" class="plabel" text-anchor="middle">×4</text><line x1="0" y1="0" x2="0.00" y2="-2.50" class="ext"/><line x1="20" y1="0" x2="20.00" y2="-2.50" class="ext"/><line x1="0.00" y1="-2.50" x2="20.00" y2="-2.50" class="dim"/><path d="M0.0,-2.5 L-1.08,-1.99 L-1.08,-3.01 Z" class="dimfill"/><path d="M20.0,-2.5 L21.08,-3.01 L21.08,-1.99 Z" class="dimfill"/><text x="10.00" y="-3.70" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 10.00 -3.70)">20</text><line x1="0" y1="0" x2="-3.00" y2="0.00" class="ext"/><line x1="0" y1="34" x2="-3.00" y2="34.00" class="ext"/><line x1="-3.00" y1="0.00" x2="-3.00" y2="34.00" class="dim"/><path d="M-3.0,0.0 L-3.51,-1.08 L-2.49,-1.08 Z" class="dimfill"/><path d="M-3.0,34.0 L-2.49,35.08 L-3.51,35.08 Z" class="dimfill"/><text x="-4.20" y="17.00" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 -4.20 17.00)">34</text></svg><ul><li>لبه‌ی صاف به درز کناری شلوار دوخته میشه؛ بالای کیسه ۱۰ سانت زیر خط کمر.</li></ul></div>
+  </div>
+  <div class="draftbox" style="margin-top:14px"><h4><span>بدنه‌ی کت ×۲ (قرینه) — ۳۳ × ۲۶۲</span><span class="en">Coat body panel (cut size)</span></h4>
+    <div class="scroll-x"><svg class="draft wide" viewBox="-8 -10 278 58" role="img" aria-label="Coat body panel"><rect x="0" y="0" width="262" height="33" class="rect"/><line x1="131" y1="-3" x2="131" y2="36" class="fold"/><text x="131" y="-4.5" font-size="3.4" class="plabel" text-anchor="middle">خط شونه (تا) — 131</text><path d="M130.99,10.5 Q132.5,4.7250000000000005 133,1.5 L133,0" class="notch"/><path d="M131,10.5 L103,1.5 L103,0" class="notch"/><path d="M131,0 L131,10.5 L103,0 Z" style="fill:var(--accent);opacity:.18"/><line x1="153" y1="33" x2="153" y2="35.5" class="dim"/><line x1="109" y1="33" x2="109" y2="35.5" class="dim"/><path d="M204.8,35.2 L206,33 L207.2,35.2" class="notch"/><path d="M54.8,35.2 L56,33 L57.2,35.2" class="notch"/><line x1="131" y1="33" x2="131.00" y2="38.00" class="ext"/><line x1="153" y1="33" x2="153.00" y2="38.00" class="ext"/><line x1="131.00" y1="38.00" x2="153.00" y2="38.00" class="dim"/><path d="M131.0,38.0 L129.92,38.51 L129.92,37.49 Z" class="dimfill"/><path d="M153.0,38.0 L154.08,37.49 L154.08,38.51 Z" class="dimfill"/><text x="142.00" y="39.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 142.00 39.20)">22 حلقه آستین</text><line x1="131" y1="33" x2="131.00" y2="24.00" class="ext"/><line x1="56" y1="33" x2="56.00" y2="24.00" class="ext"/><line x1="131.00" y1="24.00" x2="56.00" y2="24.00" class="dim"/><path d="M131.0,24.0 L132.08,23.49 L132.08,24.51 Z" class="dimfill"/><path d="M56.0,24.0 L54.92,24.51 L54.92,23.49 Z" class="dimfill"/><text x="93.50" y="22.80" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(360.0 93.50 22.80)">75 تا شروع چاک</text><line x1="0" y1="0" x2="4.00" y2="0.00" class="ext"/><line x1="0" y1="33" x2="4.00" y2="33.00" class="ext"/><line x1="4.00" y1="0.00" x2="4.00" y2="33.00" class="dim"/><path d="M4.0,0.0 L3.49,-1.08 L4.51,-1.08 Z" class="dimfill"/><path d="M4.0,33.0 L4.51,34.08 L3.49,34.08 Z" class="dimfill"/><text x="5.20" y="16.50" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 5.20 16.50)">33</text><line x1="103" y1="0" x2="103.00" y2="-4.00" class="ext"/><line x1="131" y1="0" x2="131.00" y2="-4.00" class="ext"/><line x1="103.00" y1="-4.00" x2="131.00" y2="-4.00" class="dim"/><path d="M103.0,-4.0 L101.92,-3.49 L101.92,-4.51 Z" class="dimfill"/><path d="M131.0,-4.0 L132.08,-4.51 L132.08,-3.49 Z" class="dimfill"/><text x="117.00" y="-5.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 117.00 -5.20)">28 یقه V</text><line x1="131" y1="0" x2="126.00" y2="0.00" class="ext"/><line x1="131" y1="10.5" x2="126.00" y2="10.50" class="ext"/><line x1="126.00" y1="0.00" x2="126.00" y2="10.50" class="dim"/><path d="M126.0,0.0 L125.49,-1.08 L126.51,-1.08 Z" class="dimfill"/><path d="M126.0,10.5 L126.51,11.58 L125.49,11.58 Z" class="dimfill"/><text x="124.80" y="5.25" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 124.80 5.25)">9+1.5</text><text x="65.5" y="17.5" font-size="4.5" class="plabel" text-anchor="middle">جلو — FRONT</text><text x="196.5" y="17.5" font-size="4.5" class="plabel" text-anchor="middle">پشت — BACK</text><text x="196.5" y="30" font-size="2.2" class="plabel" text-anchor="middle">لبه‌ی بالا (y=0) = درز وسط پشت / لبه‌ی جلوی باز</text><path d="M2,0 L2,0.0 L6,4.1 L2,8.2 L6,12.4 L2,16.5 L6,20.6 L2,24.8 L6,28.9 L2,33.0" class="fold" style="stroke:var(--accent)"/><path d="M260,0 L260,0.0 L254,4.1 L260,8.2 L254,12.4 L260,16.5 L254,20.6 L260,24.8 L254,28.9 L260,33.0" class="fold" style="stroke:var(--accent)"/><text x="8" y="39" font-size="2.4" class="plabel">⟵ لبه‌ی پایین جلو: ریش‌ریش، کوتاه‌تر</text><text x="254" y="39" font-size="2.4" class="plabel" text-anchor="end">لبه‌ی پایین پشت: ریش‌ریش، بلندتر ⟶</text></svg></div>
+    <ul>
+      <li>هر تیکه از لبه‌ی پایین جلو، از روی شونه، تا لبه‌ی پایین پشت یکسره‌ست. شونه درز نداره، فقط تا میخوره.</li>
+      <li>لبه‌ی بالای شکل (y=0) = لبه‌ی داخلی. نیمه‌ی پشت به تیکه‌ی قرینه دوخته میشه (درز وسط پشت). نیمه‌ی جلو باز می‌مونه.</li>
+      <li>یقه: نقطه‌ی گردن ۱۰.۵ سانت از لبه‌ی داخلی روی خط شونه‌ست. از اونجا یه خط صاف تا ۲۸ سانت پایین‌تر روی لبه‌ی جلو بکش (یقه‌ی V، قسمت قرمز رو ببُر). پشت گردن فقط یه گودی ۲ سانتی.</li>
+      <li>علامت‌ها: حلقه‌ی آستین ۲۲ سانت دو طرف خط شونه. شروع چاک کناری ۷۵ سانت پایین‌تر از خط شونه.</li>
+    </ul>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="draftbox"><h4><span>شنل کوتاه — نیم‌دایره‌ی توخالی ×۲</span><span class="en">Capelet</span></h4><svg class="draft" viewBox="-4 -9 115 66" role="img" aria-label="Capelet"><path d="M0.0,0 A53.5,53.5 0 0 0 107.0,0 L61.5,0 A8,8 0 0 1 45.5,0 Z" class="cut"/><polyline points="107.0,0.0 93.9,3.5 106.2,9.3 93.4,10.7 103.8,18.3 92.2,18.0 99.8,26.7 89.7,25.4 94.5,34.4 85.7,32.2 87.9,41.0 80.1,38.0 80.2,46.3 73.1,42.1 71.8,50.3 65.3,44.2 62.8,52.7 57.4,44.3 53.5,53.5 49.8,42.7 44.2,52.7 42.7,40.1 35.2,50.3 36.3,36.9 26.8,46.3 30.2,33.2 19.1,41.0 24.4,29.1 12.5,34.4 18.7,24.3 7.2,26.8 13.7,18.6 3.2,18.3 9.7,11.7 0.8,9.3 7.4,4.0 0.0,0.0" class="fold" style="stroke:var(--accent);fill:none"/><line x1="53.5" y1="0" x2="53.50" y2="-3.00" class="ext"/><line x1="61.5" y1="0" x2="61.50" y2="-3.00" class="ext"/><line x1="53.50" y1="-3.00" x2="61.50" y2="-3.00" class="dim"/><path d="M53.5,-3.0 L52.42,-2.49 L52.42,-3.51 Z" class="dimfill"/><path d="M61.5,-3.0 L62.58,-3.51 L62.58,-2.49 Z" class="dimfill"/><text x="57.50" y="-4.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 57.50 -4.20)">8</text><line x1="53.5" y1="0" x2="53.50" y2="3.00" class="ext"/><line x1="0.0" y1="0" x2="0.00" y2="3.00" class="ext"/><line x1="53.50" y1="3.00" x2="0.00" y2="3.00" class="dim"/><path d="M53.5,3.0 L54.58,2.49 L54.58,3.51 Z" class="dimfill"/><path d="M0.0,3.0 L-1.08,3.51 L-1.08,2.49 Z" class="dimfill"/><text x="26.75" y="4.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(360.0 26.75 4.20)">53.5</text><text x="53.5" y="30" font-size="3.4" class="plabel" text-anchor="middle">نیم‌شنل ×۲</text><text x="53.5" y="35" font-size="2.2" class="plabel" text-anchor="middle">لبه‌ی صاف یکی = وسط پشت (درز) / دیگری = جلوی باز</text><circle cx="53.5" cy="0" r=".8" style="fill:var(--accent)"/></svg>
+      <ul><li>با یه نخ و یه مداد مثل پرگار بکش: شعاع ۸ و ۵۳.۵ از یه نقطه.</li><li>لبه‌ی بیرونی بعداً نامنظم و ریش‌ریش بریده میشه (خط‌چین قرمز، طول نهایی ۳۰ تا ۴۵).</li></ul></div>
+    <div class="draftbox"><h4><span>سردوشی مونتاژشده</span><span class="en">Sode, 3 lames + top plate</span></h4><svg class="draft sodeprev" viewBox="-2 -2 31 32.8" role="img" aria-label="Sode assembled"><g transform="translate(1.5,0)"><path d="M0,1.2 Q12,-0.8 24,1.2 L24,7 L0,7 Z" style="fill:var(--fab-black);stroke:var(--silver);stroke-width:.35"/><circle cx="2.5" cy="5.8" r=".35" style="fill:var(--accent)"/><circle cx="7.5" cy="5.8" r=".35" style="fill:var(--accent)"/><circle cx="16.5" cy="5.8" r=".35" style="fill:var(--accent)"/><circle cx="21.5" cy="5.8" r=".35" style="fill:var(--accent)"/><circle cx="7" cy="2.6" r=".35" style="fill:var(--accent)"/><circle cx="17" cy="2.6" r=".35" style="fill:var(--accent)"/></g><line x1="4.0" y1="5.8" x2="4.0" y2="9.2" style="stroke:var(--accent);stroke-width:.55"/><line x1="9.0" y1="5.8" x2="9.0" y2="9.2" style="stroke:var(--accent);stroke-width:.55"/><line x1="18.0" y1="5.8" x2="18.0" y2="9.2" style="stroke:var(--accent);stroke-width:.55"/><line x1="23.0" y1="5.8" x2="23.0" y2="9.2" style="stroke:var(--accent);stroke-width:.55"/><g transform="translate(1.0,8)"><path d="M0.5,0 L24.5,0 L25,6 Q12.5,6.8 0,6 Z" style="fill:var(--fab-black);stroke:var(--silver);stroke-width:.35"/><circle cx="3.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="8.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="17.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="22.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="3.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="8.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="17.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="22.0" cy="4.8" r=".35" style="fill:var(--accent)"/></g><line x1="4.0" y1="12.8" x2="3.5" y2="16.799999999999997" style="stroke:var(--accent);stroke-width:.55"/><line x1="9.0" y1="12.8" x2="9.0" y2="16.799999999999997" style="stroke:var(--accent);stroke-width:.55"/><line x1="18.0" y1="12.8" x2="18.0" y2="16.799999999999997" style="stroke:var(--accent);stroke-width:.55"/><line x1="23.0" y1="12.8" x2="23.5" y2="16.799999999999997" style="stroke:var(--accent);stroke-width:.55"/><g transform="translate(0.5,15.6)"><path d="M0.5,0 L25.5,0 L26,6 Q13.0,6.8 0,6 Z" style="fill:var(--fab-black);stroke:var(--silver);stroke-width:.35"/><circle cx="3.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="8.5" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="17.5" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="23.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="3.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="8.5" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="17.5" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="23.0" cy="4.8" r=".35" style="fill:var(--accent)"/></g><line x1="3.5" y1="20.4" x2="3.0" y2="24.4" style="stroke:var(--accent);stroke-width:.55"/><line x1="9.0" y1="20.4" x2="9.0" y2="24.4" style="stroke:var(--accent);stroke-width:.55"/><line x1="18.0" y1="20.4" x2="18.0" y2="24.4" style="stroke:var(--accent);stroke-width:.55"/><line x1="23.5" y1="20.4" x2="24.0" y2="24.4" style="stroke:var(--accent);stroke-width:.55"/><g transform="translate(0.0,23.2)"><path d="M0.5,0 L26.5,0 L27,6 Q13.5,6.8 0,6 Z" style="fill:var(--fab-black);stroke:var(--silver);stroke-width:.35"/><circle cx="3.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="9.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="18.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="24.0" cy="1.2" r=".35" style="fill:var(--accent)"/><circle cx="3.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="9.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="18.0" cy="4.8" r=".35" style="fill:var(--accent)"/><circle cx="24.0" cy="4.8" r=".35" style="fill:var(--accent)"/></g><text x="13.5" y="3.9" font-size="2.6" text-anchor="middle" style="fill:var(--silver);font-family:'Yuji Boku',serif">起</text></svg>
+      <ul><li>EVA ۵ میل. الگوی ۱:۱ توی PDF صفحه‌ی ۴۸ و ۴۹.</li><li>تیغه‌ها با بند قرمز آویزونن، فاصله‌ی ۱ سانتی که قرمز پیدا باشه. ارتفاع کل حدود ۲۸ سانت.</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:26px">تیکه‌های مستطیلی (اندازه‌ی برش)</h3>
+  <div class="rects" style="margin-top:10px"><div class="draftbox"><h4><span>آستین راست (فقط یکی)</span><span class="tag">×۱</span></h4><svg class="draft mini" viewBox="-6 -6 75 99" role="img" aria-label="coat_sleeve"><rect x="0" y="0" width="63" height="87" class="rect"/><text x="31.5" y="43.5" font-size="9.0" class="plabel" text-anchor="middle" dominant-baseline="middle">کتان مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="63" y1="0" x2="63.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="63.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M63.0,-3.0 L64.08,-3.51 L64.08,-2.49 Z" class="dimfill"/><text x="31.50" y="-4.20" font-size="4.5" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 31.50 -4.20)">63</text><line x1="63" y1="0" x2="66.00" y2="0.00" class="ext"/><line x1="63" y1="87" x2="66.00" y2="87.00" class="ext"/><line x1="66.00" y1="0.00" x2="66.00" y2="87.00" class="dim"/><path d="M66.0,0.0 L65.49,-1.08 L66.51,-1.08 Z" class="dimfill"/><path d="M66.0,87.0 L66.51,88.08 L65.49,88.08 Z" class="dimfill"/><text x="67.20" y="43.50" font-size="4.5" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 67.20 43.50)">87</text></svg><p><span class="en">Right sleeve · 63×87 cm</span><br>از طول ۸۷ تا میشه (۴۳.۵). لبه‌ی ۶۳ سانتی طول آستینه. سر آستین ریش‌ریش.</p></div><div class="draftbox"><h4><span>یقه‌ی کیمونویی</span><span class="tag">×۲ (وسط پشت به هم وصل)</span></h4><svg class="draft mini" viewBox="-6 -6 25 158" role="img" aria-label="coat_collar"><rect x="0" y="0" width="13" height="146" class="rect"/><text x="6.5" y="73.0" font-size="2.0" class="plabel" text-anchor="middle" dominant-baseline="middle">کتان مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="13" y1="0" x2="13.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="13.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M13.0,-3.0 L14.08,-3.51 L14.08,-2.49 Z" class="dimfill"/><text x="6.50" y="-4.20" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 6.50 -4.20)">13</text><line x1="13" y1="0" x2="16.00" y2="0.00" class="ext"/><line x1="13" y1="146" x2="16.00" y2="146.00" class="ext"/><line x1="16.00" y1="0.00" x2="16.00" y2="146.00" class="dim"/><path d="M16.0,0.0 L15.49,-1.08 L16.51,-1.08 Z" class="dimfill"/><path d="M16.0,146.0 L16.51,147.08 L15.49,147.08 Z" class="dimfill"/><text x="17.20" y="73.00" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 17.20 73.00)">146</text></svg><p><span class="en">Collar band · 13×146 cm</span><br>بعد از وصل = ۱۳×۲۹۰. از طول تا میشه؛ پهنای نهایی ۵ سانت. نصفش لایی بزن.</p></div><div class="draftbox"><h4><span>پیش‌سینه‌ی کیمونو — پایه</span><span class="tag">×۱</span></h4><svg class="draft mini" viewBox="-6 -6 46 52" role="img" aria-label="dickey_base"><rect x="0" y="0" width="34" height="40" class="rect"/><text x="17.0" y="20.0" font-size="4.9" class="plabel" text-anchor="middle" dominant-baseline="middle">کتان مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="34" y1="0" x2="34.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="34.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M34.0,-3.0 L35.08,-3.51 L35.08,-2.49 Z" class="dimfill"/><text x="17.00" y="-4.20" font-size="2.4285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 17.00 -4.20)">34</text><line x1="34" y1="0" x2="37.00" y2="0.00" class="ext"/><line x1="34" y1="40" x2="37.00" y2="40.00" class="ext"/><line x1="37.00" y1="0.00" x2="37.00" y2="40.00" class="dim"/><path d="M37.0,0.0 L36.49,-1.08 L37.51,-1.08 Z" class="dimfill"/><path d="M37.0,40.0 L37.51,41.08 L36.49,41.08 Z" class="dimfill"/><text x="38.20" y="20.00" font-size="2.4285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 38.20 20.00)">40</text></svg><p><span class="en">Kimono dickey base · 34×40 cm</span><br>یقه‌اسکی زیرش پوشیده میشه؛ این فقط جلوی سینه رو کیمونویی نشون میده.</p></div><div class="draftbox"><h4><span>پیش‌سینه — نوار یقه‌ی مشکی</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 20 57" role="img" aria-label="dickey_black"><rect x="0" y="0" width="8" height="45" class="rect"/><text x="4.0" y="22.5" font-size="2.0" class="plabel" text-anchor="middle" dominant-baseline="middle">کتان مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="8" y1="0" x2="8.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="8.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M8.0,-3.0 L9.08,-3.51 L9.08,-2.49 Z" class="dimfill"/><text x="4.00" y="-4.20" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 4.00 -4.20)">8</text><line x1="8" y1="0" x2="11.00" y2="0.00" class="ext"/><line x1="8" y1="45" x2="11.00" y2="45.00" class="ext"/><line x1="11.00" y1="0.00" x2="11.00" y2="45.00" class="dim"/><path d="M11.0,0.0 L10.49,-1.08 L11.51,-1.08 Z" class="dimfill"/><path d="M11.0,45.0 L11.51,46.08 L10.49,46.08 Z" class="dimfill"/><text x="12.20" y="22.50" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 12.20 22.50)">45</text></svg><p><span class="en">Dickey collar strip (black) · 8×45 cm</span><br></p></div><div class="draftbox"><h4><span>پیش‌سینه — نوار یقه‌ی قرمز</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 22 57" role="img" aria-label="dickey_red"><rect x="0" y="0" width="10" height="45" class="rect"/><text x="5.0" y="22.5" font-size="2.0" class="plabel" text-anchor="middle" dominant-baseline="middle">قرمز</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="10" y1="0" x2="10.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="10.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M10.0,-3.0 L11.08,-3.51 L11.08,-2.49 Z" class="dimfill"/><text x="5.00" y="-4.20" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 5.00 -4.20)">10</text><line x1="10" y1="0" x2="13.00" y2="0.00" class="ext"/><line x1="10" y1="45" x2="13.00" y2="45.00" class="ext"/><line x1="13.00" y1="0.00" x2="13.00" y2="45.00" class="dim"/><path d="M13.0,0.0 L12.49,-1.08 L13.51,-1.08 Z" class="dimfill"/><path d="M13.0,45.0 L13.51,46.08 L12.49,46.08 Z" class="dimfill"/><text x="14.20" y="22.50" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 14.20 22.50)">45</text></svg><p><span class="en">Dickey collar strip (red) · 10×45 cm</span><br>زیر نوار مشکی، ۱.۵ سانت بیرون می‌زنه.</p></div><div class="draftbox"><h4><span>اوبی (شال کمر)</span><span class="tag">×۲ (به هم وصل = ۲۴۶)</span></h4><svg class="draft mini" viewBox="-6 -6 46 136" role="img" aria-label="obi"><rect x="0" y="0" width="34" height="124" class="rect"/><text x="17.0" y="62.0" font-size="4.9" class="plabel" text-anchor="middle" dominant-baseline="middle">قرمز</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="34" y1="0" x2="34.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="34.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M34.0,-3.0 L35.08,-3.51 L35.08,-2.49 Z" class="dimfill"/><text x="17.00" y="-4.20" font-size="2.4285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 17.00 -4.20)">34</text><line x1="34" y1="0" x2="37.00" y2="0.00" class="ext"/><line x1="34" y1="124" x2="37.00" y2="124.00" class="ext"/><line x1="37.00" y1="0.00" x2="37.00" y2="124.00" class="dim"/><path d="M37.0,0.0 L36.49,-1.08 L37.51,-1.08 Z" class="dimfill"/><path d="M37.0,124.0 L37.51,125.08 L36.49,125.08 Z" class="dimfill"/><text x="38.20" y="62.00" font-size="2.4285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 38.20 62.00)">124</text></svg><p><span class="en">Obi sash · 34×124 cm</span><br>پهنای نهایی ۱۵. نصفش لایی چسب‌دار. دوبار دور کمر می‌پیچه؛ شمشیر بین دو لایه‌اش فرو میره.</p></div><div class="draftbox"><h4><span>پنل جلو (مائه‌دارِه)</span><span class="tag">×۱</span></h4><svg class="draft mini" viewBox="-6 -6 40 94" role="img" aria-label="maedare"><rect x="0" y="0" width="28" height="82" class="rect"/><text x="14.0" y="41.0" font-size="4.0" class="plabel" text-anchor="middle" dominant-baseline="middle">قرمز</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="28" y1="0" x2="28.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="28.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M28.0,-3.0 L29.08,-3.51 L29.08,-2.49 Z" class="dimfill"/><text x="14.00" y="-4.20" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 14.00 -4.20)">28</text><line x1="28" y1="0" x2="31.00" y2="0.00" class="ext"/><line x1="28" y1="82" x2="31.00" y2="82.00" class="ext"/><line x1="31.00" y1="0.00" x2="31.00" y2="82.00" class="dim"/><path d="M31.0,0.0 L30.49,-1.08 L31.51,-1.08 Z" class="dimfill"/><path d="M31.0,82.0 L31.51,83.08 L30.49,83.08 Z" class="dimfill"/><text x="32.20" y="41.00" font-size="2.0" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 32.20 41.00)">82</text></svg><p><span class="en">Front panel · 28×82 cm</span><br>۶ سانت بالا تونل برای رد شدن کمربند. چاپ DTF «起死回生» روش.</p></div><div class="draftbox"><h4><span>پنل‌های کناری قرمز</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 57 97" role="img" aria-label="hip_red"><rect x="0" y="0" width="45" height="85" class="rect"/><text x="22.5" y="42.5" font-size="6.4" class="plabel" text-anchor="middle" dominant-baseline="middle">قرمز</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="45" y1="0" x2="45.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="45.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M45.0,-3.0 L46.08,-3.51 L46.08,-2.49 Z" class="dimfill"/><text x="22.50" y="-4.20" font-size="3.2142857142857144" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 22.50 -4.20)">45</text><line x1="45" y1="0" x2="48.00" y2="0.00" class="ext"/><line x1="45" y1="85" x2="48.00" y2="85.00" class="ext"/><line x1="48.00" y1="0.00" x2="48.00" y2="85.00" class="dim"/><path d="M48.0,0.0 L47.49,-1.08 L48.51,-1.08 Z" class="dimfill"/><path d="M48.0,85.0 L48.51,86.08 L47.49,86.08 Z" class="dimfill"/><text x="49.20" y="42.50" font-size="3.2142857142857144" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 49.20 42.50)">85</text></svg><p><span class="en">Red hip panels · 45×85 cm</span><br>از لای چاک کت پیداست. پایین ریش‌ریش.</p></div><div class="draftbox"><h4><span>آستر هود</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 53 67" role="img" aria-label="hood_lining"><rect x="0" y="0" width="41" height="55" class="rect"/><text x="20.5" y="27.5" font-size="5.9" class="plabel" text-anchor="middle" dominant-baseline="middle">قرمز</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="41" y1="0" x2="41.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="41.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M41.0,-3.0 L42.08,-3.51 L42.08,-2.49 Z" class="dimfill"/><text x="20.50" y="-4.20" font-size="2.9285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 20.50 -4.20)">41</text><line x1="41" y1="0" x2="44.00" y2="0.00" class="ext"/><line x1="41" y1="55" x2="44.00" y2="55.00" class="ext"/><line x1="44.00" y1="0.00" x2="44.00" y2="55.00" class="dim"/><path d="M44.0,0.0 L43.49,-1.08 L44.51,-1.08 Z" class="dimfill"/><path d="M44.0,55.0 L44.51,56.08 L43.49,56.08 Z" class="dimfill"/><text x="45.20" y="27.50" font-size="2.9285714285714284" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 45.20 27.50)">55</text></svg><p><span class="en">Hood lining · 41×55 cm</span><br>با الگوی هود برش بخوره (این فقط جای اشغالیه روی پارچه).</p></div><div class="draftbox"><h4><span>روکش توری روی پنل‌ها</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 62 107" role="img" aria-label="hip_gauze"><rect x="0" y="0" width="50" height="95" class="rect"/><text x="25.0" y="47.5" font-size="7.1" class="plabel" text-anchor="middle" dominant-baseline="middle">تور مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="50" y1="0" x2="50.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="50.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M50.0,-3.0 L51.08,-3.51 L51.08,-2.49 Z" class="dimfill"/><text x="25.00" y="-4.20" font-size="3.5714285714285716" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 25.00 -4.20)">50</text><line x1="50" y1="0" x2="53.00" y2="0.00" class="ext"/><line x1="50" y1="95" x2="53.00" y2="95.00" class="ext"/><line x1="53.00" y1="0.00" x2="53.00" y2="95.00" class="dim"/><path d="M53.0,0.0 L52.49,-1.08 L53.51,-1.08 Z" class="dimfill"/><path d="M53.0,95.0 L53.51,96.08 L52.49,96.08 Z" class="dimfill"/><text x="54.20" y="47.50" font-size="3.5714285714285716" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 54.20 47.50)">95</text></svg><p><span class="en">Gauze overlays · 50×95 cm</span><br>کاملاً پاره‌پاره.</p></div><div class="draftbox"><h4><span>پرده‌ی پشت کلاه حصیری</span><span class="tag">×۱</span></h4><svg class="draft mini" viewBox="-6 -6 42 112" role="img" aria-label="kasa_veil"><rect x="0" y="0" width="30" height="100" class="rect"/><text x="15.0" y="50.0" font-size="4.3" class="plabel" text-anchor="middle" dominant-baseline="middle">تور مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="30" y1="0" x2="30.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="30.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M30.0,-3.0 L31.08,-3.51 L31.08,-2.49 Z" class="dimfill"/><text x="15.00" y="-4.20" font-size="2.142857142857143" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 15.00 -4.20)">30</text><line x1="30" y1="0" x2="33.00" y2="0.00" class="ext"/><line x1="30" y1="100" x2="33.00" y2="100.00" class="ext"/><line x1="33.00" y1="0.00" x2="33.00" y2="100.00" class="dim"/><path d="M33.0,0.0 L32.49,-1.08 L33.51,-1.08 Z" class="dimfill"/><path d="M33.0,100.0 L33.51,101.08 L32.49,101.08 Z" class="dimfill"/><text x="34.20" y="50.00" font-size="2.142857142857143" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 34.20 50.00)">100</text></svg><p><span class="en">Kasa veil · 30×100 cm</span><br>چین بخوره به نیمه‌ی پشت لبه‌ی کلاه.</p></div><div class="draftbox"><h4><span>نوارهای پاره (شونه و پشت کت)</span><span class="tag">×۸ تا ۱۰</span></h4><svg class="draft mini" viewBox="-6 -6 20 132" role="img" aria-label="rag_strips"><rect x="0" y="0" width="8" height="120" class="rect"/><text x="4.0" y="60.0" font-size="2.0" class="plabel" text-anchor="middle" dominant-baseline="middle">تور مشکی</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="8" y1="0" x2="8.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="8.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M8.0,-3.0 L9.08,-3.51 L9.08,-2.49 Z" class="dimfill"/><text x="4.00" y="-4.20" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 4.00 -4.20)">8</text><line x1="8" y1="0" x2="11.00" y2="0.00" class="ext"/><line x1="8" y1="120" x2="11.00" y2="120.00" class="ext"/><line x1="11.00" y1="0.00" x2="11.00" y2="120.00" class="dim"/><path d="M11.0,0.0 L10.49,-1.08 L11.51,-1.08 Z" class="dimfill"/><path d="M11.0,120.0 L11.51,121.08 L10.49,121.08 Z" class="dimfill"/><text x="12.20" y="60.00" font-size="1.6" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 12.20 60.00)">120</text></svg><p><span class="en">Rag strips · 8×120 cm</span><br>هر کدوم یه پهنا و طول متفاوت.</p></div><div class="draftbox"><h4><span>مچ‌پیچ ساق (اختیاری)</span><span class="tag">×۲</span></h4><svg class="draft mini" viewBox="-6 -6 52 48" role="img" aria-label="kyahan"><rect x="0" y="0" width="40" height="36" class="rect"/><text x="20.0" y="18.0" font-size="5.1" class="plabel" text-anchor="middle" dominant-baseline="middle">پارچه‌ی شلوار</text><line x1="0" y1="0" x2="0.00" y2="-3.00" class="ext"/><line x1="40" y1="0" x2="40.00" y2="-3.00" class="ext"/><line x1="0.00" y1="-3.00" x2="40.00" y2="-3.00" class="dim"/><path d="M0.0,-3.0 L-1.08,-2.49 L-1.08,-3.51 Z" class="dimfill"/><path d="M40.0,-3.0 L41.08,-3.51 L41.08,-2.49 Z" class="dimfill"/><text x="20.00" y="-4.20" font-size="2.5714285714285716" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(0.0 20.00 -4.20)">40</text><line x1="40" y1="0" x2="43.00" y2="0.00" class="ext"/><line x1="40" y1="36" x2="43.00" y2="36.00" class="ext"/><line x1="43.00" y1="0.00" x2="43.00" y2="36.00" class="dim"/><path d="M43.0,0.0 L42.49,-1.08 L43.51,-1.08 Z" class="dimfill"/><path d="M43.0,36.0 L43.51,37.08 L42.49,37.08 Z" class="dimfill"/><text x="44.20" y="18.00" font-size="2.5714285714285716" class="dimtxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.0 44.20 18.00)">36</text></svg><p><span class="en">Kyahan leg wraps · 40×36 cm</span><br>روی دمپای شلوار و بالای پوتین بسته میشه؛ با بند قرمز.</p></div></div>
+
+  <h3 style="margin-top:26px">تسمه‌ها</h3>
+  <div class="scroll-x" style="margin-top:8px"><table style="min-width:560px"><thead><tr><th>تیکه</th><th>مواد</th><th>کجا</th></tr></thead><tbody><tr><td><b>حمایل شمشیر (تسمه‌ی اصلی)</b> <span class="en">Sword baldric</span></td><td>تسمه‌ی ۳ سانتی × ۱۶۰ + قفل کوله + سگک تنظیم</td><td>از شونه‌ی راست، روی سینه، تا لگن چپ؛ پشت بدن شمشیر به موازاتش.</td></tr><tr><td><b>دو حلقه‌ی غلاف</b> <span class="en">Scabbard loops</span></td><td>تسمه‌ی ۳ سانتی × ۲۸ ×۲ + چسب ولکرو</td><td>یکی ۱۵ سانت زیر دهانه‌ی غلاف، یکی ۵۰ سانت پایین‌تر.</td></tr><tr><td><b>حلقه‌ی شونه‌ی سردوشی</b> <span class="en">Sode shoulder loop</span></td><td>تسمه‌ی ۳ سانتی × ۷۰ + قفل کوله</td><td>دور شونه‌ی چپ و زیر بغل؛ صفحه‌ی بالای سردوشی با پرچ بهش وصل میشه.</td></tr><tr><td><b>کش بازو</b> <span class="en">Sode arm band</span></td><td>کش ۲ سانتی × ۳۲</td><td>از پشت تیغه‌ی ۲ رد میشه دور بازو که سردوشی تکون نخوره.</td></tr></tbody></table></div>
+
+  <h3 style="margin-top:26px">نقشه‌ی برش روی پارچه</h3>
+  <p class="muted" style="font-size:.9rem;margin-top:4px">عرض پارچه ۱۵۰ فرض شده. اگه ۱۴۰ بود، تیکه‌های ستون آخر رو زیر بقیه جا بده و ۳۰ سانت بیشتر بخر. متراژهای لیست خرید از قبل ۵ درصد برای جمع شدن بعد از شستشو اضافه دارن.</p>
+  <div class="layouts" style="margin-top:12px"><div class="draftbox"><h4><span>پارچه‌ی کت — کتان کجراه مشکی</span><span class="en">430 cm</span></h4><svg class="layout" viewBox="-16 -9 170 444" role="img" aria-label="پارچه‌ی کت — کتان کجراه مشکی"><rect x="0" y="0" width="150" height="430" style="fill:var(--surface);stroke:var(--draft-ink);stroke-width:.4;stroke-dasharray:2 1.5"/><rect x="0.4" y="0.4" width="32.2" height="261.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="16.5" y="131.0" font-size="4.7" class="laytxt" text-anchor="middle" dominant-baseline="middle" >بدنه چپ 33×262</text><rect x="33.4" y="0.4" width="32.2" height="261.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="49.5" y="131.0" font-size="4.7" class="laytxt" text-anchor="middle" dominant-baseline="middle" >بدنه راست 33×262</text><rect x="66.4" y="0.4" width="62.2" height="86.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="97.5" y="43.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >آستین 63×87</text><rect x="129.4" y="0.4" width="12.2" height="145.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="135.5" y="73.0" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 135.5 73.0)">یقه 13×146</text><rect x="66.4" y="87.4" width="12.2" height="145.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="72.5" y="160.0" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 72.5 160.0)">یقه 13×146</text><rect x="0.4" y="262.4" width="106.2" height="53.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="53.5" y="289.0" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >شنل ½ 107×54</text><rect x="0.4" y="318.4" width="106.2" height="53.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="53.5" y="345.0" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >شنل ½ 107×54</text><rect x="107.4" y="262.4" width="40.2" height="54.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="127.5" y="289.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >هود</text><rect x="107.4" y="318.4" width="40.2" height="54.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="127.5" y="345.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >هود</text><rect x="0.4" y="374.4" width="33.2" height="39.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="17.0" y="394.0" font-size="4.9" class="laytxt" text-anchor="middle" dominant-baseline="middle" >پیش‌سینه 34×40</text><rect x="36.4" y="374.4" width="7.2" height="44.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="40.0" y="396.5" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 40.0 396.5)">نوار 8×45</text><rect x="46.4" y="374.4" width="7.2" height="44.2" rx=".8" style="fill:var(--fab-black);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="50.0" y="396.5" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 50.0 396.5)">نوار 8×45</text><line x1="-3" y1="0" x2="0" y2="0" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="0" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">0</text><line x1="-3" y1="50" x2="0" y2="50" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="50" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">50</text><line x1="-3" y1="100" x2="0" y2="100" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="100" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">100</text><line x1="-3" y1="150" x2="0" y2="150" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="150" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">150</text><line x1="-3" y1="200" x2="0" y2="200" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="200" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">200</text><line x1="-3" y1="250" x2="0" y2="250" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="250" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">250</text><line x1="-3" y1="300" x2="0" y2="300" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="300" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">300</text><line x1="-3" y1="350" x2="0" y2="350" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="350" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">350</text><line x1="-3" y1="400" x2="0" y2="400" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="400" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">400</text><text x="75" y="-4" font-size="4" class="dimtxt" text-anchor="middle">عرض پارچه 150 سانت</text></svg></div><div class="draftbox"><h4><span>پارچه‌ی شلوار — دولا (عرضی تا شده، دو لایه)</span><span class="en">135 cm</span></h4><svg class="layout" viewBox="-16 -9 170 149" role="img" aria-label="پارچه‌ی شلوار — دولا (عرضی تا شده، دو لایه)"><rect x="0" y="0" width="150" height="135" style="fill:var(--surface);stroke:var(--draft-ink);stroke-width:.4;stroke-dasharray:2 1.5"/><rect x="0.4" y="0.4" width="40.2" height="126.2" rx=".8" style="fill:var(--fab-black2);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="20.5" y="63.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >جلو</text><rect x="43.4" y="0.4" width="48.2" height="130.2" rx=".8" style="fill:var(--fab-black2);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="67.5" y="65.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >پشت</text><rect x="95.4" y="0.4" width="22.2" height="36.2" rx=".8" style="fill:var(--fab-black2);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="106.5" y="18.5" font-size="3.3" class="laytxt" text-anchor="middle" dominant-baseline="middle" >جیب</text><rect x="120.4" y="0.4" width="22.2" height="36.2" rx=".8" style="fill:var(--fab-black2);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="131.5" y="18.5" font-size="3.3" class="laytxt" text-anchor="middle" dominant-baseline="middle" >جیب</text><rect x="95.4" y="42.4" width="39.2" height="35.2" rx=".8" style="fill:var(--fab-black2);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="115.0" y="60.0" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >مچ‌پیچ 40×36</text><line x1="-3" y1="0" x2="0" y2="0" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="0" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">0</text><line x1="-3" y1="50" x2="0" y2="50" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="50" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">50</text><line x1="-3" y1="100" x2="0" y2="100" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="100" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">100</text><text x="75" y="-4" font-size="4" class="dimtxt" text-anchor="middle">عرض پارچه 150 سانت</text></svg></div><div class="draftbox"><h4><span>پارچه‌ی قرمز</span><span class="en">250 cm</span></h4><svg class="layout" viewBox="-16 -9 170 264" role="img" aria-label="پارچه‌ی قرمز"><rect x="0" y="0" width="150" height="250" style="fill:var(--surface);stroke:var(--draft-ink);stroke-width:.4;stroke-dasharray:2 1.5"/><rect x="0.4" y="0.4" width="33.2" height="123.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="17.0" y="62.0" font-size="4.9" class="laytxt" text-anchor="middle" dominant-baseline="middle" >اوبی 34×124</text><rect x="0.4" y="124.4" width="33.2" height="123.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="17.0" y="186.0" font-size="4.9" class="laytxt" text-anchor="middle" dominant-baseline="middle" >اوبی 34×124</text><rect x="34.4" y="0.4" width="44.2" height="84.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="56.5" y="42.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >پنل کناری 45×85</text><rect x="79.4" y="0.4" width="44.2" height="84.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="101.5" y="42.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >پنل کناری 45×85</text><rect x="34.4" y="85.4" width="27.2" height="81.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="48.0" y="126.0" font-size="4.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >پنل جلو 28×82</text><rect x="62.4" y="85.4" width="40.2" height="54.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="82.5" y="112.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >آستر هود</text><rect x="103.4" y="85.4" width="40.2" height="54.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="123.5" y="112.5" font-size="5.0" class="laytxt" text-anchor="middle" dominant-baseline="middle" >آستر هود</text><rect x="62.4" y="140.4" width="9.2" height="44.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="67.0" y="162.5" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 67.0 162.5)">نوار 10×45</text><rect x="72.4" y="140.4" width="9.2" height="44.2" rx=".8" style="fill:var(--accent);stroke:var(--draft-ink);stroke-width:.3;opacity:.9"/><text x="77.0" y="162.5" font-size="2.6" class="laytxt" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 77.0 162.5)">نوار 10×45</text><line x1="-3" y1="0" x2="0" y2="0" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="0" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">0</text><line x1="-3" y1="50" x2="0" y2="50" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="50" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">50</text><line x1="-3" y1="100" x2="0" y2="100" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="100" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">100</text><line x1="-3" y1="150" x2="0" y2="150" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="150" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">150</text><line x1="-3" y1="200" x2="0" y2="200" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="200" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">200</text><line x1="-3" y1="250" x2="0" y2="250" style="stroke:var(--muted);stroke-width:.3"/><text x="-4" y="250" font-size="3.6" text-anchor="end" dominant-baseline="middle" class="dimtxt">250</text><text x="75" y="-4" font-size="4" class="dimtxt" text-anchor="middle">عرض پارچه 150 سانت</text></svg></div></div>
+
+  <h3 style="margin-top:26px">لیست کامل برش</h3>
+  <div class="scroll-x" style="margin-top:8px"><table style="min-width:680px"><thead><tr><th>تیکه</th><th>پارچه</th><th class="num">برش (سانت)</th><th>تعداد</th><th>توضیح</th></tr></thead><tbody><tr><td><b>شلوار — جلو</b> <span class="en">Pants FRONT</span></td><td>پارچه‌ی شلوار</td><td class="num">PDF / نقشه</td><td>×۲ (یک جفت قرینه) </td><td>بدون درز؛ ۱.۵ اضافه کن</td></tr><tr><td><b>شلوار — پشت</b> <span class="en">Pants BACK</span></td><td>پارچه‌ی شلوار</td><td class="num">PDF / نقشه</td><td>×۲ (یک جفت قرینه) </td><td>بدون درز؛ ۱.۵ اضافه کن</td></tr><tr><td><b>کیسه‌ی جیب</b> <span class="en">Pocket bag</span></td><td>کتان مشکی</td><td class="num">PDF / نقشه</td><td>×۴ </td><td>بدون درز؛ ۱.۵ اضافه کن</td></tr><tr><td><b>کلاه شنل (هود)</b> <span class="en">Hood side</span></td><td>مشکی + آستر قرمز</td><td class="num">PDF / نقشه</td><td>×۲ مشکی + ×۲ قرمز (آستر)</td><td>بدون درز؛ ۱.۵ اضافه کن</td></tr><tr><td><b>بدنه‌ی کت (از جلو تا پشت، یک تکه)</b> <span class="en">Coat body panel</span></td><td>کتان مشکی</td><td class="num">33 × 262</td><td>×۲ قرینه</td><td>تای وسط (۱۳۱ سانت) = خط شونه. یه طرف جلو، طرف دیگه پشت. لبه‌ی داخلی = درز وسط پشت + لبه‌ی جلوی باز.</td></tr><tr><td><b>آستین راست (فقط یکی)</b> <span class="en">Right sleeve</span></td><td>کتان مشکی</td><td class="num">63 × 87</td><td>×۱</td><td>از طول ۸۷ تا میشه (۴۳.۵). لبه‌ی ۶۳ سانتی طول آستینه. سر آستین ریش‌ریش.</td></tr><tr><td><b>یقه‌ی کیمونویی</b> <span class="en">Collar band</span></td><td>کتان مشکی</td><td class="num">13 × 146</td><td>×۲ (وسط پشت به هم وصل)</td><td>بعد از وصل = ۱۳×۲۹۰. از طول تا میشه؛ پهنای نهایی ۵ سانت. نصفش لایی بزن.</td></tr><tr><td><b>شنل کوتاه (نیم‌دایره‌ی توخالی)</b> <span class="en">Capelet half</span></td><td>کتان مشکی</td><td class="num">107 × 54</td><td>×۲</td><td>شعاع داخلی ۸ (برش) / شعاع بیرونی ۵۳.۵. با نخ و سوزن ته‌گرد مثل پرگار بکش. لبه‌ی بیرون ریش‌ریش.</td></tr><tr><td><b>پیش‌سینه‌ی کیمونو — پایه</b> <span class="en">Kimono dickey base</span></td><td>کتان مشکی</td><td class="num">34 × 40</td><td>×۱</td><td>یقه‌اسکی زیرش پوشیده میشه؛ این فقط جلوی سینه رو کیمونویی نشون میده.</td></tr><tr><td><b>پیش‌سینه — نوار یقه‌ی مشکی</b> <span class="en">Dickey collar strip (black)</span></td><td>کتان مشکی</td><td class="num">8 × 45</td><td>×۲</td><td></td></tr><tr><td><b>پیش‌سینه — نوار یقه‌ی قرمز</b> <span class="en">Dickey collar strip (red)</span></td><td>قرمز</td><td class="num">10 × 45</td><td>×۲</td><td>زیر نوار مشکی، ۱.۵ سانت بیرون می‌زنه.</td></tr><tr><td><b>اوبی (شال کمر)</b> <span class="en">Obi sash</span></td><td>قرمز</td><td class="num">34 × 124</td><td>×۲ (به هم وصل = ۲۴۶)</td><td>پهنای نهایی ۱۵. نصفش لایی چسب‌دار. دوبار دور کمر می‌پیچه؛ شمشیر بین دو لایه‌اش فرو میره.</td></tr><tr><td><b>پنل جلو (مائه‌دارِه)</b> <span class="en">Front panel</span></td><td>قرمز</td><td class="num">28 × 82</td><td>×۱</td><td>۶ سانت بالا تونل برای رد شدن کمربند. چاپ DTF «起死回生» روش.</td></tr><tr><td><b>پنل‌های کناری قرمز</b> <span class="en">Red hip panels</span></td><td>قرمز</td><td class="num">45 × 85</td><td>×۲</td><td>از لای چاک کت پیداست. پایین ریش‌ریش.</td></tr><tr><td><b>آستر هود</b> <span class="en">Hood lining</span></td><td>قرمز</td><td class="num">41 × 55</td><td>×۲</td><td>با الگوی هود برش بخوره (این فقط جای اشغالیه روی پارچه).</td></tr><tr><td><b>روکش توری روی پنل‌ها</b> <span class="en">Gauze overlays</span></td><td>تور مشکی</td><td class="num">50 × 95</td><td>×۲</td><td>کاملاً پاره‌پاره.</td></tr><tr><td><b>پرده‌ی پشت کلاه حصیری</b> <span class="en">Kasa veil</span></td><td>تور مشکی</td><td class="num">30 × 100</td><td>×۱</td><td>چین بخوره به نیمه‌ی پشت لبه‌ی کلاه.</td></tr><tr><td><b>نوارهای پاره (شونه و پشت کت)</b> <span class="en">Rag strips</span></td><td>تور مشکی</td><td class="num">8 × 120</td><td>×۸ تا ۱۰</td><td>هر کدوم یه پهنا و طول متفاوت.</td></tr><tr><td><b>مچ‌پیچ ساق (اختیاری)</b> <span class="en">Kyahan leg wraps</span></td><td>پارچه‌ی شلوار</td><td class="num">40 × 36</td><td>×۲</td><td>روی دمپای شلوار و بالای پوتین بسته میشه؛ با بند قرمز.</td></tr></tbody></table></div>
+</section>
+
+<!-- ============ MAKE ============ -->
+<section class="ch" id="make">
+  <div class="ch-head"><span class="glyph">作</span><div><h2>ساخت، قطعه به قطعه</h2>
+  <p>هر قطعه رو باز کن. <span class="pill mom">مامان</span> یعنی کار چرخ خیاطیه؛ بقیه کار دست خودته. زمان‌ها تقریبی‌ان.</p></div></div>
+  <details class="step" open><summary><span class="n">01</span><h3>شلوار گشاد (هاکاما‌نما)</h3><span class="pill mom">مامان</span><span class="t">۳ ساعت · روز ۳</span></summary><div class="body">
+<p>یه شلوار کش‌کمر خیلی گشاد با جیب‌های کناری و تونل بند تو دمپا، که روی پوتین جمع میشه. الگو: PDF صفحه‌ی ۲ تا ۳۴، یا نقشه‌ی اندازه‌دار بالا.</p>
+<ol>
+<li><b>برش:</b> پارچه رو عرضی دولا کن (رو به رو). جلو و پشت رو طبق نقشه‌ی برش بذار؛ فلش راه پارچه موازی لبه‌ی پارچه. دور فاق، کناره‌ها و داخل پا ۱.۵ سانت درز اضافه کن؛ بالا و پایین نه. ۴ کیسه‌ی جیب. علامت‌ها رو با یه چاک ۵ میلی منتقل کن.</li>
+<li><b>سردوزی:</b> همه‌ی لبه‌ها رو زیگزاگ یا اورلاک کن (این پارچه زیاد ریش میشه).</li>
+<li><b>جیب:</b> هر کیسه رو رو به رو بین دو علامت به لبه‌ی کناری جلو و پشت بدوز (درز ۱ سانت). به سمت بیرون اتو کن.</li>
+<li><b>کناره‌ها:</b> جلو و پشت رو رو به رو بذار. از کمر تا علامت بالای جیب بدوز، دور کیسه‌ی جیب بچرخ، از علامت پایین جیب تا دمپا ادامه بده.</li>
+<li><b>داخل پا:</b> هر پاچه جدا.</li>
+<li><b>فاق:</b> یه پاچه رو برگردون (رو بیرون) و بکن تو اون یکی (رو به رو). کل منحنی فاق رو یکسره بدوز. دوبار بدوز چون کشش زیاد داره. روی منحنی چند تا چاک بزن.</li>
+<li><b>کمر:</b> ۱ سانت، بعد ۴ سانت تو بزن. بدوز و ۵ سانت باز بذار. کش ۳.۵ سانتی رو به طول <b>۷۲ سانت</b> رد کن (اول امتحان کن از روی باسن رد بشه)، ۳ سانت روی هم بدوز، دهانه رو ببند.</li>
+<li><b>دمپا:</b> ۱ سانت، بعد ۳ سانت تو بزن، کنار درز داخل پا ۲ سانت باز بذار. کش گرد یا بند رد کن که روی ساق پوتین سفت بشه.</li>
+</ol>
+<div class="note">پرو: دمپا باید وقتی بند شله تا روی پنجه‌ی پوتین برسه. اگه بلندتر بود، از دمپا کوتاه کن نه از کمر.</div>
+</div></details>
+
+<details class="step"><summary><span class="n">02</span><h3>کت رونین (ساختار کیمونو)</h3><span class="pill mom">مامان</span><span class="t">۵ ساعت در ۳ نوبت · روز ۴ تا ۶</span></summary><div class="body">
+<p>کیمونو فقط از مستطیل ساخته میشه: دو بدنه‌ی بلند که روی شونه تا می‌خورن، یه آستین و یه نوار یقه. نه حلقه‌ی آستین منحنی داره، نه درز شونه.</p>
+<ol>
+<li><b>علامت‌گذاری:</b> روی هر بدنه خط شونه (وسط، ۱۳۱)، حلقه‌ی آستین (۲۲ سانت دو طرف شونه، روی لبه‌ی بیرونی) و شروع چاک (۷۵ سانت دو طرف شونه) رو با گچ بزن.</li>
+<li><b>درز وسط پشت:</b> دو بدنه رو رو به رو، لبه‌ی داخلی روی هم. فقط <b>نیمه‌ی پشت</b> رو بدوز، از ۲ سانت زیر خط شونه تا پایین. باز اتو کن. نیمه‌های جلو جدا می‌مونن (جلوی کت بازه).</li>
+<li><b>یقه:</b> روی هر نیمه‌ی جلو، از نقطه‌ی ۱۰.۵ سانتی روی خط شونه یه خط صاف تا لبه‌ی داخلی در ۲۸ سانت پایین‌تر بکش و ببر (یقه‌ی V). پشت گردن یه گودی ۲ سانتی.</li>
+<li><b>پرس DTF</b> طرح پشت (روی دامن کت، زیر جای اوبی) و طرح آستین، الان که همه‌چی صافه. جای دقیقش تو بخش چاپ.</li>
+<li><b>آستین راست:</b> مستطیل ۶۳×۸۷ رو از طول ۸۷ نصف کن تا وسطش پیدا بشه. لبه‌ی ۸۷ سانتی رو رو به رو به لبه‌ی بیرونی بدنه‌ی راست بدوز؛ وسطش روی خط شونه، از علامت ۲۲ جلو تا علامت ۲۲ پشت.</li>
+<li><b>درزهای کناری:</b> سمت راست: زیر آستین (دو لبه‌ی ۶۳ سانتی) رو بدوز و بدون توقف کناره‌ی بدنه رو تا علامت چاک ادامه بده. سمت چپ: از علامت ۲۲ تا علامت چاک.</li>
+<li><b>حلقه‌ی آستین چپ:</b> ۱ سانت دوبار تو بزن و بدوز. اگه بخوای یه برق قرمز داشته باشه، با یه نوار اریب قرمز ۴ سانتی ببندش.</li>
+<li><b>نوار یقه:</b> دو تیکه‌ی ۱۳×۱۴۶ رو از سر به هم وصل کن (۲۹۰). روی نصف پهنا لایی بزن. از طول تا بزن (رو بیرون) و اتو کن. وسط نوار رو روی درز وسط پشت بذار، لبه‌های باز نوار رو به لبه‌ی یقه سنجاق کن: دور پشت گردن، پایین یقه‌ی V و تا پایین لبه‌ی جلو. بدوز، سردوزی، به سمت بیرون اتو، و ۰.۵ سانت روی نوار رودوزی کن. زیادیش پایین می‌مونه که بعداً با بقیه بریده بشه.</li>
+<li><b>پایین کت سجاف نمی‌خواد.</b> بعد از پرو (روز ۷) و تو کهنه‌کاری (روز ۱۰) نامنظم بریده میشه.</li>
+</ol>
+<div class="note">ترفند: یه خط دوخت صاف (stay-stitch) ۵ سانت بالاتر از جایی که ریش‌ریش باید تموم بشه بزن. ریش‌شدگی همونجا وایمیسه و لباس از هم وانمی‌ره.</div>
+</div></details>
+
+<details class="step"><summary><span class="n">03</span><h3>هود و شنل</h3><span class="pill mom">مامان</span><span class="t">۲.۵ ساعت · روز ۶</span></summary><div class="body">
+<ol>
+<li><b>هود بیرونی:</b> دو تیکه‌ی مشکی رو رو به رو بذار. درز وسط (بالا و منحنی پشت تا نوک) رو بدوز و منحنی‌ها رو چاک بزن. آستر قرمز هم همین‌طور.</li>
+<li><b>وصل آستر:</b> هود مشکی و قرمز رو رو به رو بذار، فقط لبه‌ی صورت رو بدوز. برگردون و اتو کن، ۰.۷ سانت رودوزی.</li>
+<li><b>تونل LED:</b> یه خط دوخت دوم ۲.۵ سانت داخل‌تر از لبه‌ی صورت بزن. فاصله‌ی بین دو خط، تونل سیم ریسه‌ی LED میشه. یه دهانه‌ی ۲ سانتی کنار گردن باز بذار.</li>
+<li><b>شنل:</b> دو نیم‌دایره رو از یکی از لبه‌های صاف به هم بدوز (درز وسط پشت). لبه‌های صاف دیگه میشن جلوی باز.</li>
+<li><b>وصل هود به شنل:</b> لبه‌ی گردن هود (دو لایه با هم) رو رو به رو به دایره‌ی داخلی شنل بدوز. درز وسط هود روی درز وسط شنل، علامت‌های شونه‌ی هود دو طرف. سردوزی و به سمت پایین رودوزی.</li>
+<li><b>بست جلو:</b> یه قزن (هوک) یا دکمه‌قابلمه‌ای زیر گلو. اگه بخوای، یه بند قرمز با گره‌ی ساده.</li>
+<li><b>جیب باتری:</b> یه جیب ۸×۱۰ داخل شنل، سمت چپ، با ولکرو.</li>
+</ol>
+<div class="note">تست: هود رو با بالاکلاوا و ماسک بپوش و کلاه حصیری رو بذار روش. نوک هود زیر کلاه جمع میشه؛ اگه زیادی بلند بود، نوک رو ۳ تا ۵ سانت کوتاه کن.</div>
+</div></details>
+
+<details class="step"><summary><span class="n">04</span><h3>پیش‌سینه‌ی کیمونو (دیکی)</h3><span class="pill mom">مامان</span><span class="t">۴۵ دقیقه · روز ۷</span></summary><div class="body">
+<p>یه «سینه‌ی کیمونو» که روی یقه‌اسکی پوشیده میشه. از جلو کاملاً مثل کیمونوی دولایه دیده میشه و نیاز نیست کیمونوی کامل بدوزی.</p>
+<ol>
+<li>پایه‌ی مشکی ۳۴×۴۰: دورتادور ۱ سانت سجاف.</li>
+<li>نوارهای قرمز ۱۰×۴۵ رو از طول تا کن (۵ سانت). نوارهای مشکی ۸×۴۵ (۴ سانت).</li>
+<li>روی پایه دو تا V بکش که ۲۲ سانت زیر لبه‌ی بالا همدیگه رو قطع کنن.</li>
+<li>هر نوار مشکی رو روی یه نوار قرمز بدوز طوری که ۱.۵ سانت قرمز بیرون بزنه.</li>
+<li><b>ترتیب:</b> اول نوار سمت <b>چپ بدن تو</b> رو بدوز، بعد نوار سمت <b>راست بدن</b> رو روش. این میشه راست‌روی‌چپ، همون یقه‌ی مرده‌ها. برای یقه‌ی معمولی ترتیب رو برعکس کن.</li>
+<li>بالا: یه کش گرد دور گردن (حدود ۴۰ سانت، امتحان کن). پایین دو گوشه: دو بند که پشت کمر، زیر کت، گره بخوره.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">05</span><h3>اوبی، پنل جلو و پنل‌های کناری</h3><span class="pill mom">مامان</span><span class="t">۱.۵ ساعت · روز ۷</span></summary><div class="body">
+<ol>
+<li><b>اوبی:</b> دو تیکه‌ی ۳۴×۱۲۴ رو از سر به هم بدوز. روی نصف پهنا (۱۶ سانت) لایی بزن. از طول رو به رو تا بزن. لبه‌ی بلند و یه سر رو بدوز، برگردون، سر دیگه رو با دست ببند. اتو، ۰.۵ سانت رودوزی دور تا دور. نتیجه: ۱۵×۲۴۴.</li>
+<li><b>بستن اوبی:</b> دو دور دور کمر، سر اضافه رو تا کن و پشت سمت چپ یه گره‌ی صاف بزن (یا دو دکمه‌قابلمه‌ای که فقط یه بار تنظیم بشه). شمشیر لای لایه‌ی اول و دوم سمت چپ فرو میره، با لبه‌ی تیغه رو به بالا، به سبک سامورایی.</li>
+<li><b>پنل جلو:</b> اول پرس DTF. بعد دو کناره ۱ سانت دوبار تو. بالا ۶ سانت تو بزن و ۱ سانت از لبه بدوز (تونل کمربند). پایین ریش‌ریش (بدون سجاف).</li>
+<li><b>پنل‌های کناری قرمز:</b> مثل پنل جلو، بدون چاپ. روی هر کدوم یه پنل توری مشکی شل، با همون تونل. کاملاً پاره‌پاره.</li>
+<li>همه‌ی پنل‌ها روی کمربند سگک صلیبی سوار میشن: کمربند از تونل‌ها رد میشه و روی اوبی بسته میشه.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">06</span><h3>سردوشی (Sode) از فوم EVA</h3><span class="t">۴ ساعت در ۴ نوبت · روز ۳ تا ۷</span></summary><div class="body">
+<ol>
+<li><b>برش:</b> صفحه‌ی ۴۸ و ۴۹ PDF رو ببر، روی EVA ۵ میل بکش. با کاتر تیز، تیغه عمود، چند ضربه‌ی سبک. تیغه رو زود عوض کن.</li>
+<li><b>پخ:</b> لبه‌ی رویی رو با کاتر یا سنباده‌ی ۸۰ کمی ۴۵ درجه کن که مثل ورقه‌ی فلز بشه.</li>
+<li><b>فرم:</b> هر تیکه رو ۲۰ تا ۳۰ ثانیه با سشوار صنعتی (یا سشوار معمولی، داغ‌ترین حالت، طولانی‌تر) گرم کن. دور یه بطری ۲ لیتری خم کن و نگه دار تا سرد بشه. انحنا افقیه، دور بازو.</li>
+<li><b>سوراخ:</b> جای سوراخ‌ها رو با پانچ یا نوک پیچ‌گوشتی داغ (با تهویه) باز کن. پرچ چشمی بزن؛ تمیزتر میشه و بند فوم رو پاره نمی‌کنه.</li>
+<li><b>مُهر:</b> 起 رو از EVA دو میلی یا مقوا ببر و وسط صفحه‌ی بالا بچسبون، یا فقط با رنگ بکش.</li>
+<li><b>سیلر:</b> چسب چوب + آب (یک به یک)، ۳ لایه‌ی نازک، هر لایه ۲۰ دقیقه خشک.</li>
+<li><b>رنگ:</b> مشکی (اسپری یا دو دست اکریلیک). بعد قلم‌موی تقریباً خشک با کمی نقره‌ای فقط روی لبه‌ها و برجستگی‌ها (dry brush).</li>
+<li><b>بند قرمز (Odoshi):</b> ۴ ستون. برای هر ستون ۶۰ سانت بند. از پشت صفحه‌ی بالا گره بزن، از سوراخ بیا جلو، برو تو سوراخ بالای تیغه‌ی ۱، از سوراخ پایینش بیا بیرون، برو تیغه‌ی ۲… یه نوار مقوای ۱ سانتی بین تیغه‌ها بذار که فاصله‌ها یکی بشن. ته کار گره و یه منگوله‌ی کوچیک وسط.</li>
+<li><b>نصب:</b> دو سوراخ بالایی صفحه‌ی بالا رو به حلقه‌ی تسمه‌ی شونه پرچ یا دوخت کن (تسمه دور شونه‌ی چپ و زیر بغل، با قفل کوله). کش ۲ سانتی دور بازو از پشت تیغه‌ی ۲ رد میشه.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">07</span><h3>حمایل شمشیر و حمل از سه جا</h3><span class="t">۲ ساعت · روز ۹</span></summary><div class="body">
+<ol>
+<li><b>تسمه‌ی اصلی:</b> ۱۶۰ سانت تسمه‌ی ۳ سانتی. سرها رو با فندک آب کن. یه قفل کوله جلوی سینه (برای درآوردن سریع) و یه سگک تنظیم.</li>
+<li><b>مسیر:</b> از روی شونه‌ی راست، مورب روی سینه، تا زیر بغل/لگن چپ. پشت بدن شمشیر موازی تسمه می‌شینه: دسته بالای شونه‌ی راست، نوک غلاف کنار لگن چپ.</li>
+<li><b>حلقه‌های غلاف:</b> دو تیکه‌ی ۲۸ سانتی با ولکرو، عمود روی تسمه با دوخت X داخل مربع. جاشون رو روی بدن خودت پیدا کن: اولی ۱۵ سانت زیر دهانه‌ی غلاف، دومی ۵۰ سانت پایین‌تر. زیر هر حلقه یه کش پهن یا تیکه‌ی لاستیک دور غلاف بنداز که سُر نخوره.</li>
+<li><b>گره‌ی ایمنی:</b> یه بند قرمز ۵۰ سانتی دور گارد (تسوبا) و دهانه‌ی غلاف، چند دور، با گره‌ی پاپیونی. وقتی شمشیر پشته این گره اجباریه.</li>
+<li><b>کمر:</b> قفل حلقه‌ها رو باز کن و غلاف رو لای دو لایه‌ی اوبی سمت چپ فرو کن. دسته جلو، لبه رو به بالا.</li>
+<li><b>دست:</b> برای عکس و راه رفتن. غلاف‌دار حمل کن.</li>
+</ol>
+<div class="note">کشیدن کامل یه کاتانای حدوداً ۱۰۰ سانتی از پشت عملاً ممکن نیست؛ تو فیلم‌ها هم نیست. برای عکس فقط دست روی دسته بذار.</div>
+</div></details>
+
+<details class="step"><summary><span class="n">08</span><h3>طناب شیمه‌ناوا و شیده‌ها</h3><span class="t">۱.۵ ساعت · روز ۴ و ۸</span></summary><div class="body">
+<ol>
+<li>سه رشته طناب کنفی ۲ متری رو یه سر به دستگیره‌ی در گره بزن.</li>
+<li>محکم ببافشون (بافت سه‌تایی مو). یا برای شکل اصلی شیمه‌ناوا: دو رشته رو هر کدوم جدا ساعتگرد بپیچون و دور هم پادساعتگرد تاب بده.</li>
+<li>دو سر رو ۳ سانت با بند قرمز محکم بپیچ و ۸ سانت ریش‌ریش آزاد بذار.</li>
+<li>طول رو روی بدن تنظیم کن: از شونه‌ی چپ، روی سینه، تا لگن راست و از پشت برمی‌گرده. دو سر رو کنار لگن راست گره بزن.</li>
+<li><b>شیده:</b> صفحه‌ی ۵۱ PDF رو روی کاغذ سفید ضخیم (۱۲۰ گرم) پرینت کن. خطوط قرمز رو ببر، خط‌چین‌ها رو به جلو تا کن. سه تا رو لای پیچ‌های طناب فرو کن: دو تا جلو، یکی پشت.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">09</span><h3>طلسم‌ها (Ofuda)، چارم شمشیر، کلاه</h3><span class="t">۳ ساعت · روز ۸</span></summary><div class="body">
+<h4>طلسم‌ها</h4>
+<ol>
+<li>صفحه‌ی ۵۰ PDF رو <b>رنگی</b> روی کاغذ کرم یا کرافت پرینت کن.</li>
+<li>با قلم‌مو چای پررنگ سرد بزن، خشک کن، کمی مچاله کن و دوباره صاف کن.</li>
+<li>پشتشون مقوا بچسبون، ببر، سوراخ بالا رو پرچ کن.</li>
+<li>با بند قرمز کوتاه به زنجیر نقره‌ای حلقه‌دارت آویزون کن (سمت راست کمر). لبه‌ها رو با کمی اکریلیک قهوه‌ای کهنه کن؛ آتیش نزن.</li>
+</ol>
+<h4>چارم قرمز شمشیر</h4>
+<ol>
+<li>پایه: گره‌ی چینی قرمز + منگوله‌ی قرمزی که الان داری.</li>
+<li>پلاک: صفحه‌ی ۵۱ (死 جلو، 生 پشت) رو پرینت کن، روی مقوای ضخیم یا MDF سه میلی بچسبون، لبه‌ها رو مشکی کن، سوراخ.</li>
+<li>دو تا زنگوله با حلقه‌ی کوچیک.</li>
+<li>همه رو به یه قلاب کیفی (از زنجیرهای خودت) وصل کن که به دسته‌ی شمشیر قلاب بشه و راحت جدا بشه.</li>
+</ol>
+<h4>کلاه حصیری</h4>
+<ol>
+<li><b>اندازه:</b> اگه روی هود لق بود، یه حلقه فوم یا نمد ۱ سانتی به حلقه‌ی داخلی کلاه بچسبون. فقط به حلقه، نه به حصیر.</li>
+<li><b>بند چونه:</b> ۱.۲ متر بند قرمز از دو طرف حلقه‌ی داخلی. زیر چونه، روی هود گره می‌خوره.</li>
+<li><b>منگوله‌ها:</b> دو منگوله‌ی قرمز با بند ۲۵ سانتی، دو طرف کلاه، جای شقیقه‌ها.</li>
+<li><b>پرده‌ی پشت:</b> تور مشکی ۳۰×۱۰۰ رو از بالا چین بده تا حدود ۷۰ سانت بشه، روی یه نوار بدوز و با ۵ تا گیره‌ی موی مشکی به نیمه‌ی پشت لبه وصل کن. هیچ آسیبی به کلاه نمی‌زنه و جدا میشه.</li>
+<li>روی نوشته‌ی کلاه هیچ چسب و رنگی نزن.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">10</span><h3>کهنه‌کاری (Weathering)</h3><span class="t">۳ ساعت · روز ۱۰</span></summary><div class="body">
+<ol>
+<li><b>طول نهایی:</b> کت رو بپوش و علامت بزن. جلو ۱۰۵ تا ۱۱۵ سانت از شونه، پشت ۱۲۵ تا ۱۳۵ در بلندترین زبونه‌ها. سمت چپ کوتاه‌تر از راست (عدم تقارن).</li>
+<li><b>برش:</b> زبونه‌های نامنظم ۵ تا ۱۵ سانتی. ۳ تا ۵ چاک عمودی ۱۰ تا ۳۰ سانتی از پایین، فقط کناره‌ها و جلو؛ وسط پشت رو برای طرح سالم بذار. چند تا سوراخ کوچیک که بعد مالیده و گشاد بشن. آستین راست و شنل هم همین‌طور.</li>
+<li><b>ریش:</b> با برس سیمی یا رنده‌ی آشپزخونه روی همه‌ی لبه‌های خام بکش. بعد یه دور ماشین ۴۰ درجه و خشک‌کن (اگه نیست، آفتاب و تکون دادن).</li>
+<li><b>خاک:</b> اسپری آب با کمی اکریلیک قهوه‌ای و خاکستری. ۲۰ سانت پایین کت، شنل و دمپای شلوار رو مه‌پاش کن. پایین‌ترین قسمت تیره‌تر، با اسفنج.</li>
+<li><b>چین‌ها:</b> قلم‌موی خشک خاکستری روشن خیلی کم روی برجستگی‌ها.</li>
+<li><b>قرمزها</b> رو فقط نوک پایینشون خاکی کن. باید هنوز «زنده» به چشم بیان. روی چاپ‌ها رنگ نزن.</li>
+<li><b>خون (اختیاری):</b> اکریلیک قرمز + کمی قهوه‌ای + چسب چوب برای براقی. با مسواک روی پایین کت، یکی از طلسم‌ها و لبه‌ی مچ‌بند پاش بده. روی ماسک نه.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">11</span><h3>نور قرمز، صدا و گریم</h3><span class="t">۲ ساعت · روز ۱۱</span></summary><div class="body">
+<ol>
+<li><b>LED:</b> ریسه‌ی سیمی رو از دهانه‌ی کنار گردن تو تونل لبه‌ی هود رد کن. لامپ‌ها رو به جلو و بیرون، نه تو چشمت. باتری تو جیب داخل شنل، کلید جایی که دستت برسه.</li>
+<li>تست تو تاریکی: باید لبه‌های ماسک قرمز بشه و وسط هود سیاه بمونه. اگه زیادی روشن بود، یه لایه تور روی تونل کافیه.</li>
+<li>ریسه‌ی دوم (اختیاری): زیر لبه‌ی کلاه حصیری، یا دور نیمه‌ی پایین غلاف.</li>
+<li><b>گریم:</b> کرم گریم مشکی با اسفنج دور چشم، فقط جایی که از شکاف بالاکلاوا پیداست. با پودر ثابت کن. اول ۲۴ ساعت قبل روی مچ تست حساسیت بگیر.</li>
+<li><b>ماسک:</b> داخلش یه نوار نرم ضدلغزش یا ولکروی نرم که روی بالاکلاوا جا بیفته.</li>
+</ol>
+</div></details>
+
+<details class="step"><summary><span class="n">12</span><h3>مچ‌پیچ ساق و پلن B شلوار (اختیاری)</h3><span class="pill mom">مامان</span><span class="t">۴۰ دقیقه</span></summary><div class="body">
+<p>اگه شلوار گشاد نرسید، کارگوی خودت + مچ‌پیچ کیاهان. اگه رسید، مچ‌پیچ رو برای جزئیات بیشتر روی دمپا ببند.</p>
+<ol>
+<li>دو مستطیل ۴۰×۳۶. دورتادور ۱ سانت سجاف.</li>
+<li>روی لبه‌ی ۴۰ سانتی (لبه‌ی بالا) دو بند قرمز ۶۰ سانتی بدوز. روی لبه‌ی پایین هم دو تا.</li>
+<li>دور ساق روی شلوار بپیچ، لبه‌ی بلند عمودی پشت ساق، بندها رو جلو ضربدری ببند.</li>
+</ol>
+</div></details>
+
+</section>
+
+<!-- ============ DAYS ============ -->
+<section class="ch" id="days">
+  <div class="ch-head"><span class="glyph">日</span><div><h2>برنامه‌ی ۱۴ روزه</h2>
+  <p>از جمعه ۱ آبان تا شب مهمونی، پنجشنبه ۱۴ آبان. روزی ۳ تا ۴ ساعت. دو روز آخر قبل از مهمونی برای تست و رفع ایراد خالیه. تیک هر کار ذخیره میشه و امروز با رنگ قرمز مشخصه.</p></div></div>
+  <div class="prio" style="margin-bottom:16px">
+    <div class="card hl"><h4>اگه عقب افتادی: حتماً</h4><p style="font-size:.9rem;margin-top:6px">کت، هود و شنل، اوبی، شلوار (یا پلن B)، ماسک، کلاه، شمشیر با گره‌ی ایمنی.</p></div>
+    <div class="card"><h4>بهتره باشه</h4><p style="font-size:.9rem;margin-top:6px">سردوشی، پنل جلو با DTF، طناب و شیده، طلسم‌ها، پیش‌سینه، کهنه‌کاری.</p></div>
+    <div class="card"><h4>اگه وقت شد</h4><p style="font-size:.9rem;margin-top:6px">LED، زنگوله، پنل‌های کناری توری، مچ‌پیچ ساق، خون مصنوعی، پرده‌ی پشت کلاه.</p></div>
+  </div>
+  <div class="plan" id="plan"></div>
+</section>
+
+<!-- ============ PRINT ============ -->
+<section class="ch" id="print">
+  <div class="ch-head"><span class="glyph">印</span><div><h2>فایل‌های چاپ DTF</h2>
+  <p>DTF یعنی طرح روی فیلم چاپ میشه و با پرس داغ به پارچه می‌چسبه. تمیز، سریع و مثل لباس فروشگاهی. سه طرح روی یه برگه‌ی ۵۸ سانتی جا شدن که ارزون‌تر دربیاد.</p></div></div>
+  <div class="arts">
+    <figure><img src="img/dtf-back-preview.png" alt="طرح پشت کت"><figcaption>پشت کت · ۲۶×۴۴ سانت · سفید + قرمز</figcaption></figure>
+    <figure><img src="img/dtf-sleeve-preview.png" alt="طرح آستین"><figcaption>آستین راست · ۹×۴۰</figcaption></figure>
+    <figure><img src="img/dtf-panel-preview.png" alt="طرح پنل جلو"><figcaption>پنل جلو · ۲۰×۶۶ · جوهر مشکی روی پارچه‌ی قرمز</figcaption></figure>
+  </div>
+  <div class="dl" style="margin-top:14px">
+    <div class="card"><span class="ico">印</span><div><div class="t">گنگ‌شیت DTF (PNG شفاف، ۳۰۰dpi)</div><div class="s">۵۸×۶۸ سانت؛ همینو برای چاپخانه بفرست</div></div>
+      <div class="acts"><button class="btn primary" data-dl="files/dtf-gangsheet.png">دانلود</button><a class="alt" href="files/dtf-gangsheet.png" target="_blank" rel="noopener">باز کردن</a></div></div>
+    <div class="card"><span class="ico">一</span><div><div class="t">طرح‌ها جدا</div><div class="s">برای وقتی که فقط یکی رو می‌خوای</div></div>
+      <div class="acts"><button class="btn" data-dl="files/dtf-back.png">پشت</button><button class="btn" data-dl="files/dtf-sleeve.png">آستین</button><button class="btn" data-dl="files/dtf-panel.png">پنل</button></div></div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h3>پیام آماده برای چاپخانه</h3>
+      <pre class="copy fa" id="msgPrint">سلام، یه چاپ DTF دارم:
+- فایل PNG شفاف، ۳۰۰dpi، عرض ۵۸ سانت، طول حدود ۶۸ سانت (گنگ‌شیت).
+- سه طرح داره. طرح وسطی و چپی سفیدن؛ پنل سمت راست جوهر مشکیه (روی پارچه‌ی قرمز پرس میشه).
+- چاپ در اندازه‌ی ۱۰۰٪ لطفاً، بدون تغییر اندازه.
+- پرس روی سه تیکه پارچه‌ی خودم رو هم انجام میدید؟ (کتان مشکی ۱۰۰٪ نخ و کرپ قرمز)
+- تا دوشنبه ۴ آبان آماده میشه؟ قیمت با پرس چقدر میشه؟
+ممنون</pre>
+      <button class="btn" data-copy="msgPrint" style="margin-top:8px">کپی پیام</button></div>
+    <div class="card"><h3>موقع پرس</h3><ul style="padding-inline-start:20px;margin:6px 0 0">
+      <li>اندازه‌ها: پشت ۲۶×۴۴، آستین ۹×۴۰، پنل ۲۰×۶۶ سانت.</li>
+      <li>دمای معمول DTF: ۱۵۰ تا ۱۶۰ درجه، ۱۰ تا ۱۵ ثانیه، فشار متوسط به بالا. تنظیم دقیق با خود چاپخانه‌ست (به فیلمشون بستگی داره).</li>
+      <li><b>پشت کت:</b> طرح روی <b>دامن کت، زیر اوبی</b> میاد، چون شنل بالای پشت رو می‌پوشونه و اوبی کمر رو. روز ۴ بدنه‌ی دوخته رو بنداز رو شونه‌ت، یه شال جای اوبی ببند و لبه‌ی پایینش رو پشت علامت بزن (حدوداً ۴۵ تا ۴۸ سانت زیر خط شونه). بالای طرح ۵ سانت زیر این علامت. وسط طرح روی درز وسط پشت، که قبلش باز و صاف اتو شده.</li>
+      <li><b>آستین:</b> روی نیمه‌ی بیرونی آستین (همون نیمه‌ای که از جلو دیده میشه)، عمودی. بالای طرح ۱۸ سانت پایین‌تر از لبه‌ای که به بدنه دوخته میشه، چون بالای آستین زیر شنله.</li>
+      <li><b>پنل جلو:</b> وسط، ۸ سانت زیر خط تونل.</li>
+      <li>پرس <b>قبل</b> از دوختن آستین و قبل از سجاف پنل. پارچه صاف‌تر = چاپ بهتر.</li>
+      <li>پلن B (بدون DTF): طرح رو بزرگ پرینت کن، پشتش رو با گچ سفید سیاه کن، روی پارچه کپی کن و با رنگ پارچه‌ی سفید و قلم‌موی تخت پر کن. خط قلم‌مویی کج هم به سبکش میاد.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ PARTY ============ -->
+<section class="ch" id="party">
+  <div class="ch-head"><span class="glyph">宴</span><div><h2>شب مهمونی</h2>
+  <p>پنجشنبه ۱۴ آبان، ۱۸ تا ۲۱. با ماشین برو و نصف لباس رو تو محل بپوش. تو خیابون نه ماسک لازمه، نه شمشیر.</p></div></div>
+  <div class="grid2">
+    <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>ترتیب پوشیدن</h3><button class="btn" id="resetDress" type="button">پاک کردن تیک‌ها</button></div>
+      <p class="muted" style="font-size:.85rem">خونه حدود ۲۰ دقیقه · محل حدود ۱۵ دقیقه</p>
+      <div class="checklist" id="dress"></div></div>
+    <div class="stack">
+      <div class="card"><h3>ساک اضطراری</h3><div class="checklist" id="kit"></div></div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card hl"><h3>ایمنی (جدی)</h3><ul style="padding-inline-start:20px;margin:6px 0 0">
+      <li><b>گره‌ی ایمنی شمشیر (Peace-tie):</b> یه بند قرمز دور گارد و دهانه‌ی غلاف با گره‌ی پاپیونی. وقتی شمشیر رو پشتته سر و ته آویزونه و بدون این گره ممکنه تیغه بیفته بیرون.</li>
+      <li>تو شلوغی شمشیر رو بیرون نکش. فقط برای عکس، با فاصله و با هماهنگی.</li>
+      <li>مسیر: شمشیر تو کاور یا جعبه، تو صندوق ماشین. با ماسک و شمشیر تو خیابون راه نرو؛ حمل سلاح سرد می‌تونه دردسر قانونی داشته باشه.</li>
+      <li>دید: ماسک، هود و کلاه دید کناری و پایین رو کم می‌کنن. پله رو آروم برو. کلاه حدود ۵۰ سانت قطر داره؛ تو در کج رد شو.</li>
+      <li>گرما: اگه داغ کردی اول بالاکلاوا رو دربیار. هر یه ساعت آب بخور.</li>
+      <li>موقع ساخت: سشوار صنعتی و هویه فقط با تهویه. چسب رازی فقط فضای باز. هیچ شعله‌ای نزدیک تور و پارچه‌ی مصنوعی نباشه.</li>
+    </ul></div>
+    <div class="card"><h3>شش ژست عکس</h3><ol style="padding-inline-start:20px;margin:6px 0 0">
+      <li><b>سایه‌ی کلاه:</b> سر پایین، فقط لبخند ماسک از زیر لبه‌ی کلاه.</li>
+      <li><b>نیم‌کشیدن:</b> ۵ سانت تیغه بیرون، دست روی دسته، صاف به دوربین.</li>
+      <li><b>از روی شونه:</b> پشت به دوربین، طرح پشت کت و سردوشی، سر نیم‌چرخ.</li>
+      <li><b>تسبیح:</b> دست راست با تسبیح جلوی ماسک، مثل رفرنس مو قرمز.</li>
+      <li><b>زانو:</b> یه زانو زمین، شمشیر غلاف‌دار عمودی کنارت، سر بالا.</li>
+      <li><b>تاریکی:</b> چراغ‌ها خاموش، فقط LED. عکس از پایین.</li>
+    </ol>
+    <p class="muted" style="font-size:.85rem;margin-top:8px">یکی از دوستات رو از قبل توجیه کن که این شش تا رو ازت بگیره.</p></div>
+  </div>
+</section>
+
+<!-- ============ AI ============ -->
+<section class="ch" id="ai">
+  <div class="ch-head"><span class="glyph">絵</span><div><h2>پرامپت‌ها برای ChatGPT</h2>
+  <p>اگه بخوای ChatGPT همین طرح نهایی رو به عکس دربیاره. کانجی‌ها رو ممکنه درست ننویسه؛ مهم نیست، طرح واقعی از فایل‌های DTF میاد.</p></div></div>
+  <div class="stack">
+    <div class="card"><h3>۱. عکس کامل کاراکتر</h3><pre class="copy" id="p1">Full-body photorealistic cosplay photo of a tall slim ronin called "Tanish, the Smiling Revenant", front view, 85mm, dramatic low-key studio light, light rain, red rim light.
+HEAD: wide black woven bamboo conical kasa hat with a white vertical kanji column 起死回生 and a red circle behind 死, red tassels hanging at both sides, red chin cord, a ragged black gauze veil at the back. Under it a pointed black hood lined in blood red with a faint red glow inside. Face: glossy white mask with black crescent smiling eyes and a wide black grin (Kagetane Hiruko, Black Bullet), black balaclava under it, eyes hidden in black. A short ragged black capelet over the shoulders.
+TORSO: kimono collar crossed right-over-left, black over a blood-red under-collar, over a black knit turtleneck. Long black cotton kimono-construction coat to mid-calf, frayed asymmetric hem, side slits showing red, only the RIGHT sleeve: wide, ragged, with a vertical column of white brush kanji. LEFT arm in the turtleneck sleeve with a laced black leather bracer, a single samurai sode shoulder guard of three black lacquered plates hanging on red silk cords, a red cord armband.
+CHEST: braided hemp shimenawa rope with white zigzag shide paper from the left shoulder to the right hip, crossing a black webbing sword baldric; katana on the back, hilt over the right shoulder, red Chinese-knot charm with small bells.
+WAIST: blood-red obi wrapped twice, black leather belt with a silver gothic cross buckle, red front apron panel with black brush kanji 起死回生, red ragged hip panels under torn black gauze, paper ofuda talisman tags on a silver chain, a silver cross chain.
+HANDS/LEGS: black fingerless gloves with silver rings, black juzu prayer beads in the right hand; very wide black hakama-like trousers bloused over chunky black lace-up combat boots.
+PALETTE: ink black, charcoal, blood red #8E1016, bone white. Weathered, dusty hems. No bare skin visible.</pre><button class="btn" data-copy="p1" style="margin-top:8px">کپی</button></div>
+    <div class="card"><h3>۲. شیت جلو، پشت و بغل</h3><pre class="copy" id="p2">Character turnaround sheet of the exact same costume (front, back, left side), neutral dark grey background, costume design reference sheet style with small English callout labels. Back view must show: the coat back with a large white vertical 起死回生 and a red brushed disc behind 死, the kasa hat's gauze veil, the katana diagonal on the back with two scabbard straps, the ragged longer back hem. Side view shows the single left sode shoulder guard with red cord lacing and the wide right sleeve. Same lighting and palette as before.</pre><button class="btn" data-copy="p2" style="margin-top:8px">کپی</button></div>
+    <div class="card"><h3>۳. پوستر برای استوری</h3><pre class="copy" id="p3">Moody vertical 9:16 poster of the same character standing in a rainy night alley lit only by a red glow from inside his hood; the white smiling mask is the brightest thing in the frame; large red vertical Japanese text タニシュ on the right edge, small text "笑う亡霊 — Died once. Still smiling." at the bottom; cinematic, grain, shallow depth of field.</pre><button class="btn" data-copy="p3" style="margin-top:8px">کپی</button></div>
+  </div>
+</section>
+
+<!-- ============ NOTES ============ -->
+<section class="ch" id="notes">
+  <div class="ch-head"><span class="glyph">心</span><div><h2>چیزهایی که احتمالاً بهشون فکر نکرده بودی</h2></div></div>
+  <div class="grid2">
+    <div class="card"><ol style="padding-inline-start:20px;margin:0">
+      <li><b>جمع شدن پارچه:</b> کتان بعد از اولین شستشو ۳ تا ۵ درصد جمع میشه. قبل از برش بشور، وگرنه بعد از کهنه‌کاری کت کوتاه میشه.</li>
+      <li><b>دستشویی:</b> شلوار کش‌کمره و اوبی ۳۰ ثانیه‌ای باز و بسته میشه. حمایل قفل کوله داره. پس هیچ‌چیز رو به هم ندوز.</li>
+      <li><b>آب خوردن:</b> ماسک رو از پایین بالا بده و با نی بخور.</li>
+      <li><b>نشستن:</b> شمشیر پشت + صندلی = نمیشه. قبل از نشستن ببرش لای اوبی یا بذارش کنار.</li>
+      <li><b>گوشی:</b> تو جیب شلوار، از لای چاک کت دستت بهش میرسه.</li>
+      <li><b>ماسک روی بالاکلاوا لیز می‌خوره:</b> یه تیکه ولکروی نرم یا نوار ضدلغزش داخل ماسک بچسبون.</li>
+      <li><b>صدای زنگوله:</b> اگه رو اعصاب رفت، با یه گیره‌ی کوچیک خفه‌اش کن.</li>
+      <li><b>بو:</b> چسب رازی و رنگ رو تا روز ۱۱ تموم کن که تا مهمونی بوش بره.</li>
+    </ol></div>
+    <div class="card"><ol start="9" style="padding-inline-start:20px;margin:0">
+      <li><b>پلن B شلوار:</b> کارگوی خودت + مچ‌پیچ ساق + پنل‌های کناری. صرفه‌جویی حدود ۱.۵ میلیون.</li>
+      <li><b>پلن B DTF:</b> رنگ پارچه + کپی با گچ. صرفه‌جویی حدود ۸۰۰ هزار، ولی ۲ ساعت کار بیشتر.</li>
+      <li><b>پلن B سردوشی:</b> کفپوش پازلی فومی به جای EVA.</li>
+      <li><b>پلن B پارچه‌ی توری:</b> تنظیف (گاز) سفید + رنگ پارچه‌ی مشکی تو آب داغ.</li>
+      <li><b>اگه مامانت اصلاً قبول نکرد:</b> شلوار رو پلن B کن. کت رو با دوخت صاف خودت بزن؛ کیمونو فقط درز صافه. یقه رو هم میشه با چسب پارچه زد.</li>
+      <li><b>بعد مهمونی:</b> با آب سرد و دست بشور. DTF رو از پشت اتو کن. سردوشی رو آویزون نگه دار که صاف نشه.</li>
+      <li><b>اسم و جمله آماده داشته باش:</b> «تانیش؛ رونینی که یه بار مُرد و هنوز می‌خنده.»</li>
+      <li><b>اگه اندازه‌ای اشتباه بود</b> (مخصوصاً فاق و داخل پا)، بگو تا الگو و PDF رو دوباره بسازم.</li>
+    </ol></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>یادداشت‌های خودت</h3><p class="muted" style="font-size:.85rem">هرچی اینجا بنویسی با بقیه‌ی پیشرفتت ذخیره میشه.</p><label for="notesTxt" class="muted" style="font-size:.8rem">یادداشت</label><textarea id="notesTxt" placeholder="مثلاً: مغازه‌ی پارچه‌ی خوب تو سرای امیرکبیر، طبقه‌ی دوم…"></textarea></div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p>منابع قیمت (برای تخمین؛ قیمت واقعی رو تو لیست وارد کن):</p>
+  <ul>
+    <li><a href="https://basalam.com/cat/home/%D9%BE%D8%A7%D8%B1%DA%86%D9%87-%DA%A9%D8%AA%D8%A7%D9%86-%DA%A9%D8%AC%D8%B1%D8%A7%D9%87" target="_blank" rel="noopener">باسلام: پارچه‌ی کتان کجراه</a> · <a href="https://torob.com/p/384f6946-2660-403c-9e6d-89e79b828f8d/%D9%BE%D8%A7%D8%B1%DA%86%D9%87-%DA%A9%D8%AA%D8%A7%D9%86-%DA%A9%D8%AC%D8%B1%D8%A7%D9%87/" target="_blank" rel="noopener">ترب: کتان کجراه</a></li>
+    <li><a href="https://satiatex.com/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%DA%86%D8%A7%D9%BE-dtf/" target="_blank" rel="noopener">ساتیاتکس: تعرفه‌ی DTF (شهریور ۱۴۰۵)</a> · <a href="https://nimosh.ir/%DA%86%D8%A7%D9%BE-%D8%AF%DB%8C-%D8%AA%DB%8C-%D8%A7%D9%81-dtf/" target="_blank" rel="noopener">نیموش: DTF</a></li>
+    <li><a href="https://torob.com/p/73d739d1-b21c-4ae4-ae3b-4d6723d775cb/%D8%AF%D8%B3%D8%AA%DA%A9%D8%B4-%D9%86%DB%8C%D9%85-%D8%A7%D9%86%DA%AF%D8%B4%D8%AA%DB%8C-%D8%AA%D8%A7%DA%A9%D8%AA%DB%8C%DA%A9%D8%A7%D9%84/" target="_blank" rel="noopener">ترب: دستکش نیم‌انگشتی</a> · <a href="https://amiranlaminet.com/%D9%82%DB%8C%D9%85%D8%AA-%D9%81%D9%88%D9%85-eva/" target="_blank" rel="noopener">قیمت فوم EVA</a></li>
+    <li><a href="https://balad.ir/blog/?p=3136" target="_blank" rel="noopener">بلد: بورس پارچه‌ی تهران (سرای امیرکبیر و چهارسوق)</a></li>
+  </ul>
+  <p style="margin-top:10px">ساخته‌شده برای تانیش · هالووین ۱۴۰۵ · <span class="kj">起死回生</span></p>
+</div></footer>
+
+<script>
+// Content data for the guide. Prices are in thousand toman (estimates, Aban 1405).
+const STORES = {
+  bazaar: { name: 'بازار بزرگ — راسته‌ی پارچه (سرای امیرکبیر / چهارسوق)', how: 'مترو خط ۱، ایستگاه ۱۵ خرداد یا محمدیه. بعضی مغازه‌ها عمده/کیلویی می‌فروشن؛ بپرس «متری هم می‌دید؟».' },
+  kharrazi: { name: 'خرازی و یراق‌فروشی‌های اطراف بازار (یا خرازی بزرگ محل)', how: 'تو «بلد» سرچ کن «خرازی» یا «یراق کیف». تسمه، قفل کوله، پرچ، کش، بند و منگوله همه همین‌جا.' },
+  lalehzar: { name: 'خیابان لاله‌زار (بورس برق و نور)', how: 'از بازار پیاده/تاکسی نزدیکه. «ریسه‌ی سیمی LED باتری‌خور قرمز» بخواه.' },
+  art: { name: 'لوازم‌التحریر و هنری (خیابان انقلاب یا نزدیک‌ترین فروشگاه هنری)', how: 'فوم EVA، چسب رازی، اکریلیک، قلم‌مو، کاغذ الگو.' },
+  online: { name: 'آنلاین (ترب / دیجی‌کالا / باسلام) یا فروشگاه ورزشی و موتوری', how: 'روز ۱ سفارش بده که تا روز ۴ برسه. قبل از خرید سایز و ارسال تهران رو چک کن.' },
+  print: { name: 'چاپخانه‌ی DTF و کپی‌فروشی', how: 'فایل «گنگ‌شیت» رو بفرست. برای پرس روی پارچه‌ی خودت هماهنگ کن.' },
+};
+
+const SHOP = [
+  { id: 'F1', s: 'bazaar', name: 'کتان کجراه نخی مشکی', en: 'Black cotton twill', qty: '۴.۸ متر (عرض ۱۵۰)', min: 2640, max: 3360, pri: 'must', note: 'کت، هود، شنل، پیش‌سینه. «صد درصد نخ» بخواه، نه پلی‌استر: پلی‌استر ریش‌ریش نمیشه و با حرارت آب میشه. یه نخ از لبه بکش؛ باید راحت دربیاد.' },
+  { id: 'F2', s: 'bazaar', name: 'پارچه‌ی شلوار: لینن یا کتان‌ویسکوز مشکی', en: 'Black linen-look', qty: '۲.۹ متر', min: 1305, max: 1885, pri: 'must', note: 'افتادگی (drape) خوب داشته باشه. اگه پیدا نشد، همون کجراه.' },
+  { id: 'F3', s: 'bazaar', name: 'پارچه‌ی قرمز خونی (زرشکی تیره)', en: 'Blood red crepe/cotton', qty: '۲.۷ متر', min: 1080, max: 1755, pri: 'must', note: 'رنگ هدف #8E1016، نه قرمز گوجه‌ای. براقیت کم (کرپ مات یا کتان). عکس سواچ رنگ رو تو گوشی نشون بده.' },
+  { id: 'F4', s: 'bazaar', name: 'تور یا گاز یا ژرژت مشکی', en: 'Black gauze / net', qty: '۳ متر', min: 360, max: 900, pri: 'should', note: 'لایه‌های پاره‌پاره، پرده‌ی پشت کلاه. هرچی شل‌بافت‌تر بهتر.' },
+  { id: 'F5', s: 'bazaar', name: 'لایی چسب‌دار متوسط', en: 'Fusible interfacing', qty: '۱.۵ متر', min: 150, max: 300, pri: 'must', note: 'برای اوبی و یقه که شق وایسن.' },
+  { id: 'H1', s: 'kharrazi', name: 'تسمه‌ی کوله‌ای (نوار بافتی) مشکی ۳ سانتی', en: 'Webbing 30 mm', qty: '۶ متر', min: 180, max: 420, pri: 'must', note: 'حمایل شمشیر و حلقه‌ی سردوشی.' },
+  { id: 'H2', s: 'kharrazi', name: 'یراق: قفل کوله ×۳، سگک تنظیم ×۴، حلقه‌ی D ×۶', en: 'Buckles, sliders, D-rings 30 mm', qty: '۱ ست', min: 250, max: 500, pri: 'must', note: 'همه ۳ سانتی، مشکی مات یا نقره‌ای کدر.' },
+  { id: 'H3', s: 'kharrazi', name: 'پرچ چشمی ۵ میل ×۱۰۰ + قالب پرچ‌زن دستی', en: 'Eyelets 5 mm + setter', qty: '۱ بسته', min: 300, max: 700, pri: 'should', note: 'قالب و چکش ارزون‌تر از انبر پرچه و کافیه.' },
+  { id: 'H4', s: 'kharrazi', name: 'بند قرمز ۳ تا ۴ میل (مکرومه یا ابریشمی)', en: 'Red cord 3–4 mm', qty: '۱۵ متر', min: 225, max: 600, pri: 'must', note: 'بند سردوشی (۶م)، بند چونه، منگوله‌ها، بازوبند، گره‌ی ایمنی شمشیر.' },
+  { id: 'H5', s: 'kharrazi', name: 'منگوله‌ی قرمز', en: 'Red tassels', qty: '۴ عدد', min: 100, max: 300, pri: 'should', note: 'یا خودت با کاموای قرمز درست کن (۱۰ دقیقه برای هر کدوم).' },
+  { id: 'H6', s: 'kharrazi', name: 'زنگوله‌ی فلزی کوچیک', en: 'Small bells', qty: '۶ عدد', min: 60, max: 150, pri: 'could', note: 'روی چارم شمشیر: صداش قبل از خودت میرسه.' },
+  { id: 'H7', s: 'kharrazi', name: 'گره‌ی چینی قرمز (آویز)', en: 'Red Chinese knot', qty: '۱ عدد', min: 80, max: 200, pri: 'should', note: 'پایه‌ی چارم شمشیر.' },
+  { id: 'H8', s: 'kharrazi', name: 'کش: ۳.۵ سانتی ۱ متر، ۲ سانتی ۰.۵ متر، کش گرد ۳ میلی ۲ متر', en: 'Elastics', qty: '۱ ست', min: 100, max: 200, pri: 'must', note: 'کمر شلوار، کش بازوی سردوشی، دور گردن پیش‌سینه، دمپا.' },
+  { id: 'H9', s: 'kharrazi', name: 'ولکرو مشکی ۵۰ سانت + دکمه‌قابلمه‌ای ×۱۰', en: 'Velcro + snaps', qty: '۱ ست', min: 150, max: 300, pri: 'must', note: 'حلقه‌های غلاف و اتصال‌های سریع.' },
+  { id: 'H10', s: 'kharrazi', name: 'نخ مشکی ×۳، نخ قرمز ×۱، سوزن چرخ ۱۰۰/۱۶، سنجاق‌قفلی ×۳۰', en: 'Thread, needles, pins', qty: '۱ ست', min: 200, max: 400, pri: 'must', note: '' },
+  { id: 'H11', s: 'kharrazi', name: 'طناب کنفی ۱.۲ تا ۱.۵ سانتی', en: 'Jute rope', qty: '۶ متر', min: 150, max: 350, pri: 'should', note: 'برای شیمه‌ناوا (طناب بافته‌ی روی سینه). طناب‌فروشی‌ها و ابزارفروشی‌های بازار هم دارن.' },
+  { id: 'W3', s: 'kharrazi', name: 'تسبیح درشت مشکی (دانه حدود ۱ سانت)', en: 'Juzu prayer beads', qty: '۱ عدد', min: 200, max: 600, pri: 'should', note: '۳۳ یا ۱۰۸ دانه. اگه منگوله‌ی قرمز داشت عالیه. راسته‌ی تسبیح‌فروش‌های بازار.' },
+  { id: 'X1', s: 'lalehzar', name: 'ریسه‌ی سیمی LED قرمز باتری‌خور ۲–۳ متری + باتری یدک', en: 'Red LED fairy wire', qty: '۲ رشته', min: 300, max: 700, pri: 'could', note: 'نور قرمز داخل هود که ماسک رو از کنار روشن کنه.' },
+  { id: 'C1', s: 'art', name: 'فوم EVA ۵ میل (۵۰×۱۰۰)', en: 'EVA foam 5 mm', qty: '۱ ورق', min: 200, max: 600, pri: 'should', note: 'جایگزین ارزون: کفپوش پازلی فومی بچه یا زیرانداز یوگا (روی صافش کار کن).' },
+  { id: 'C2', s: 'art', name: 'چسب رازی (دوقلو/کانتکت) + چسب حرارتی', en: 'Contact cement + hot glue', qty: '۱ + ۱', min: 200, max: 400, pri: 'should', note: 'بخارش سمیه؛ فقط فضای باز.' },
+  { id: 'C3', s: 'art', name: 'چسب چوب', en: 'PVA wood glue', qty: '۱ عدد', min: 80, max: 150, pri: 'should', note: 'رقیق‌شده با آب = سیلر EVA. به اضافه‌ی خون مصنوعی براق.' },
+  { id: 'C4', s: 'art', name: 'اکریلیک: مشکی، نقره‌ای، قرمز، قهوه‌ای سوخته، سفید + ۳ قلم‌مو + سنباده ۸۰ و ۲۲۰', en: 'Acrylics, brushes, sandpaper', qty: '۱ ست', min: 400, max: 800, pri: 'should', note: '' },
+  { id: 'C5', s: 'art', name: 'اسپری رنگ مشکی مات', en: 'Matte black spray', qty: '۱ عدد', min: 200, max: 350, pri: 'could', note: 'سردوشی؛ اگه نخواستی، اکریلیک مشکی ۲ دست کافیه.' },
+  { id: 'C6', s: 'art', name: 'کاغذ کرافت یا کرم A4 ×۱۰ + یه ورق مقوا', en: 'Kraft paper + card', qty: '۱ بسته', min: 50, max: 150, pri: 'should', note: 'طلسم‌ها و شیده.' },
+  { id: 'C7', s: 'art', name: 'کاغذ الگو (رول) یا کالک + چسب نواری کاغذی', en: 'Pattern paper + tape', qty: '۱ ست', min: 100, max: 250, pri: 'must', note: 'یا روزنامه. برای کشیدن الگوها.' },
+  { id: 'W4', s: 'art', name: 'کرم گریم مشکی یا مداد چشم پهن', en: 'Black face paint', qty: '۱ عدد', min: 150, max: 300, pri: 'should', note: 'دور چشم توی شکاف بالاکلاوا که چشم‌ها کامل گم بشن.' },
+  { id: 'W1', s: 'online', name: 'بالاکلاوا (اسکی‌ماسک) نازک مشکی، یک‌شکاف چشمی', en: 'Thin balaclava', qty: '۱ عدد', min: 200, max: 500, pri: 'must', note: 'نخی یا لایکرا که زیر ماسک داغ نکنه.' },
+  { id: 'W2', s: 'online', name: 'دستکش نیم‌انگشتی مشکی (تاکتیکال یا چرم مصنوعی)', en: 'Fingerless gloves', qty: '۱ جفت', min: 185, max: 400, pri: 'must', note: 'انگشترهات روی انگشت‌ها دیده میشن.' },
+  { id: 'X2', s: 'online', name: 'خون مصنوعی (اختیاری)', en: 'Fake blood', qty: '۱ عدد', min: 100, max: 250, pri: 'could', note: 'جایگزین: اکریلیک قرمز + کمی قهوه‌ای + چسب چوب برای براقی.' },
+  { id: 'P1', s: 'print', name: 'چاپ DTF گنگ‌شیت (۵۸×۶۸ سانت) + پرس روی ۳ تیکه', en: 'DTF print + press', qty: '~۰.۷ متر', min: 600, max: 1100, pri: 'should', note: 'قیمت آنلاین شهریور ۱۴۰۵ حدود ۵۴۰ تا ۸۱۰ هزار برای هر متر. پرس رو جدا بپرس.' },
+  { id: 'P2', s: 'print', name: 'پرینت الگوها (۵۱ صفحه A4) + ۱ صفحه رنگی طلسم', en: 'A4 printing', qty: '۵۲ صفحه', min: 150, max: 500, pri: 'must', note: 'گزینه‌ی «Actual size / 100%». اگه مامانت از روی نقشه‌های اندازه‌دار می‌کشه، فقط صفحه‌ی ۱ و ۴۸ تا ۵۱ رو پرینت کن.' },
+];
+
+const HAVE = [
+  { img: 'img/hat.jpg', name: 'کلاه حصیری با 起死回生', use: 'قطعه‌ی ۱ و تم کل کاستوم. فقط بند چونه، منگوله و پرده‌ی پشت اضافه میشه. روی نوشته هیچ چسب و رنگی نزن.' },
+  { img: 'img/mask.jpg', name: 'ماسک کاگه‌تانه (Black Bullet)', use: 'قطعه‌ی ۲. دست‌نخورده. فقط داخلش یه تیکه ولکرو یا نوار ضدلغزش بچسبون که روی بالاکلاوا لیز نخوره.' },
+  { img: 'img/items.jpg', name: 'کاتانا + غلاف + منگوله‌ی قرمز', use: 'قطعه‌ی ۱۸. منگوله‌ی فعلی میره توی چارم قرمز. گره‌ی ایمنی اجباریه.' },
+  { img: 'img/items.jpg', name: 'پوتین چرمی بنددار', use: 'قطعه‌ی ۱۷. دمپای شلوار با بند روش جمع میشه.' },
+  { img: 'img/items.jpg', name: 'دو مچ‌بند چرمی بنددار', use: 'قطعه‌ی ۱۴. هر دو ساعد. چپی دیده میشه، راستی زیر آستین گشاد.' },
+  { img: 'img/items.jpg', name: 'زنجیر گل‌صلیبی + زنجیرهای حلقه‌دار + قلاب‌ها', use: 'زنجیر صلیبی آویز لگن چپ؛ زنجیر نقره‌ای حلقه‌دار نگهدارنده‌ی طلسم‌ها سمت راست؛ قلاب‌ها برای اتصال سریع چارم.' },
+  { img: 'img/items.jpg', name: 'انگشترها و دستبند چرم با قفل طلایی', use: 'انگشترها روی دستکش نیم‌انگشتی؛ دستبند روی مچ چپ.' },
+  { img: 'img/pants.jpg', name: 'کمربند سگک صلیبی', use: 'روی اوبی قرمز. سگک وسط.' },
+  { img: 'img/pants.jpg', name: 'شلوار کارگو مشکی', use: 'پلن B شلوار: اگه شلوار گشاد نرسید، کارگو + مچ‌پیچ ساق.' },
+  { img: 'img/turtleneck.jpg', name: 'یقه‌اسکی بافت مشکی', use: 'لایه‌ی پایه. یقه‌ی گنده‌اش رو تو بالاکلاوا تا کن. آستین چپش دیده میشه.' },
+];
+
+const PLAN = [
+  { d: 1, date: 'جمعه ۱ آبان', title: 'شروع و آماده‌سازی', h: '۳ ساعت', note: 'بازار تعطیله؛ روز برنامه‌ریزی و سفارش.', t: [
+    ['تو', 'این راهنما رو یه بار کامل بخون. بخش «اندازه‌ها» رو با متر دوباره چک کن (مخصوصاً فاق و دور گردن).'],
+    ['با هم', '«برگه‌ی مامان» (PDF) رو نشون مامانت بده: همه‌چی درز صاف و مستطیله، هیچ الگوی عجیبی نداره.'],
+    ['تو', 'فایل گنگ‌شیت DTF رو برای یه چاپخانه بفرست که تا دوشنبه آماده باشه. بپرس پرس روی پارچه‌ی خودت رو هم انجام میدن یا نه.'],
+    ['تو', 'سفارش آنلاین: بالاکلاوا و دستکش نیم‌انگشتی.'],
+    ['تو', 'تست دید: یقه‌اسکی، یه شال دور سر، ماسک و کلاه حصیری رو بپوش. ببین پایین پات رو می‌بینی یا نه.'],
+    ['تو', 'لیست خرید رو مرور کن و فایل الگوها رو برای پرینت آماده کن.'],
+  ]},
+  { d: 2, date: 'شنبه ۲ آبان', title: 'روز بازار', h: '۵ ساعت', note: 'صبح زود برو؛ بازار شلوغ میشه.', t: [
+    ['تو', 'بازار پارچه: F1 تا F5. یه تیکه از قرمز رو کنار مشکی بگیر ببین بهم میان.'],
+    ['تو', 'خرازی‌ها: همه‌ی H‌ها و تسبیح.'],
+    ['تو', 'لاله‌زار: ریسه‌ی LED قرمز و باتری یدک.'],
+    ['تو', 'کپی‌فروشی: پرینت الگوها با «Actual size» و چک مربع ۵ سانتی.'],
+    ['با هم', 'شب: پارچه‌های نخی رو یه دور بشور و خشک کن. کتان ۳ تا ۵ درصد جمع میشه و این باید قبل از برش اتفاق بیفته.'],
+  ]},
+  { d: 3, date: 'یکشنبه ۳ آبان', title: 'شلوار', h: '۳–۴ ساعت', t: [
+    ['تو', 'صفحه‌های PDF شلوار، هود و جیب رو بچسبون و ببر.'],
+    ['مامان', 'اتو؛ برش شلوار طبق نقشه‌ی برش (پارچه دولا، عرضی تا).'],
+    ['مامان', 'دوخت شلوار: جیب‌ها، کناره، داخل پا، فاق، تونل کمر و دمپا.'],
+    ['تو', 'فروشگاه هنری (اگه دیروز نشد): EVA، چسب رازی، رنگ‌ها.'],
+    ['تو', 'الگوی سردوشی رو روی EVA بکش و ببُر.'],
+  ]},
+  { d: 4, date: 'دوشنبه ۴ آبان', title: 'برش کت و شنل', h: '۳–۴ ساعت', t: [
+    ['مامان', 'برش کل پارچه‌ی کت طبق نقشه: بدنه‌ها، آستین، یقه، شنل، هود، پیش‌سینه.'],
+    ['مامان', 'درز وسط پشت (فقط نیمه‌ی پشت)؛ باز اتو کن. یقه‌ی V جلو و گودی پشت گردن رو ببر.'],
+    ['تو', 'بدنه رو بنداز رو شونه‌ت، یه شال جای اوبی ببند و لبه‌ی پایینش رو پشت با گچ علامت بزن (جای طرح DTF).'],
+    ['تو', 'تحویل DTF از چاپخانه (یا هماهنگی برای فردا).'],
+    ['تو', 'EVA: فرم دادن با سشوار، سوراخ‌ها، پخ زدن لبه‌ها.'],
+    ['تو', 'بافتن طناب شیمه‌ناوا.'],
+  ]},
+  { d: 5, date: 'سه‌شنبه ۵ آبان', title: 'پرس DTF و مونتاژ کت', h: '۴ ساعت', t: [
+    ['تو', 'صبح: بدنه‌ی کت (درز پشت دوخته)، تیکه‌ی آستین و پنل جلوی قرمز رو برای پرس ببر چاپخانه.'],
+    ['مامان', 'آستین راست به بدنه؛ درز زیر آستین و کناره‌ها تا شروع چاک؛ حلقه‌ی آستین چپ.'],
+    ['تو', 'سردوشی: ۳ لایه چسب چوب رقیق (هر لایه ۲۰ دقیقه خشک بشه).'],
+  ]},
+  { d: 6, date: 'چهارشنبه ۶ آبان', title: 'یقه، هود و شنل', h: '۴ ساعت', t: [
+    ['مامان', 'یقه‌ی کیمونویی: لایی، تا، دوخت دور یقه و لبه‌های جلو.'],
+    ['مامان', 'هود (بیرونی + آستر قرمز + تونل LED) و شنل؛ وصل هود به شنل.'],
+    ['تو', 'رنگ سردوشی: مشکی، بعد قلم‌موی خشک نقره‌ای روی لبه‌ها.'],
+    ['تو', 'برش تسمه‌های حمایل؛ سر تسمه‌ها رو با فندک آب کن که ریش نشه.'],
+  ]},
+  { d: 7, date: 'پنجشنبه ۷ آبان', title: 'پرو اول', h: '۴ ساعت', t: [
+    ['با هم', 'پرو کامل: شلوار، کت، هود و شنل. با گچ خیاطی خط ریش‌ریش پایین و جای چاک‌ها رو علامت بزن.'],
+    ['مامان', 'اوبی، پنل جلو، پنل‌های کناری، پیش‌سینه.'],
+    ['تو', 'بستن بند قرمز سردوشی (odoshi) با فاصله‌ی ۱ سانتی.'],
+  ]},
+  { d: 8, date: 'جمعه ۸ آبان', title: 'جزئیات دستی', h: '۴ ساعت', note: 'بازار تعطیله؛ روز کارهای ظریف.', t: [
+    ['تو', 'طلسم‌ها: پرینت رنگی، چای، مقوا، پرچ، آویز به زنجیر.'],
+    ['تو', 'شیده‌ها (کاغذ زیگزاگ) ×۳ و نصب روی طناب.'],
+    ['تو', 'چارم قرمز شمشیر + گره‌ی ایمنی.'],
+    ['تو', 'کلاه حصیری: بند چونه، منگوله‌ها، پرده‌ی توری پشت، حلقه‌ی فوم داخل.'],
+  ]},
+  { d: 9, date: 'شنبه ۹ آبان', title: 'حمایل و سردوشی روی بدن', h: '۴ ساعت', t: [
+    ['با هم', 'دوخت حمایل شمشیر، دو حلقه‌ی غلاف و حلقه‌ی شونه‌ی سردوشی.'],
+    ['تو', 'وصل سردوشی به حلقه‌ی شونه با پرچ یا دوخت، و کش بازو.'],
+    ['تو', 'تست حمل شمشیر: پشت، لای اوبی، تو دست. ببین موقع راه رفتن تق‌تق نکنه.'],
+    ['تو', 'هرچی جا مونده رو بخر (بازار بازه).'],
+  ]},
+  { d: 10, date: 'یکشنبه ۱۰ آبان', title: 'کهنه‌کاری (Weathering)', h: '۳–۴ ساعت', t: [
+    ['تو', 'یه خط دوخت ایمنی بزن جایی که می‌خوای ریش‌ریش متوقف بشه. بعد زبونه‌ها و چاک‌های عمودی پایین کت و شنل رو ببر.'],
+    ['تو', 'ریش کردن لبه‌ها با برس سیمی یا رنده؛ یه دور ماشین (۴۰ درجه) و خشک‌کن.'],
+    ['تو', 'خاکی کردن: اسپری آب + اکریلیک قهوه‌ای و خاکستری روی ۲۰ سانت پایین لباس‌ها.'],
+  ]},
+  { d: 11, date: 'دوشنبه ۱۱ آبان', title: 'افکت‌ها', h: '۳ ساعت', t: [
+    ['تو', 'ریسه‌ی LED توی تونل لبه‌ی هود؛ جیب کوچیک باتری داخل شنل.'],
+    ['تو', 'زنگوله‌ها، زنجیرها، انگشترها؛ چیدن آویزهای کمر.'],
+    ['تو', 'تست گریم مشکی دور چشم (حساسیت پوستی رو ۲۴ ساعت قبل روی مچ تست کن).'],
+    ['تو', '(اختیاری) خون مصنوعی روی لبه‌های پایین و یکی از طلسم‌ها.'],
+  ]},
+  { d: 12, date: 'سه‌شنبه ۱۲ آبان', title: 'تمرین کامل لباس', h: '۳–۴ ساعت', note: 'اولین روز از دو روز تست.', t: [
+    ['تو', 'پوشیدن کامل به ترتیب بخش «روز مهمونی» با تایمر.'],
+    ['تو', '۹۰ دقیقه باهاش بمون: راه برو، پله، بشین، از در رد شو، آب بخور.'],
+    ['تو', 'عکس از جلو، پشت و بغل؛ لیست ایرادها.'],
+    ['با هم', 'رفع ایرادها.'],
+  ]},
+  { d: 13, date: 'چهارشنبه ۱۳ آبان', title: 'محکم‌کاری و بستن ساک', h: '۲–۳ ساعت', t: [
+    ['با هم', 'ایرادهای باقی‌مونده؛ دوخت‌های محکم‌کاری روی جاهای کشش‌دار (حلقه‌های غلاف، بند چونه، کمر).'],
+    ['تو', 'بستن ساک طبق لیست؛ باتری نو؛ شارژ گوشی و پاوربانک.'],
+    ['تو', 'زود بخواب.'],
+  ]},
+  { d: 14, date: 'پنجشنبه ۱۴ آبان', title: 'شب مهمونی · ۱۸ تا ۲۱', h: '', t: [
+    ['تو', 'صبح: یه دور سریع پوشیدن قطعه‌های حساس (سردوشی، حمایل، کلاه).'],
+    ['تو', '۱۵:۳۰ ساک نهایی · ۱۶:۳۰ لایه‌های پایه و گریم · ۱۷:۰۰ حرکت با ماشین · ۱۷:۳۰ پوشیدن نهایی در محل · ۱۸:۰۰ ورود.'],
+  ]},
+];
+
+const DRESS = [
+  ['خونه', 'گریم مشکی دور چشم'],
+  ['خونه', 'شلوار (بند دمپا شل)'],
+  ['خونه', 'یقه‌اسکی'],
+  ['خونه', 'پوتین؛ بعد بند دمپا رو روی ساق پوتین سفت کن'],
+  ['خونه', 'مچ‌بندهای چرمی، هر دو دست'],
+  ['خونه', 'پیش‌سینه‌ی کیمونو (کش دور گردن، بندها دور کمر)'],
+  ['خونه', 'کت (برای مسیر، روی همه‌چی یه کاپشن معمولی)'],
+  ['محل', 'اوبی دو دور + کمربند سگک صلیبی'],
+  ['محل', 'پنل جلو و پنل‌های کناری (از زیر کمربند رد میشن)'],
+  ['محل', 'زنجیر صلیبی چپ، زنجیر طلسم‌ها راست'],
+  ['محل', 'حلقه‌ی شونه + سردوشی چپ + کش بازو'],
+  ['محل', 'طناب شیمه‌ناوا (شونه‌ی چپ تا لگن راست)'],
+  ['محل', 'حمایل + شمشیر پشت (یا شمشیر لای اوبی سمت چپ)'],
+  ['محل', 'بالاکلاوا'],
+  ['محل', 'ماسک'],
+  ['محل', 'هود و شنل؛ گیره‌ی جلوی گردن'],
+  ['محل', 'کلاه حصیری + بند چونه'],
+  ['محل', 'روشن کردن LED'],
+  ['محل', 'دستکش، تسبیح، انگشترها'],
+  ['محل', 'آینه: جلو، پشت، زاویه‌ی کلاه. یه عکس تست.'],
+];
+
+const KIT = ['سنجاق‌قفلی ×۱۰', 'نخ و سوزن مشکی و قرمز', 'چسب قطره‌ای کوچیک', 'ولکرو و دکمه‌قابلمه‌ای یدک', 'باتری یدک LED',
+  'دستمال مرطوب + پاک‌کن آرایش', 'مداد/کرم مشکی برای تمدید گریم', 'پاوربانک و کابل', 'نی (آب خوردن با ماسک نیمه‌بالا)', 'آینه‌ی کوچیک',
+  'کاور یا جعبه‌ی شمشیر', 'کیسه‌ی پارچه‌ای نرم برای ماسک', 'بطری آب', 'کاپشن یا هودی معمولی برای مسیر', 'پلاستیک برای لباس‌های خیس/کثیف'];
+
+</script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const fa = n => Number(n).toLocaleString('fa-IR');
+  const money = k => k >= 1000 ? fa(Math.round(k / 100) / 10) + ' میلیون' : fa(Math.round(k)) + ' هزار';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // ---------- state: db (synced across devices) with a local fallback ----------
+  const LKEY = 'tanish-progress-v1';
+  let S = { c: {}, p: {}, n: '' };
+  try { const raw = localStorage.getItem(LKEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+  let docRef = null, saveTimer = null, writing = false, again = false, readOnly = false;
+  const syncEl = $('#sync');
+  const setSync = (txt, ok) => { syncEl.innerHTML = 'ذخیره: <b style="color:' + (ok ? 'var(--ok)' : 'var(--muted)') + '">' + txt + '</b>'; };
+
+  function saveLocal() { try { localStorage.setItem(LKEY, JSON.stringify(S)); } catch (e) {} }
+  function schedule() {
+    saveLocal();
+    if (!docRef || readOnly) return;
+    clearTimeout(saveTimer);
+    setSync('در حال ذخیره…', false);
+    saveTimer = setTimeout(push, 700);
+  }
+  async function push() {
+    saveTimer = null;
+    if (writing) { again = true; return; }
+    writing = true;
+    try { await docRef.set(JSON.parse(JSON.stringify(S))); setSync('همگام روی همه‌ی دستگاه‌ها', true); }
+    catch (e) {
+      if (e && e.code === 'invalid_argument') { readOnly = true; setSync('فقط این دستگاه', false); }
+      else setSync('فقط این دستگاه (بعداً دوباره)', false);
+    }
+    writing = false;
+    if (again) { again = false; push(); }
+  }
+  (async () => {
+    try {
+      const db = window.claude && await window.claude.use('db');
+      if (!db) return;
+      docRef = db.doc('progress/main');
+      setSync('در حال اتصال…', false);
+      docRef.onSnapshot(snap => {
+        if (saveTimer || writing) return;                 // local edits in flight win
+        if (snap.exists) {
+          if (snap.metadata && snap.metadata.hasPendingWrites) return;
+          const d = snap.data() || {};
+          S = { c: Object.assign({}, d.c), p: Object.assign({}, d.p), n: d.n || '' };
+          saveLocal(); applyState();
+          setSync('همگام روی همه‌ی دستگاه‌ها', true);
+        } else if (Object.keys(S.c).length || Object.keys(S.p).length || S.n) {
+          push();                                          // first run: upload what this device has
+        } else setSync('همگام روی همه‌ی دستگاه‌ها', true);
+      }, () => setSync('فقط این دستگاه', false));
+    } catch (e) { /* stays local */ }
+  })();
+
+  // ---------- inventory ----------
+  $('#inv').innerHTML = HAVE.map(h => `<div class="card"><img src="${h.img}" alt="" loading="lazy"><div><div style="font-weight:800">${esc(h.name)}</div><div class="muted" style="font-size:.88rem">${esc(h.use)}</div></div></div>`).join('');
+
+  // ---------- shopping ----------
+  const PRI = { must: ['ضروری', 'must'], should: ['بهتره', ''], could: ['اختیاری', 'could'] };
+  let filter = 'all';
+  function renderShop() {
+    const byStore = {};
+    SHOP.forEach(it => (byStore[it.s] = byStore[it.s] || []).push(it));
+    $('#shop').innerHTML = Object.keys(STORES).filter(k => byStore[k]).map((k, i) => {
+      const items = byStore[k].filter(it => filter === 'all' || (filter === 'left' && !S.c['buy-' + it.id]) || (filter === 'must' && it.pri === 'must'));
+      if (!items.length) return '';
+      return `<div class="store"><h3><span class="mono" style="color:var(--accent)">${fa(i + 1)}</span>${esc(STORES[k].name)}</h3><p class="how">${esc(STORES[k].how)}</p>` +
+        items.map(it => {
+          const done = !!S.c['buy-' + it.id];
+          const pr = PRI[it.pri];
+          return `<div class="item${done ? ' done' : ''}" data-id="${it.id}">
+            <input type="checkbox" id="buy-${it.id}" ${done ? 'checked' : ''} aria-label="خریدم: ${esc(it.name)}">
+            <label for="buy-${it.id}" style="cursor:pointer"><span class="iname">${esc(it.name)}</span> <span class="en">${esc(it.en)}</span>
+              <div class="meta"><span class="tag ${pr[1] === 'must' ? 'must' : ''}" ${pr[1] === 'could' ? 'style="border-style:dashed"' : ''}>${pr[0]}</span> <span class="mono">${it.id}</span> · ${esc(it.qty)}${it.note ? ' · ' + esc(it.note) : ''}</div></label>
+            <div class="price">${fa(it.min)}–${fa(it.max)}<br><input inputmode="numeric" id="price-${it.id}" placeholder="واقعی" value="${S.p[it.id] != null ? esc(S.p[it.id]) : ''}" aria-label="قیمت واقعی ${esc(it.name)} به هزار تومان"></div>
+          </div>`;
+        }).join('') + '</div>';
+    }).join('');
+    totals();
+  }
+  function totals() {
+    let mn = 0, mx = 0, spent = 0, bought = 0;
+    SHOP.forEach(it => {
+      mn += it.min; mx += it.max;
+      const v = parseFloat(String(S.p[it.id] ?? '').replace(/[^\d.]/g, ''));
+      if (!isNaN(v)) spent += v;
+      if (S.c['buy-' + it.id]) bought++;
+    });
+    $('#estT').textContent = money(mn) + ' تا ' + money(mx);
+    $('#budget').textContent = money((mn + mx) / 2);
+    $('#spentT').textContent = spent ? money(spent) : '—';
+    $('#boughtT').textContent = fa(bought) + ' از ' + fa(SHOP.length);
+  }
+  const toEn = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  $('#shop').addEventListener('change', e => {
+    const t = e.target;
+    if (t.type === 'checkbox') { S.c[t.id] = t.checked; t.closest('.item').classList.toggle('done', t.checked); totals(); schedule(); if (filter === 'left') renderShop(); }
+  });
+  $('#shop').addEventListener('input', e => {
+    const t = e.target;
+    if (t.id && t.id.startsWith('price-')) { const v = toEn(t.value).replace(/[^\d.]/g, ''); if (v) S.p[t.id.slice(6)] = v; else delete S.p[t.id.slice(6)]; totals(); schedule(); }
+  });
+  [['fAll', 'all'], ['fLeft', 'left'], ['fMust', 'must']].forEach(([id, f]) => $('#' + id).addEventListener('click', () => {
+    filter = f; $$('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.id === id))); renderShop();
+  }));
+
+  // ---------- plan ----------
+  // Tehran is UTC+3:30 (no DST). Day 1 = 2026-10-23 (1 Aban 1405).
+  const tehranNow = () => new Date(Date.now() + 3.5 * 3600e3);
+  const dayIndex = () => { const t = tehranNow(); const d0 = Date.UTC(2026, 9, 23); return Math.floor((Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()) - d0) / 864e5) + 1; };
+  function renderPlan() {
+    const di = dayIndex();
+    $('#plan').innerHTML = PLAN.map(p => {
+      const today = p.d === di;
+      return `<article class="day${today ? ' today' : ''}${p.d === 14 ? ' party' : ''}" id="day${p.d}">${today ? '<span class="todaybadge">امروز</span>' : ''}
+        <header><span class="dn">${fa(p.d)}</span><span class="dd">${esc(p.date)}</span><span class="dh">${esc(p.h || '')}</span></header>
+        <div class="tt">${esc(p.title)}</div>${p.note ? `<div class="dnote">${esc(p.note)}</div>` : ''}
+        <div style="margin-top:6px">${p.t.map((t, i) => {
+          const id = `plan-${p.d}-${i}`; const done = !!S.c[id];
+          return `<label class="task${done ? ' done' : ''}"><input type="checkbox" id="${id}" ${done ? 'checked' : ''}><span class="who${t[0] === 'مامان' ? ' mom' : ''}">${esc(t[0])}</span><span>${esc(t[1])}</span></label>`;
+        }).join('')}</div></article>`;
+    }).join('');
+    planProgress();
+  }
+  function planProgress() {
+    let n = 0, d = 0;
+    PLAN.forEach(p => p.t.forEach((t, i) => { n++; if (S.c[`plan-${p.d}-${i}`]) d++; }));
+    const pc = Math.round(d / n * 100);
+    $('#planp').textContent = fa(pc) + '٪';
+    $('#planbar').style.width = pc + '%';
+  }
+  $('#plan').addEventListener('change', e => {
+    const t = e.target; if (t.type !== 'checkbox') return;
+    S.c[t.id] = t.checked; t.closest('.task').classList.toggle('done', t.checked); planProgress(); schedule();
+  });
+
+  // ---------- dressing + kit ----------
+  function renderChecklist(el, list, prefix, withWhere) {
+    el.innerHTML = list.map((x, i) => {
+      const id = `${prefix}-${i}`; const done = !!S.c[id];
+      const txt = withWhere ? x[1] : x;
+      return `<label class="${done ? 'done' : ''}"><input type="checkbox" id="${id}" ${done ? 'checked' : ''}><span class="i">${fa(i + 1)}</span><span>${withWhere ? `<span class="where">${esc(x[0])}</span> ` : ''}${esc(txt)}</span></label>`;
+    }).join('');
+  }
+  function renderLists() { renderChecklist($('#dress'), DRESS, 'dress', true); renderChecklist($('#kit'), KIT, 'kit', false); }
+  ['#dress', '#kit'].forEach(sel => $(sel).addEventListener('change', e => {
+    const t = e.target; if (t.type !== 'checkbox') return;
+    S.c[t.id] = t.checked; t.closest('label').classList.toggle('done', t.checked); schedule();
+  }));
+  $('#resetDress').addEventListener('click', () => { DRESS.forEach((x, i) => delete S.c['dress-' + i]); renderLists(); schedule(); });
+
+  // ---------- notes ----------
+  const notes = $('#notesTxt');
+  notes.value = S.n || '';
+  notes.addEventListener('input', () => { S.n = notes.value; schedule(); });
+
+  function applyState() { renderShop(); renderPlan(); renderLists(); if (document.activeElement !== notes) notes.value = S.n || ''; }
+
+  // ---------- countdown / today ----------
+  const PARTY = Date.UTC(2026, 10, 5, 14, 30); // 14 Aban 18:00 Tehran
+  const START = Date.UTC(2026, 9, 22, 20, 30); // 1 Aban 00:00 Tehran
+  function tick() {
+    const ms = PARTY - Date.now();
+    if (ms <= 0) { $('#cd').textContent = 'شروع شده!'; $('#cdbar').style.width = '100%'; }
+    else {
+      const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5);
+      $('#cd').innerHTML = `${fa(d)}<small> روز </small>${fa(h)}<small> ساعت</small>`;
+      $('#cdbar').style.width = Math.min(100, Math.max(0, (Date.now() - START) / (PARTY - START) * 100)) + '%';
+    }
+    const di = dayIndex();
+    const p = PLAN.find(x => x.d === di);
+    if (p) { $('#today').innerHTML = `روز ${fa(di)}<small> از ۱۴</small>`; $('#todayt').innerHTML = `<a href="#day${di}">${esc(p.title)}</a>`; }
+    else if (di < 1) { $('#today').textContent = 'هنوز شروع نشده'; }
+    else { $('#today').textContent = 'تموم شد'; $('#todayt').textContent = 'امیدوارم شب خوبی بوده باشه'; }
+  }
+  tick(); setInterval(tick, 60e3);
+
+  // ---------- copy ----------
+  async function copyText(text, btn, srcEl) {
+    try { await navigator.clipboard.writeText(text); flash(btn, 'کپی شد'); }
+    catch (e) {
+      if (srcEl) { const r = document.createRange(); r.selectNodeContents(srcEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      flash(btn, 'انتخاب شد؛ کپی کن');
+    }
+  }
+  function flash(btn, txt) { const o = btn.dataset.label || btn.textContent; btn.dataset.label = o; btn.textContent = txt; setTimeout(() => btn.textContent = o, 1600); }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]'); if (!b) return;
+    const el = document.getElementById(b.dataset.copy); copyText(el.textContent, b, el);
+  });
+  $('#copyShop').addEventListener('click', e => {
+    const lines = []; let cur = '';
+    SHOP.filter(it => !S.c['buy-' + it.id]).forEach(it => {
+      if (it.s !== cur) { cur = it.s; lines.push('\n■ ' + STORES[it.s].name); }
+      lines.push(`☐ ${it.name} — ${it.qty} (${fa(it.min)}–${fa(it.max)} هزار)`);
+    });
+    copyText('لیست خرید کاستوم تانیش' + lines.join('\n'), e.currentTarget, null);
+  });
+
+  // ---------- downloads ----------
+  let dlNs;
+  const dlReady = (async () => { try { dlNs = window.claude && await window.claude.use('downloads'); } catch (e) { dlNs = null; } })();
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('[data-dl]'); if (!b) return;
+    const path = b.dataset.dl;
+    await dlReady;
+    if (!dlNs) { window.open(path, '_blank', 'noopener'); return; }
+    try {
+      flash(b, '…');
+      const blob = await (await fetch(path)).blob();
+      await dlNs.save({ filename: path.split('/').pop(), data: blob });
+      flash(b, 'ذخیره شد');
+    } catch (err) {
+      if (err && err.code === 'declined') flash(b, 'لغو شد');
+      else { flash(b, 'باز کردن…'); window.open(path, '_blank', 'noopener'); }
+    }
+  });
+
+  applyState();
+})();
+
+</script>
